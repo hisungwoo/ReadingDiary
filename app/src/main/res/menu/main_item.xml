@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/i1"
+        android:id="@+id/menu_home"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_settings_24"
-        android:title="아이템1" />
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="홈" />
 
     <item
-        android:id="@+id/i2"
+        android:id="@+id/menu_books"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_settings_24"
-        android:title="아이템2" />
+        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:title="서재" />
 
     <item
-        android:id="@+id/i3"
+        android:id="@+id/menu_chart"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_settings_24"
-        android:title="아이템3" />
-
+        android:icon="@drawable/ic_baseline_insert_chart_outlined_24"
+        android:title="통계" />
     <item
-        android:id="@+id/i4"
+        android:id="@+id/menu_setting"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_settings_24"
-        android:title="아이템4" />
+        android:title="설정" />
 </menu>

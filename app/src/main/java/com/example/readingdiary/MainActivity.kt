@@ -12,21 +12,23 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
 
         binding.bottomNav.setOnItemSelectedListener {
             when(it.itemId) {
-                R.id.i1 -> {
+                R.id.menu_home -> {
                 }
-                R.id.i2 -> {
+                R.id.menu_books -> {
                 }
-                R.id.i3 -> {
+                R.id.menu_chart -> {
                 }
-                R.id.i4 -> {
+                R.id.menu_setting -> {
                 }
             }
             true
         }
 
+        setContentView(binding.root)
     }
 }
