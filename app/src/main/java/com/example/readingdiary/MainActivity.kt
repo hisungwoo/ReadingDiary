@@ -2,8 +2,11 @@ package com.example.readingdiary
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
+import com.example.readingdiary.Fragments.BooksFragment
+import com.example.readingdiary.Fragments.ChartFragment
+import com.example.readingdiary.Fragments.HomeFragment
+import com.example.readingdiary.Fragments.SettingFragment
 import com.example.readingdiary.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
