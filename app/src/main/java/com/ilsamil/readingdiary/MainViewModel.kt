@@ -1,4 +1,4 @@
-package com.example.readingdiary
+package com.ilsamil.readingdiary
 
 import androidx.lifecycle.ViewModel
 

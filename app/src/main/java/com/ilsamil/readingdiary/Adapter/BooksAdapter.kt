@@ -1,4 +1,4 @@
-package com.example.readingdiary.Adapter
+package com.ilsamil.readingdiary.Adapter
 
 import android.view.View
 import android.view.ViewGroup

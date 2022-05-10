@@ -1,11 +1,11 @@
-package com.example.readingdiary.Fragments
+package com.ilsamil.readingdiary.Fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.readingdiary.R
+import com.ilsamil.readingdiary.R
 
 
 class BooksFragment : Fragment() {

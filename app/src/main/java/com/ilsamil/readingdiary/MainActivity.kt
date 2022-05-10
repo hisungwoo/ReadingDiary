@@ -1,13 +1,13 @@
-package com.example.readingdiary
+package com.ilsamil.readingdiary
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.example.readingdiary.Fragments.BooksFragment
-import com.example.readingdiary.Fragments.ChartFragment
-import com.example.readingdiary.Fragments.HomeFragment
-import com.example.readingdiary.Fragments.SettingFragment
-import com.example.readingdiary.databinding.ActivityMainBinding
+import com.ilsamil.readingdiary.Fragments.BooksFragment
+import com.ilsamil.readingdiary.Fragments.ChartFragment
+import com.ilsamil.readingdiary.Fragments.HomeFragment
+import com.ilsamil.readingdiary.Fragments.SettingFragment
+import com.ilsamil.readingdiary.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     val mainViewModel : MainViewModel by viewModels()

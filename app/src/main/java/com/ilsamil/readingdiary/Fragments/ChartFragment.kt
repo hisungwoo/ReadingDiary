@@ -1,17 +1,16 @@
-package com.example.readingdiary.Fragments
+package com.ilsamil.readingdiary.Fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.readingdiary.R
+import com.ilsamil.readingdiary.R
 
-class SettingFragment : Fragment() {
-
+class ChartFragment : Fragment() {
     companion object {
-        fun newInstance() : SettingFragment {
-            return SettingFragment()
+        fun newInstance() : ChartFragment {
+            return ChartFragment()
         }
     }
 
@@ -24,7 +23,7 @@ class SettingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setting, container, false)
+        return inflater.inflate(R.layout.fragment_chart, container, false)
     }
 
 }

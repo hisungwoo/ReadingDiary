@@ -1,16 +1,19 @@
-package com.example.readingdiary.Fragments
+package com.ilsamil.readingdiary.Fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.readingdiary.R
+import com.ilsamil.readingdiary.R
 
-class ChartFragment : Fragment() {
+class HomeFragment : Fragment() {
+
+    //Category.newInstance()사용을 위해 생성
     companion object {
-        fun newInstance() : ChartFragment {
-            return ChartFragment()
+        fun newInstance() : HomeFragment {
+            return HomeFragment()
         }
     }
 
@@ -18,12 +21,15 @@ class ChartFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chart, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
 }

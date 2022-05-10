@@ -1,4 +1,4 @@
-package com.example.readingdiary
+package com.ilsamil.readingdiary
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

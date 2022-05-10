@@ -9,7 +9,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.readingdiary"
+        applicationId "com.ilsamil.readingdiary"
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
@@ -51,5 +51,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation "androidx.fragment:fragment-ktx:1.4.0"
+
+    implementation 'com.squareup.retrofit2:retrofit:2.6.4'
+    implementation'com.squareup.retrofit2:converter-moshi:2.9.0'
 
 }
