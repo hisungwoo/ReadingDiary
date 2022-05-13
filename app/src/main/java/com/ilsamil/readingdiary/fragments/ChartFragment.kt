@@ -1,4 +1,4 @@
-package com.ilsamil.readingdiary.Fragments
+package com.ilsamil.readingdiary.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,11 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.ilsamil.readingdiary.R
 
-
-class BooksFragment : Fragment() {
+class ChartFragment : Fragment() {
     companion object {
-        fun newInstance() : BooksFragment {
-            return BooksFragment()
+        fun newInstance() : ChartFragment {
+            return ChartFragment()
         }
     }
 
@@ -24,7 +23,7 @@ class BooksFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_books, container, false)
+        return inflater.inflate(R.layout.fragment_chart, container, false)
     }
 
 }

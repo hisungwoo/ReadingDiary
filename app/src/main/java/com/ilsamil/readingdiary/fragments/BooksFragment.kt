@@ -1,6 +1,5 @@
-package com.ilsamil.readingdiary.Fragments
+package com.ilsamil.readingdiary.fragments
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.ilsamil.readingdiary.R
 
-class HomeFragment : Fragment() {
 
-    //Category.newInstance()사용을 위해 생성
+class BooksFragment : Fragment() {
     companion object {
-        fun newInstance() : HomeFragment {
-            return HomeFragment()
+        fun newInstance() : BooksFragment {
+            return BooksFragment()
         }
     }
 
@@ -21,15 +19,12 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_books, container, false)
     }
 
 }
