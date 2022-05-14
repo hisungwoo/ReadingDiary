@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menu_home"
+        android:id="@+id/homeFragment"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="홈" />
 
     <item
-        android:id="@+id/menu_books"
+        android:id="@+id/booksFragment"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_menu_book_24"
         android:title="서재" />
 
     <item
-        android:id="@+id/menu_chart"
+        android:id="@+id/chartFragment"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_insert_chart_outlined_24"
         android:title="통계" />
     <item
-        android:id="@+id/menu_setting"
+        android:id="@+id/settingFragment"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="설정" />
