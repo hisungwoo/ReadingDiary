@@ -19,6 +19,7 @@ import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
+
     companion object{
         private const val TAG = "MainActivity"
     }
@@ -29,17 +30,18 @@ class MainActivity : AppCompatActivity() {
     private val booksFragment by lazy { BooksFragment.newInstance() }
     private val chartFragment by lazy { ChartFragment.newInstance() }
     private val settingFragment by lazy { SettingFragment.newInstance() }
-    lateinit var navController: NavController
+    private lateinit var navController: NavController
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        // bottom_nav 설정
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_nav_host)
         if (navHostFragment != null) {
             navController = navHostFragment.findNavController()
         }
-
         binding.bottomNav.setupWithNavController(navController)
 
 //        val retrofit = Retrofit.Builder()

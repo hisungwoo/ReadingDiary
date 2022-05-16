@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class BooksAdapter : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
+class BooksAdapter() : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
 
     inner class BooksViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
