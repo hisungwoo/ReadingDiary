@@ -1,10 +1,18 @@
 package com.ilsamil.readingdiary.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.ilsamil.readingdiary.MainViewModel
+import com.ilsamil.readingdiary.R
+import com.ilsamil.readingdiary.databinding.CalendarHeaderBinding
+import com.ilsamil.readingdiary.databinding.DayBinding
+import com.ilsamil.readingdiary.databinding.EmptyDayBinding
+import com.ilsamil.readingdiary.databinding.FragmentHomeBinding
 
 class CalendarAdapter(calendarList : List<Any>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val HEADER_TYPE = 0
@@ -37,9 +45,20 @@ class CalendarAdapter(calendarList : List<Any>) : RecyclerView.Adapter<RecyclerV
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == HEADER_TYPE) {
+            val binding =
+                DataBindingUtil.inflate<CalendarHeaderBinding>(LayoutInflater.from(parent.context), R.layout.item_calendar_header, parent, false)
+            val params : StaggeredGridLayoutManager.LayoutParams = binding.root.layoutParams as StaggeredGridLayoutManager.LayoutParams
+            binding.root.layoutParams = params
+            return HeaderViewHolder(binding)
+        } else if (viewType == EMPTY_TYPE) {
+            val binding =
+                DataBindingUtil.inflate<EmptyDayBinding>(LayoutInflater.from(parent.context), R.layout.item_calendar_header, parent, false)
+            return EmptyViewHolder(binding)
+        } else {
+            val binding =
+                DataBindingUtil.inflate<DayBinding>(LayoutInflater.from(parent.context), R.layout.item_calendar_header, parent, false)
+            return DayViewHolder(binding)
         }
-        TODO("Not yet implemented")
-
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -51,7 +70,30 @@ class CalendarAdapter(calendarList : List<Any>) : RecyclerView.Adapter<RecyclerV
     }
 
 
-    inner class CalendarViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+    inner class HeaderViewHolder(binding : CalendarHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val binding : CalendarHeaderBinding = binding
 
+        private fun setViewModel(model : MainViewModel) {
+            binding.model = model
+            binding.executePendingBindings()
+        }
+    }
+
+    inner class EmptyViewHolder(binding : EmptyDayBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val binding : EmptyDayBinding = binding
+
+        private fun setViewModel(model : MainViewModel) {
+            binding.model = model
+            binding.executePendingBindings()
+        }
+    }
+
+    inner class DayViewHolder(binding : DayBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val binding : DayBinding = binding
+
+        private fun setViewModel(model : MainViewModel) {
+            binding.model = model
+            binding.executePendingBindings()
+        }
     }
 }

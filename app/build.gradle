@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-kapt'
 }
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
@@ -34,12 +36,14 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
+        dataBinding = true
     }
 
     buildFeatures {
-        dataBinding true
+        viewBinding = true
     }
+
+
 }
 
 dependencies {

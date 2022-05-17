@@ -7,11 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ilsamil.readingdiary.R
-import com.ilsamil.readingdiary.databinding.ActivityMainBinding
 import com.ilsamil.readingdiary.databinding.FragmentHomeBinding
 import java.lang.Exception
 import java.security.Key
@@ -19,9 +20,6 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
-
-
-    private lateinit var binding: FragmentHomeBinding
 
     //Category.newInstance()사용을 위해 생성
     companion object {
@@ -43,13 +41,15 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        setCalendarList()
+        val binding : FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
 
 
-        return binding.root
+
+
+
+
+        return binding?.root
     }
 
 
