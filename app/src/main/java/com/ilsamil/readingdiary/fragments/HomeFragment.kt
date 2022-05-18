@@ -7,19 +7,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.ilsamil.readingdiary.BR
+import com.ilsamil.readingdiary.MainViewModel
 import com.ilsamil.readingdiary.R
-import com.ilsamil.readingdiary.databinding.FragmentHomeBinding
+import com.ilsamil.readingdiary.adapter.CalendarAdapter
+import com.ilsamil.readingdiary.databinding.CalendarListBinding
 import java.lang.Exception
 import java.security.Key
 import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
+    private val mainViewModel by activityViewModels<MainViewModel>()
+    lateinit var calendarAdapter : CalendarAdapter
 
     //Category.newInstance()사용을 위해 생성
     companion object {
@@ -41,7 +50,21 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding : FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
+//        val binding : CalendarListBinding = CalendarListBinding.inflate(inflater, container, false)
+//        val binding = DataBindingUtil.inflate<FragmentHomeBinding>()
+        val binding = DataBindingUtil.inflate<CalendarListBinding>(inflater, R.layout.fragment_home, container, false)
+        binding.setVariable(BR.model, ViewModelProvider(this).get(MainViewModel::class.java))
+        binding.lifecycleOwner = this
+        binding.model = mainViewModel
+
+        binding.model.initCalendarList()
+        binding.executePendingBindings()
+
+        val manager = StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL)
+//        calendarAdapter = CalendarAdapter()
+
+
+
 
 
 
@@ -50,43 +73,6 @@ class HomeFragment : Fragment() {
 
 
         return binding?.root
-    }
-
-
-    private fun setCalendarList() {
-        // 오늘 날짜
-        val today = GregorianCalendar()
-
-        // 모든 타입을 받는 ArrayList
-        val calendarList = ArrayList<Any>()
-
-        for (i in -300 .. 300) {
-            try {
-                val calendar = GregorianCalendar(today.get(Calendar.YEAR), today.get(Calendar.MONTH) + i, 1, 0, 0, 0)
-
-                // 날짜 타입
-                calendarList.add(calendar.timeInMillis)
-
-                // 해당 월에 시작하는 요일에 -1을 하여 빈칸 흭득
-                val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) -1
-
-                //해당 월에 마지막 요일
-                val max = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
-
-                for(j in 0 .. dayOfWeek) {
-                    calendarList.add(0)
-                }
-
-                for(j in 0 .. max) {
-                    calendarList.add(GregorianCalendar(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), j))
-                }
-            } catch (e : Exception) {
-                e.printStackTrace()
-                Log.d(TAG, e.toString())
-            }
-        }
-
-        Log.d(TAG, calendarList.toString())
     }
 
 
