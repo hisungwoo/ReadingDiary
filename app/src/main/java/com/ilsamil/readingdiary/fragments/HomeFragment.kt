@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.model = mainViewModel
 
-        binding.model.initCalendarList()
+//        binding.model.initCalendarList()
         binding.executePendingBindings()
 
         val manager = StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.VERTICAL)
@@ -66,6 +66,9 @@ class HomeFragment : Fragment() {
 
 
 
+        mainViewModel.mCalendarList.observe(this, androidx.lifecycle.Observer {
+//            val view = binding.pagerClaendar
+        })
 
 
 

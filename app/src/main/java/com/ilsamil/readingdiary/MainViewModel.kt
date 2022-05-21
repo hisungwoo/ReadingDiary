@@ -1,6 +1,7 @@
 package com.ilsamil.readingdiary
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ilsamil.readingdiary.fragments.HomeFragment
@@ -12,7 +13,6 @@ import java.util.zip.DataFormatException
 class MainViewModel : ViewModel() {
     val mHeaderDate = MutableLiveData<Long>()
     val mCalendar = MutableLiveData<Calendar>()
-
 
     private var mCurrentTime : Long? = null
 
