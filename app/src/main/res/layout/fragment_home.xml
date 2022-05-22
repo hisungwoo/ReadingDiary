@@ -24,22 +24,43 @@
             android:animateLayoutChanges="true"
             android:orientation="horizontal">
 
-            <TextView
+            <ImageButton
+                android:id="@+id/cal_prev_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_navigate_before_24"
                 android:layout_weight="1"
-                android:padding="16dp"
-                android:text="2022년 05월"
-                android:textSize="18sp"
+                android:layout_gravity="center"
                 />
 
+
+            <TextView
+                android:id="@+id/cal_currentDate_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:padding="16dp"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                tools:text="2022년 06월"
+                />
+
+            <ImageButton
+                android:id="@+id/cal_next_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_navigate_next_24"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                />
         </LinearLayout>
 
         <!-- 요일 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -48,7 +69,7 @@
                 android:gravity="center"
                 android:text="일"
                 android:textColor="@color/black"
-                android:textSize="10sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -57,7 +78,7 @@
                 android:gravity="center"
                 android:text="월"
                 android:textColor="@color/black"
-                android:textSize="10sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -66,7 +87,7 @@
                 android:gravity="center"
                 android:text="화"
                 android:textColor="@color/black"
-                android:textSize="10sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -75,7 +96,7 @@
                 android:gravity="center"
                 android:text="수"
                 android:textColor="@color/black"
-                android:textSize="10sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -84,7 +105,7 @@
                 android:gravity="center"
                 android:text="목"
                 android:textColor="@color/black"
-                android:textSize="10sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -93,7 +114,7 @@
                 android:gravity="center"
                 android:text="금"
                 android:textColor="@color/black"
-                android:textSize="10sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="0dp"
@@ -102,15 +123,16 @@
                 android:gravity="center"
                 android:text="토"
                 android:textColor="@color/black"
-                android:textSize="10sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
 
         <!-- 달력 -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/calendar"
+            android:id="@+id/cal_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp" />
 
     </LinearLayout>
 </layout>
