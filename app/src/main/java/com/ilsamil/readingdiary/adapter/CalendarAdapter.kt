@@ -1,25 +1,21 @@
 package com.ilsamil.readingdiary.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.ilsamil.readingdiary.MainViewModel
 import com.ilsamil.readingdiary.R
-import com.ilsamil.readingdiary.databinding.CalendarHeaderBinding
-import com.ilsamil.readingdiary.databinding.DayBinding
-import com.ilsamil.readingdiary.databinding.EmptyDayBinding
+import com.ilsamil.readingdiary.model.CalendarDay
 import java.util.*
 
-class CalendarAdapter(calendarList : ArrayList<String>) : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
-    var dayList : ArrayList<String> = calendarList
+class CalendarAdapter(calendarList : ArrayList<CalendarDay>) : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
+    var dayList : ArrayList<CalendarDay> = calendarList
 
     inner class CalendarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var dayText : TextView = itemView.findViewById(R.id.item_dayText_tv)
+        var checkBtn : ImageButton = itemView.findViewById(R.id.item_check_ibtn)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
@@ -29,7 +25,17 @@ class CalendarAdapter(calendarList : ArrayList<String>) : RecyclerView.Adapter<C
 
 
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
-        holder.dayText.text = dayList[position]
+        dayList[position].let { item ->
+            if (!item.isEmpty) {
+                holder.dayText.text = item.day
+                holder.checkBtn.visibility = View.VISIBLE
+                if(item.isRead) {
+                    holder.checkBtn.setImageResource(R.drawable.ic_baseline_brightness_check_1_24)
+                }
+            } else {
+                holder.dayText.text = ""
+            }
+        }
     }
 
     override fun getItemCount(): Int {
