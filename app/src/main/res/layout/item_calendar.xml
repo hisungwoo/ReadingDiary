@@ -1,39 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="55dp"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/item_dayText_tv"
-        android:layout_width="match_parent"
+<layout>
+    <data>
+        <variable
+            name="calDay"
+            type="com.ilsamil.readingdiary.model.CalendarDay" />
+
+        <variable
+            name="clickListener"
+            type="com.ilsamil.readingdiary.adapter.CalendarAdapter.OnItemClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="55dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="15sp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="13"
-        />
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageButton
-        android:id="@+id/item_check_ibtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/white"
-        android:src="@drawable/ic_baseline_brightness_1_24"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@+id/item_dayText_tv"
-        app:layout_constraintEnd_toEndOf="@+id/item_dayText_tv"
-        app:layout_constraintTop_toBottomOf="@id/item_dayText_tv"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:visibility="visible"
-        />
+        <TextView
+            android:id="@+id/item_dayText_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:text="@{calDay.day}"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="13"
+            />
 
+        <ImageButton
+            android:id="@+id/item_read_ibtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/white"
+            android:src="@drawable/ic_baseline_brightness_1_24"
+            android:visibility="invisible"
+            app:readCheck="@{calDay}"
+            app:layout_constraintStart_toStartOf="@+id/item_dayText_tv"
+            app:layout_constraintEnd_toEndOf="@+id/item_dayText_tv"
+            app:layout_constraintTop_toBottomOf="@id/item_dayText_tv"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="visible"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>

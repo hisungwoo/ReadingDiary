@@ -46,9 +46,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
-
-
 //        val retrofit = Retrofit.Builder()
 //                    .baseUrl("https://dapi.kakao.com")
 //                    .addConverterFactory(GsonConverterFactory.create())

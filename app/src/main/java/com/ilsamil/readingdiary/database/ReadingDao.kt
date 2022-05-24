@@ -12,7 +12,7 @@ interface ReadingDao {
     fun selectReadingDate(year : String, month : String, ) : List<String>
 
     @Insert
-    fun insertReadingDay(data : ReadingDay)
+    fun insertReadingDay(data : ReadingDay) : Long
 
     @Update
     fun updateReadingDay(data : ReadingDay)
