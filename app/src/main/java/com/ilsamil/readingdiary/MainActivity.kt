@@ -2,25 +2,12 @@ package com.ilsamil.readingdiary
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.room.Room
-import com.ilsamil.readingdiary.database.ReadingDatabase
 import com.ilsamil.readingdiary.databinding.ActivityMainBinding
-import com.ilsamil.readingdiary.fragments.BooksFragment
-import com.ilsamil.readingdiary.fragments.ChartFragment
-import com.ilsamil.readingdiary.fragments.HomeFragment
-import com.ilsamil.readingdiary.fragments.SettingFragment
-import com.ilsamil.readingdiary.model.ReadingDay
-import com.ilsamil.readingdiary.model.SearchBookDto
 import retrofit2.*
-import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         private const val TAG = "MainActivity"
     }
 
-    val mainViewModel : MainViewModel by viewModels()
+    private val mainViewModel : MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 

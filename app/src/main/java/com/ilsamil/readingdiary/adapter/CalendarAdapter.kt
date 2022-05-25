@@ -14,7 +14,6 @@ import com.ilsamil.readingdiary.model.CalendarDay
 import java.util.*
 
 class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
-//    private var dayList : ArrayList<CalendarDay> = calendarList
     private var dayList : List<CalendarDay> = ArrayList<CalendarDay>()
     private lateinit var itemClickListener : OnItemClickListener
 
@@ -48,7 +47,11 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>
                 imageButton.visibility = View.VISIBLE
                 if (calDay.isRead) {
                     imageButton.setImageResource(R.drawable.ic_baseline_brightness_check_1_24)
+                } else {
+                    imageButton.setImageResource(R.drawable.ic_baseline_brightness_1_24)
                 }
+            } else {
+                imageButton.visibility = View.INVISIBLE
             }
         }
     }

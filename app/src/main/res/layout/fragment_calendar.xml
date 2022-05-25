@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragments.HomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.CalendarFragment">
 
     <data class="CalendarListBinding">
         <import type="android.view.View"/>
@@ -12,17 +12,22 @@
             type="com.ilsamil.readingdiary.MainViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <!-- 헤더 -->
         <LinearLayout
+            android:id="@+id/calendar_header_ly"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
 
             <ImageButton
                 android:id="@+id/cal_prev_btn"
@@ -58,9 +63,12 @@
 
         <!-- 요일 -->
         <LinearLayout
+            android:id="@+id/calendar_day_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/calendar_header_ly"
+            >
 
             <TextView
                 android:layout_width="0dp"
@@ -126,15 +134,17 @@
                 android:textSize="18sp" />
         </LinearLayout>
 
-
         <!-- 달력 -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cal_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp" />
+            android:layout_marginTop="7dp"
+            app:layout_constraintTop_toBottomOf="@+id/calendar_day_title"
+            />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
 
 
