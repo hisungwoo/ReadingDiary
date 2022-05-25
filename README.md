@@ -24,9 +24,6 @@
 * RecyClerView를 이용한 달력 생성
 * Safe Arg
 
-* 광고 
-
-
 
 <br>
 
