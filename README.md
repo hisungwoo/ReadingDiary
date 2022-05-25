@@ -23,6 +23,8 @@
 * Jetpack Nivagation
 * RecyClerView를 이용한 달력 생성
 * Safe Arg
+* DataBinding
+* LiveData
 
 
 <br>
