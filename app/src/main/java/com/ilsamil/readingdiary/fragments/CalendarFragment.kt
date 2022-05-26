@@ -1,11 +1,18 @@
 package com.ilsamil.readingdiary.fragments
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +24,7 @@ import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.adapter.CalendarAdapter
 import com.ilsamil.readingdiary.databinding.CalendarListBinding
 import com.ilsamil.readingdiary.model.CalendarDay
+import com.ilsamil.readingdiary.model.MyBook
 import com.ilsamil.readingdiary.model.ReadingDay
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -41,6 +49,17 @@ class CalendarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
+
+//        val bookItem1 = MyBook("전지적 독자 시점", "www.naver.com", 0, 555, false)
+//        val bookItem2 = MyBook("화산 귀환", "www.naver.com", 0, 1252, false)
+//        mainViewModel.addBook(bookItem1)
+//        mainViewModel.addBook(bookItem2)
+//
+//        val readItem = ReadingDay("2022", "5", "26", "전지적 독자 시점", "0", "102")
+//        val readItem2 = ReadingDay("2022", "5", "26", "전지적 독자 시점", "102", "313")
+//        mainViewModel.addReadingDiary(readItem)
+//        mainViewModel.addReadingDiary(readItem2)
+
 
         //현재 날짜
         selectedDate = LocalDate.now()
@@ -72,9 +91,28 @@ class CalendarFragment : Fragment() {
 //                readingList = mainViewModel.getReadingDate(selectedDate.year.toString(), selectedDate.monthValue.toString())
 //                mainViewModel.setCalendarList(selectedDate, readingList)
 
-                val action = CalendarFragmentDirections.actionCalendarFragmentToAddReadingActivity(item)
-                findNavController().navigate(action)
+                if (!item.isEmpty && item.isRead) {
+                    AlertDialog.Builder(inflater.context)
+                        .setView(R.layout.dialog_sel_calendar)
+                        .show()
+                        .also { alertDialog ->
+                            if (alertDialog == null) return@also
+                            alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
+                            val editBtn = alertDialog.findViewById<Button>(R.id.dialog_cal_edit_btn)
+
+                            editBtn?.setOnClickListener {
+                                val action = CalendarFragmentDirections.actionCalendarFragmentToAddReadingActivity(item)
+                                findNavController().navigate(action)
+                            }
+
+
+                        }
+
+                } else {
+                    val action = CalendarFragmentDirections.actionCalendarFragmentToAddReadingActivity(item)
+                    findNavController().navigate(action)
+                }
             }
         })
 

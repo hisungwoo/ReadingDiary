@@ -7,13 +7,13 @@ import com.ilsamil.readingdiary.model.ReadingDay
 @Dao
 interface ReadingDao {
     @Query("SELECT * FROM ReadingDay")
-    fun selectReadingDay() : LiveData<List<ReadingDay>>
+    fun selectReadingDay() : List<ReadingDay>
 
     @Query("SELECT DISTINCT day FROM ReadingDay WHERE year = :year AND month = :month ORDER BY day")
     fun selectReadingDate(year : String, month : String) : List<String>
 
-    @Query("SELECT DISTINCT book FROM ReadingDay")
-    fun selectBooks() : List<String>
+    @Query("SELECT MAX(readEd) FROM ReadingDay WHERE book = :book")
+    fun selectMaxRead(book : String) : String
 
     @Insert
     fun insertReadingDay(data : ReadingDay) : Long

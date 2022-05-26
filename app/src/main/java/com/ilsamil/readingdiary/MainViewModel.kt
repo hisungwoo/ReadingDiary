@@ -1,12 +1,13 @@
 package com.ilsamil.readingdiary
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
-import com.ilsamil.readingdiary.database.ReadingDatabase
+import com.ilsamil.readingdiary.database.AppDatabase
 import com.ilsamil.readingdiary.model.CalendarDay
+import com.ilsamil.readingdiary.model.MyBook
 import com.ilsamil.readingdiary.model.ReadingDay
 import java.time.LocalDate
 import java.time.YearMonth
@@ -15,9 +16,10 @@ import java.util.*
 class MainViewModel(application : Application) : AndroidViewModel(application) {
     val calReadList = MutableLiveData<ArrayList<CalendarDay>>()
 
-    private val db = Room.databaseBuilder(application, ReadingDatabase::class.java, "database-reading")
+    private val db = Room.databaseBuilder(application, AppDatabase::class.java, "database-app")
         .allowMainThreadQueries()
         .build()
+
 
 
     fun setCalendarList(date : LocalDate, readingList : List<String>) {
@@ -72,12 +74,16 @@ class MainViewModel(application : Application) : AndroidViewModel(application) {
         return db.readingDao().insertReadingDay(data)
     }
 
-    fun getBooks() : List<String> {
-        return db.readingDao().selectBooks()
+    fun addBook(book : MyBook) : Long {
+        return db.myBookDao().insertBook(book)
     }
 
+    fun getBooks() : List<MyBook> {
+        return db.myBookDao().selectMyBook()
+    }
 
-
-
+    fun getEdPage(book : String) : String {
+        return db.readingDao().selectMaxRead(book)
+    }
 
 }
