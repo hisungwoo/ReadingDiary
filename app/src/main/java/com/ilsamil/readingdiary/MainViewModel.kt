@@ -86,4 +86,16 @@ class MainViewModel(application : Application) : AndroidViewModel(application) {
         return db.readingDao().selectMaxRead(book)
     }
 
+    fun getReadingDay(year : String, month : String, day : String) : ReadingDay {
+        return db.readingDao().selectReadingDay(year, month, day)
+    }
+
+    fun removeReadingDay(year : String, month : String, day : String) : Int {
+        return db.readingDao().deleteReadingDay(year, month, day)
+    }
+
+    fun updateReadingDay(readingDay : ReadingDay) {
+        return db.readingDao().updateReadingDay(readingDay.year, readingDay.month, readingDay.day, readingDay.book, readingDay.readSt.toString(), readingDay.readEd.toString(), readingDay.maxPage.toString())
+    }
+
 }

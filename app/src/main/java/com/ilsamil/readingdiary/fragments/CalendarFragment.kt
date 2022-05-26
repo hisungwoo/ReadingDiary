@@ -8,10 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
@@ -55,8 +52,8 @@ class CalendarFragment : Fragment() {
 //        mainViewModel.addBook(bookItem1)
 //        mainViewModel.addBook(bookItem2)
 //
-//        val readItem = ReadingDay("2022", "5", "26", "전지적 독자 시점", "0", "102")
-//        val readItem2 = ReadingDay("2022", "5", "26", "전지적 독자 시점", "102", "313")
+//        val readItem = ReadingDay("2022", "5", "26", "전지적 독자 시점", "0", "102", "555")
+//        val readItem2 = ReadingDay("2022", "5", "26", "전지적 독자 시점", "102", "313", "555")
 //        mainViewModel.addReadingDiary(readItem)
 //        mainViewModel.addReadingDiary(readItem2)
 
@@ -85,13 +82,10 @@ class CalendarFragment : Fragment() {
         //클릭 이벤트
         calendarAdapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int, item : CalendarDay) {
-//                val readItem = ReadingDay(item.year, item.month, item.day, true, "해리포터", 0, 500, 10)
-//                addReading(readItem)
-//
-//                readingList = mainViewModel.getReadingDate(selectedDate.year.toString(), selectedDate.monthValue.toString())
-//                mainViewModel.setCalendarList(selectedDate, readingList)
-
                 if (!item.isEmpty && item.isRead) {
+                    val calInfo = mainViewModel.getReadingDay(item.year, item.month, item.day)
+                    Log.d("ttest", "calInfo = $calInfo")
+
                     AlertDialog.Builder(inflater.context)
                         .setView(R.layout.dialog_sel_calendar)
                         .show()
@@ -99,11 +93,38 @@ class CalendarFragment : Fragment() {
                             if (alertDialog == null) return@also
                             alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
+                            val dateTitleTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_date_tv)
+                            val bookNameTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_book_tv)
+                            val progressBar = alertDialog.findViewById<ProgressBar>(R.id.dialog_cal_progress_bar)
+                            val pageTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_page_tv)
+                            val readingTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_reading_tv)
+
                             val editBtn = alertDialog.findViewById<Button>(R.id.dialog_cal_edit_btn)
+                            val removeBtn = alertDialog.findViewById<Button>(R.id.dialog_cal_remove_btn)
+
+
+                            dateTitleTv?.text = "${item.year}년 ${item.month}월 ${item.day}일"
+                            bookNameTv?.text = "${calInfo.book}"
+                            progressBar?.max = calInfo.maxPage?.toInt()!!
+                            progressBar?.progress = calInfo.readEd?.toInt()!!
+                            pageTv?.text = "${calInfo.readEd} / ${calInfo.maxPage}"
+
+                            val readingPage = calInfo.readEd!!.toInt() - calInfo.readSt!!.toInt()
+                            readingTv?.text = "$readingPage 장을 읽었습니다."
+
 
                             editBtn?.setOnClickListener {
                                 val action = CalendarFragmentDirections.actionCalendarFragmentToAddReadingActivity(item)
                                 findNavController().navigate(action)
+                            }
+
+                            removeBtn?.setOnClickListener {
+                                val isComplete = mainViewModel.removeReadingDay(item.year, item.month, item.day)
+                                if (isComplete >= 1) {
+                                    readingList = mainViewModel.getReadingDate(selectedDate.year.toString(), selectedDate.monthValue.toString())
+                                    mainViewModel.setCalendarList(selectedDate, readingList)
+                                    alertDialog.dismiss()
+                                }
                             }
 
 
@@ -145,11 +166,6 @@ class CalendarFragment : Fragment() {
     private fun monthYearFromDate(date : LocalDate) : String {
         val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월")
         return date.format(formatter)
-    }
-
-    // 독서 기록 추가
-    private fun addReading(readData : ReadingDay) {
-        mainViewModel.addReadingDiary(readData)
     }
 
     override fun onResume() {

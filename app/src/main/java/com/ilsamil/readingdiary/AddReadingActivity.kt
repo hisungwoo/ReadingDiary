@@ -2,8 +2,11 @@ package com.ilsamil.readingdiary
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
@@ -18,6 +21,7 @@ import com.ilsamil.readingdiary.model.ReadingDay
 import org.w3c.dom.Text
 import java.time.LocalDate
 import java.time.LocalDateTime
+import kotlin.properties.Delegates
 
 class AddReadingActivity : AppCompatActivity() {
     private val mainViewModel : MainViewModel by viewModels()
@@ -27,12 +31,13 @@ class AddReadingActivity : AppCompatActivity() {
     private lateinit var year : String
     private lateinit var month : String
     private lateinit var day : String
-    private var selBook : String? = null
-    private var minPage : String? = null
-    private var maxPage : String? = null
 
+    private var selBook : String? = null
+    private var maxPage : String? = null
     private var readSt : String? = null
     private var readEd : String? = null
+    private var isAdd = true
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +48,23 @@ class AddReadingActivity : AppCompatActivity() {
         day = args.calday.day
 
         binding.addReadingDateTv.text = "${year}년 ${month}월 ${day}일"
+
+        if (!args.calday.isEmpty && args.calday.isRead) {
+            isAdd = false
+            val calInfo = mainViewModel.getReadingDay(year, month, day)
+            binding.addReadingBookNameTitle.text = calInfo.book
+            binding.addReadingPageTv.text = "${calInfo.readEd} / ${calInfo.maxPage} 페이지"
+            binding.addReadingEditPageBtn.isEnabled = true
+            binding.addReadingSaveBtn.visibility = View.INVISIBLE
+            binding.addReadingEditBtn.visibility = View.VISIBLE
+
+            selBook = calInfo.book
+            maxPage = calInfo.maxPage
+            readSt = calInfo.readSt
+
+        } else {
+
+        }
 
         binding.addReadingSelbookBtn.setOnClickListener {
             val books = mainViewModel.getBooks()
@@ -56,18 +78,17 @@ class AddReadingActivity : AppCompatActivity() {
                     readSt = mainViewModel.getEdPage(selBook!!)
                     if(readSt == null) readSt = "0"
 
-                    minPage = books[which].stPage.toString()
                     maxPage = books[which].edPage.toString()
 
                     binding.addReadingBookNameTitle.text = items[which]
                     binding.addReadingPageTv.text = "${readSt} / ${maxPage} 페이지"
-                    binding.addReadingEditBtn.isEnabled = true
+                    binding.addReadingEditPageBtn.isEnabled = true
                     binding.addReadingSaveBtn.isEnabled = true
                 }
             builder.show()
         }
 
-        binding.addReadingEditBtn.setOnClickListener {
+        binding.addReadingEditPageBtn.setOnClickListener {
             AlertDialog.Builder(this)
                 .setView(R.layout.dialog_page_eidt)
                 .show()
@@ -105,8 +126,18 @@ class AddReadingActivity : AppCompatActivity() {
 
         binding.addReadingSaveBtn.setOnClickListener {
             if (selBook != null && readSt != null && readEd != null) {
-                val readItem = ReadingDay(year, month, day, selBook!!, readSt, readEd)
+                val readItem = ReadingDay(year, month, day, selBook!!, readSt, readEd, maxPage)
                 mainViewModel.addReadingDiary(readItem)
+                finish()
+            } else {
+                Toast.makeText(this, "페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.addReadingEditBtn.setOnClickListener {
+            if (selBook != null && readSt != null && readEd != null) {
+                val readItem = ReadingDay(year, month, day, selBook!!, readSt, readEd, maxPage)
+                mainViewModel.updateReadingDay(readItem)
                 finish()
             } else {
                 Toast.makeText(this, "페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
