@@ -1,13 +1,10 @@
-package com.ilsamil.readingdiary
+package com.ilsamil.readingdiary.view
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.Window
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -15,13 +12,10 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.navArgs
+import com.ilsamil.readingdiary.viewmodel.MainViewModel
+import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.databinding.ActivityAddReadingBinding
-import com.ilsamil.readingdiary.model.MyBook
-import com.ilsamil.readingdiary.model.ReadingDay
-import org.w3c.dom.Text
-import java.time.LocalDate
-import java.time.LocalDateTime
-import kotlin.properties.Delegates
+import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 
 class AddReadingActivity : AppCompatActivity() {
     private val mainViewModel : MainViewModel by viewModels()

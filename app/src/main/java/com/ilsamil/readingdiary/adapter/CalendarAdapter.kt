@@ -1,16 +1,14 @@
 package com.ilsamil.readingdiary.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.databinding.ItemCalendarBinding
-import com.ilsamil.readingdiary.model.CalendarDay
+import com.ilsamil.readingdiary.data.db.entity.CalendarDay
 import java.util.*
 
 class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {

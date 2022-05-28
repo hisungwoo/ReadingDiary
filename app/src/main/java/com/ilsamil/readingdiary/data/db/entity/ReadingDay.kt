@@ -1,4 +1,4 @@
-package com.ilsamil.readingdiary.model
+package com.ilsamil.readingdiary.data.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

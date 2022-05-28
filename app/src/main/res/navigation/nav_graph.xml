@@ -3,41 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/calendarFragment">
+    app:startDestination="@id/booksFragment">
+
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.ilsamil.readingdiary.fragments.CalendarFragment"
+        android:name="com.ilsamil.readingdiary.view.CalendarFragment"
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" >
-        <action
-            android:id="@+id/action_calendarFragment_to_booksFragment"
-            app:destination="@id/booksFragment" />
         <action
             android:id="@+id/action_calendarFragment_to_addReadingActivity"
             app:destination="@id/addReadingActivity" />
     </fragment>
+
     <fragment
         android:id="@+id/booksFragment"
-        android:name="com.ilsamil.readingdiary.fragments.BooksFragment"
+        android:name="com.ilsamil.readingdiary.view.BooksFragment"
         android:label="fragment_books"
         tools:layout="@layout/fragment_books" />
+
     <fragment
         android:id="@+id/chartFragment"
-        android:name="com.ilsamil.readingdiary.fragments.ChartFragment"
+        android:name="com.ilsamil.readingdiary.view.ChartFragment"
         android:label="fragment_chart"
         tools:layout="@layout/fragment_chart" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.ilsamil.readingdiary.fragments.SettingFragment"
+        android:name="com.ilsamil.readingdiary.view.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
     <activity
         android:id="@+id/addReadingActivity"
-        android:name="com.ilsamil.readingdiary.AddReadingActivity"
+        android:name="com.ilsamil.readingdiary.view.AddReadingActivity"
         android:label="activity_add_reading"
         tools:layout="@layout/activity_add_reading" >
         <argument
             android:name="calday"
-            app:argType="com.ilsamil.readingdiary.model.CalendarDay" />
+            app:argType="com.ilsamil.readingdiary.data.db.entity.CalendarDay" />
     </activity>
 </navigation>

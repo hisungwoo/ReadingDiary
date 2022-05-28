@@ -1,4 +1,4 @@
-package com.ilsamil.readingdiary.fragments
+package com.ilsamil.readingdiary.view
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -16,13 +16,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
 import com.ilsamil.readingdiary.BR
-import com.ilsamil.readingdiary.MainViewModel
+import com.ilsamil.readingdiary.viewmodel.MainViewModel
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.adapter.CalendarAdapter
 import com.ilsamil.readingdiary.databinding.CalendarListBinding
-import com.ilsamil.readingdiary.model.CalendarDay
-import com.ilsamil.readingdiary.model.MyBook
-import com.ilsamil.readingdiary.model.ReadingDay
+import com.ilsamil.readingdiary.data.db.entity.CalendarDay
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -114,7 +112,11 @@ class CalendarFragment : Fragment() {
 
 
                             editBtn?.setOnClickListener {
-                                val action = CalendarFragmentDirections.actionCalendarFragmentToAddReadingActivity(item)
+                                alertDialog.dismiss()
+                                val action =
+                                    CalendarFragmentDirections.actionCalendarFragmentToAddReadingActivity(
+                                        item
+                                    )
                                 findNavController().navigate(action)
                             }
 
@@ -131,7 +133,10 @@ class CalendarFragment : Fragment() {
                         }
 
                 } else {
-                    val action = CalendarFragmentDirections.actionCalendarFragmentToAddReadingActivity(item)
+                    val action =
+                        CalendarFragmentDirections.actionCalendarFragmentToAddReadingActivity(
+                            item
+                        )
                     findNavController().navigate(action)
                 }
             }

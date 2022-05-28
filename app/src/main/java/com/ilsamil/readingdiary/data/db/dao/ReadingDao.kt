@@ -1,8 +1,7 @@
-package com.ilsamil.readingdiary.database
+package com.ilsamil.readingdiary.data.db.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.ilsamil.readingdiary.model.ReadingDay
+import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 
 @Dao
 interface ReadingDao {

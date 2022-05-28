@@ -3,13 +3,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.CalendarFragment">
+    tools:context=".view.CalendarFragment">
 
     <data class="CalendarListBinding">
         <import type="android.view.View"/>
         <variable
             name="model"
-            type="com.ilsamil.readingdiary.MainViewModel" />
+            type="com.ilsamil.readingdiary.viewmodel.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

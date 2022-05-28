@@ -4,7 +4,7 @@
     <data>
         <variable
             name="calDay"
-            type="com.ilsamil.readingdiary.model.CalendarDay" />
+            type="com.ilsamil.readingdiary.data.db.entity.CalendarDay" />
 
         <variable
             name="clickListener"

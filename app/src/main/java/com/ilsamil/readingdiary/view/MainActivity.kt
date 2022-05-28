@@ -1,4 +1,4 @@
-package com.ilsamil.readingdiary
+package com.ilsamil.readingdiary.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,8 +6,9 @@ import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.ilsamil.readingdiary.viewmodel.MainViewModel
+import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.databinding.ActivityMainBinding
-import retrofit2.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,7 +31,6 @@ class MainActivity : AppCompatActivity() {
             navController = navHostFragment.findNavController()
         }
         binding.bottomNav.setupWithNavController(navController)
-
 
 
 //        val retrofit = Retrofit.Builder()

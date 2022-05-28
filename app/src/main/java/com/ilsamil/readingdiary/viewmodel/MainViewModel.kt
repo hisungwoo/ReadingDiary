@@ -1,14 +1,13 @@
-package com.ilsamil.readingdiary
+package com.ilsamil.readingdiary.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
-import com.ilsamil.readingdiary.database.AppDatabase
-import com.ilsamil.readingdiary.model.CalendarDay
-import com.ilsamil.readingdiary.model.MyBook
-import com.ilsamil.readingdiary.model.ReadingDay
+import com.ilsamil.readingdiary.data.db.AppDatabase
+import com.ilsamil.readingdiary.data.db.entity.CalendarDay
+import com.ilsamil.readingdiary.data.db.entity.MyBook
+import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 import java.time.LocalDate
 import java.time.YearMonth
 import java.util.*

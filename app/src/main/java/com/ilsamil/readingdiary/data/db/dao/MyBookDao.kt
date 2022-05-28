@@ -1,9 +1,9 @@
-package com.ilsamil.readingdiary.database
+package com.ilsamil.readingdiary.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.ilsamil.readingdiary.model.MyBook
+import com.ilsamil.readingdiary.data.db.entity.MyBook
 
 @Dao
 interface MyBookDao {
