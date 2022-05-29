@@ -1,4 +1,4 @@
-package com.ilsamil.readingdiary.model
+package com.ilsamil.readingdiary.data.remote.model
 
 import androidx.room.Entity
 

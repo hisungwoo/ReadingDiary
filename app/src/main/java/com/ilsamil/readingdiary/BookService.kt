@@ -1,6 +1,6 @@
 package com.ilsamil.readingdiary
 
-import com.ilsamil.readingdiary.model.SearchBookDto
+import com.ilsamil.readingdiary.data.remote.model.SearchBookDto
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers

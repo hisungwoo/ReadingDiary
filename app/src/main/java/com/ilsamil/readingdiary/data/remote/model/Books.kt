@@ -1,4 +1,4 @@
-package com.ilsamil.readingdiary.data.db.entity
+package com.ilsamil.readingdiary.data.remote.model
 
 data class Books (
     var title : String,

@@ -41,8 +41,6 @@ class BooksFragment : Fragment() {
 
 
 
-
-
         return binding.root
     }
 
