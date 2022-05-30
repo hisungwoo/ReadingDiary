@@ -19,8 +19,6 @@ class MainViewModel(application : Application) : AndroidViewModel(application) {
         .allowMainThreadQueries()
         .build()
 
-
-
     fun setCalendarList(date : LocalDate, readingList : List<String>) {
         val dayList = ArrayList<CalendarDay>()
         val yearMonth = YearMonth.from(date)
@@ -36,9 +34,6 @@ class MainViewModel(application : Application) : AndroidViewModel(application) {
 
         val year = date.year.toString()
         val month = date.monthValue.toString()
-
-//        Log.d("ttest", "readingList = $readingList")
-//        Log.d("ttest", readingList.contains("21").toString())
 
         val calEmpty = CalendarDay(true, "", "", "", false)
         for(i in 1 .. 42) {
@@ -81,8 +76,8 @@ class MainViewModel(application : Application) : AndroidViewModel(application) {
         return db.myBookDao().selectMyBook()
     }
 
-    fun getEdPage(book : String) : String {
-        return db.readingDao().selectMaxRead(book)
+    fun getCurPage(book : String) : String {
+        return db.myBookDao().selectCurPage(book)
     }
 
     fun getReadingDay(year : String, month : String, day : String) : ReadingDay {
@@ -95,6 +90,10 @@ class MainViewModel(application : Application) : AndroidViewModel(application) {
 
     fun updateReadingDay(readingDay : ReadingDay) {
         return db.readingDao().updateReadingDay(readingDay.year, readingDay.month, readingDay.day, readingDay.book, readingDay.readSt.toString(), readingDay.readEd.toString(), readingDay.maxPage.toString())
+    }
+
+    fun setCurPage(lastDate : String, curPage : String, name : String) {
+        return db.myBookDao().updateCurPage(lastDate, curPage, name)
     }
 
 }

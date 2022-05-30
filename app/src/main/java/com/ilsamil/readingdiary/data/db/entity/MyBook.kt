@@ -7,8 +7,9 @@ import androidx.room.PrimaryKey
 data class MyBook (
     var name : String,
     var imgUrl : String,
-    var stPage : Int,
-    var edPage : Int,
+    var lastDate : String,
+    var edPage : String,
+    var curPage : String,
     var isEnd : Boolean
 ) {
     @PrimaryKey(autoGenerate = true) var bookId : Int = 0

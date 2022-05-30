@@ -10,7 +10,7 @@
         android:id="@+id/item_mybooks_img"
         android:layout_width="120dp"
         android:layout_height="150dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:src="@drawable/ic_baseline_brightness_check_1_24"
         app:layout_constraintTop_toTopOf="parent"

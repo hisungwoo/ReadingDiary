@@ -21,6 +21,8 @@ import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.adapter.CalendarAdapter
 import com.ilsamil.readingdiary.databinding.CalendarListBinding
 import com.ilsamil.readingdiary.data.db.entity.CalendarDay
+import com.ilsamil.readingdiary.data.db.entity.MyBook
+import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -45,15 +47,10 @@ class CalendarFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
 
-//        val bookItem1 = MyBook("전지적 독자 시점", "www.naver.com", 0, 555, false)
-//        val bookItem2 = MyBook("화산 귀환", "www.naver.com", 0, 1252, false)
+//        val bookItem1 = MyBook("전지적 독자 시점", "www.naver.com", "2022-05-29","555", "0", false)
+//        val bookItem2 = MyBook("화산 귀환", "www.naver.com", "2022-05-30", "1252","0", false)
 //        mainViewModel.addBook(bookItem1)
 //        mainViewModel.addBook(bookItem2)
-//
-//        val readItem = ReadingDay("2022", "5", "26", "전지적 독자 시점", "0", "102", "555")
-//        val readItem2 = ReadingDay("2022", "5", "26", "전지적 독자 시점", "102", "313", "555")
-//        mainViewModel.addReadingDiary(readItem)
-//        mainViewModel.addReadingDiary(readItem2)
 
 
         //현재 날짜
