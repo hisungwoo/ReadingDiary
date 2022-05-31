@@ -2,6 +2,8 @@ package com.ilsamil.readingdiary.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -33,43 +35,27 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setupWithNavController(navController)
 
 
-//        val retrofit = Retrofit.Builder()
-//                    .baseUrl("https://dapi.kakao.com")
-//                    .addConverterFactory(GsonConverterFactory.create())
-//                    .build()
-//
-//        val bookService = retrofit.create(BookService::class.java)
+        // Navigation 탐색 리스너
+        // 검색 Fragment 이동 시 Navigation 숨김 처리
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when(destination.id) {
+                R.id.searchFragment -> binding.bottomNav.visibility = View.GONE
+                R.id.searchResultFragment -> binding.bottomNav.visibility = View.GONE
+                else -> binding.bottomNav.visibility = View.VISIBLE
+            }
 
+//            if(destination.id == R.id.searchFragment) {
+//                binding.bottomNav.visibility = View.GONE
+//            } else {
+//                binding.bottomNav.visibility = View.VISIBLE
+//            }
+        }
 
-//        bookService.getBookInfo("미움받을용기", "accuracy", 50, "title")
-//            .enqueue(object : Callback<SearchBookDto> {
-//                override fun onResponse(
-//                    call: Call<SearchBookDto>,
-//                    response: Response<SearchBookDto>
-//                ) {
-//                    Log.d(TAG, " 성공!! ")
-//
-//                    if(response.isSuccessful.not()) {
-//                        return
-//                    }
-//                    response.body()?.let {
-//                        Log.d(TAG, "body 있음")
-//
-//                        it.bookInfo.forEach { books ->
-//                            Log.d(TAG, books.toString())
-//                        }
-//
-//                    }
-//
-//                }
-//                override fun onFailure(call: Call<SearchBookDto>, t: Throwable) {
-//                    Log.d("ttest",t.toString())
-//
-//                }
-//            })
 
         setContentView(binding.root)
     }
+
+
 
 
 

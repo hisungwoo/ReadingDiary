@@ -1,5 +1,9 @@
 package com.ilsamil.readingdiary.data.remote.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Books (
     var title : String,
     var contents : String,
@@ -13,4 +17,4 @@ data class Books (
     var sale_price : String,
     var thumbnail : String,
     var status : String,
-    )
+) : Parcelable

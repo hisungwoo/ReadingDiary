@@ -8,7 +8,6 @@
         <variable
             name="model"
             type="com.ilsamil.readingdiary.viewmodel.MainViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,6 +28,16 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/books_add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="책 추가하기"
+            app:layout_constraintTop_toTopOf="@+id/books_title_tv"
+            app:layout_constraintBottom_toBottomOf="@id/books_title_tv"
+            app:layout_constraintStart_toEndOf="@+id/books_title_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/books_category_all_btn"
@@ -75,6 +84,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </layout>
 

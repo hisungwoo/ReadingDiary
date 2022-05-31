@@ -19,7 +19,11 @@
         android:id="@+id/booksFragment"
         android:name="com.ilsamil.readingdiary.view.BooksFragment"
         android:label="fragment_books"
-        tools:layout="@layout/fragment_books" />
+        tools:layout="@layout/fragment_books" >
+        <action
+            android:id="@+id/action_booksFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/chartFragment"
@@ -40,4 +44,22 @@
             android:name="calday"
             app:argType="com.ilsamil.readingdiary.data.db.entity.CalendarDay" />
     </activity>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.ilsamil.readingdiary.view.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.ilsamil.readingdiary.view.SearchResultFragment"
+        android:label="fragment_search_result"
+        tools:layout="@layout/fragment_search_result" >
+        <argument
+            android:name="books"
+            app:argType="com.ilsamil.readingdiary.data.remote.model.Books" />
+    </fragment>
 </navigation>

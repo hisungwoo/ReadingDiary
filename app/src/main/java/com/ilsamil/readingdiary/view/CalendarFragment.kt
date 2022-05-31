@@ -130,10 +130,7 @@ class CalendarFragment : Fragment() {
                         }
 
                 } else {
-                    val action =
-                        CalendarFragmentDirections.actionCalendarFragmentToAddReadingActivity(
-                            item
-                        )
+                    val action = CalendarFragmentDirections.actionCalendarFragmentToAddReadingActivity(item)
                     findNavController().navigate(action)
                 }
             }

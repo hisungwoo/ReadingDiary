@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ilsamil.readingdiary.R
@@ -19,7 +22,6 @@ import com.ilsamil.readingdiary.viewmodel.BooksViewModel
 class BooksFragment : Fragment() {
     private val booksViewModel by activityViewModels<BooksViewModel>()
     private lateinit var binding : FragmentBooksBinding
-
 
     companion object {
         fun newInstance() : BooksFragment {
@@ -50,8 +52,13 @@ class BooksFragment : Fragment() {
         adapter.updateItems(mItems)
 
 
+        binding.booksAddBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_booksFragment_to_searchFragment)
+        }
+
 
         return binding.root
     }
+
 
 }
