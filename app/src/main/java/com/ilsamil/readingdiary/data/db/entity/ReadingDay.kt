@@ -10,7 +10,7 @@ data class ReadingDay(
     var day: String,
     var book: String,
     var readSt: String?,
-    var readEd: String?,
+    var readEd: Int?,
     var maxPage : String?
 ) {
     @PrimaryKey(autoGenerate = true) var id : Int = 0

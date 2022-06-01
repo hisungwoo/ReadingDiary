@@ -10,7 +10,6 @@ data class MyBook (
     var lastDate : String,
     var edPage : String,
     var curPage : String,
-    var isEnd : Boolean
 ) {
     @PrimaryKey(autoGenerate = true) var bookId : Int = 0
 }

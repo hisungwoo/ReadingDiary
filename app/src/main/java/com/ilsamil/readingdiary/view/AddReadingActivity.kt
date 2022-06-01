@@ -29,7 +29,7 @@ class AddReadingActivity : AppCompatActivity() {
     private var selBook : String? = null
     private var maxPage : String? = null
     private var readSt : String? = null
-    private var readEd : String? = null
+    private var readEd : Int? = null
     private var isAdd = true
 
 
@@ -68,6 +68,7 @@ class AddReadingActivity : AppCompatActivity() {
                 .setTitle("읽은 책을 선택해주세요")
                 .setItems(items) { dialog, which ->
                     selBook = items[which].toString()
+//                    readSt = mainViewModel.getCurPage(selBook!!)
                     readSt = mainViewModel.getCurPage(selBook!!)
                     if(readSt == null) readSt = "0"
 
@@ -98,7 +99,7 @@ class AddReadingActivity : AppCompatActivity() {
                     edPageTv?.text = "/ $maxPage 페이지"
 
                     saveBtn?.setOnClickListener {
-                        readEd = pageEt?.text.toString()
+                        readEd = pageEt?.text.toString().toInt()
 
                         if (readSt!!.toInt() >= readEd!!.toInt()) {
                             Toast.makeText(this, "전보다 많은 페이지 입력", Toast.LENGTH_SHORT).show()

@@ -45,9 +45,16 @@ class BooksFragment : Fragment() {
         val adapter = BooksAdapter()
         binding.booksRecyclerView.adapter = adapter
         val mItems = booksViewModel.getMyBooks()
+        Log.d("ttest", "mItems = $mItems")
         for (i in mItems.indices) {
             val curPage = booksViewModel.getCurPage(mItems[i].name)
-            mItems[i].curPage = curPage
+
+            if (curPage != null) {
+                mItems[i].curPage = curPage
+            } else {
+                mItems[i].curPage = "0"
+            }
+
         }
         adapter.updateItems(mItems)
 
