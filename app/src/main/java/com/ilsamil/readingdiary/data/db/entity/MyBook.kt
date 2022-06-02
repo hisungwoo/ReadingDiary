@@ -8,8 +8,8 @@ data class MyBook (
     var name : String,
     var imgUrl : String,
     var lastDate : String,
-    var edPage : String,
-    var curPage : String,
+    var edPage : Int,
+    var curPage : Int,
 ) {
     @PrimaryKey(autoGenerate = true) var bookId : Int = 0
 }

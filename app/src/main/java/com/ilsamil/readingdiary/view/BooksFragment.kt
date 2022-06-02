@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.adapter.BooksAdapter
+import com.ilsamil.readingdiary.data.db.entity.MyBook
+import com.ilsamil.readingdiary.data.remote.model.Books
 import com.ilsamil.readingdiary.databinding.FragmentBooksBinding
 import com.ilsamil.readingdiary.viewmodel.BooksViewModel
 
@@ -22,12 +25,6 @@ import com.ilsamil.readingdiary.viewmodel.BooksViewModel
 class BooksFragment : Fragment() {
     private val booksViewModel by activityViewModels<BooksViewModel>()
     private lateinit var binding : FragmentBooksBinding
-
-    companion object {
-        fun newInstance() : BooksFragment {
-            return BooksFragment()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,31 +38,34 @@ class BooksFragment : Fragment() {
         binding.booksRecyclerView.layoutManager = LinearLayoutManager(container?.context,
                 RecyclerView.VERTICAL,
                 false)
-
         val adapter = BooksAdapter()
         binding.booksRecyclerView.adapter = adapter
-        val mItems = booksViewModel.getMyBooks()
-        Log.d("ttest", "mItems = $mItems")
-        for (i in mItems.indices) {
-            val curPage = booksViewModel.getCurPage(mItems[i].name)
 
-            if (curPage != null) {
-                mItems[i].curPage = curPage
-            } else {
-                mItems[i].curPage = "0"
+
+        booksViewModel.apply {
+            setCategoryAll()
+            bookList.observe(this@BooksFragment, Observer {
+                adapter.updateItems(it)
+            })
+        }
+
+        binding.apply {
+            booksAddBtn.setOnClickListener {
+                findNavController().navigate(R.id.action_booksFragment_to_searchFragment)
             }
 
+            booksCategoryAllBtn.setOnClickListener {
+                booksViewModel.setCategoryAll()
+            }
+
+            booksCategoryReadingBtn.setOnClickListener {
+                booksViewModel.setCategoryReading()
+            }
+
+            booksCategoryFinishBtn.setOnClickListener {
+                booksViewModel.setCategoryFinish()
+            }
         }
-        adapter.updateItems(mItems)
-
-
-        binding.booksAddBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_booksFragment_to_searchFragment)
-        }
-
-
         return binding.root
     }
-
-
 }

@@ -44,12 +44,9 @@ class SearchResultFragment : Fragment() {
         }
 
         binding.searchResultSaveBtn.setOnClickListener {
-            val book = MyBook(args.books.title, args.books.thumbnail, args.books.datetime.substring(0,10), "1200",  "0")
+            val book = MyBook(args.books.title, args.books.thumbnail, "", 1200,  0)
             srViewModel.addBooks(book)
-            Log.d("ttest", "성공!!")
         }
-
-
         return binding.root
     }
 

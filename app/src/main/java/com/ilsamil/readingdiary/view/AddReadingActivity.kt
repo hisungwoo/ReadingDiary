@@ -68,12 +68,15 @@ class AddReadingActivity : AppCompatActivity() {
                 .setTitle("읽은 책을 선택해주세요")
                 .setItems(items) { dialog, which ->
                     selBook = items[which].toString()
-//                    readSt = mainViewModel.getCurPage(selBook!!)
-                    readSt = mainViewModel.getCurPage(selBook!!)
-                    if(readSt == null) readSt = "0"
 
-                    maxPage = books[which].edPage
+                    val reading = mainViewModel.getCurPage(selBook!!)
+                    if (reading == null) {
+                        readSt = "0"
+                    } else {
+                        readSt = reading.readEd.toString()
+                    }
 
+                    maxPage = books[which].edPage.toString()
                     binding.addReadingBookNameTitle.text = items[which]
                     binding.addReadingPageTv.text = "${readSt} / ${maxPage} 페이지"
                     binding.addReadingEditPageBtn.isEnabled = true

@@ -11,8 +11,8 @@ interface ReadingDao {
     @Query("SELECT DISTINCT day FROM ReadingDay WHERE year = :year AND month = :month ORDER BY day")
     fun selectReadingDate(year : String, month : String) : List<String>
 
-    @Query("SELECT MAX(readEd) FROM ReadingDay WHERE book = :book")
-    fun selectMaxRead(book : String) : String
+    @Query("SELECT * FROM ReadingDay WHERE readEd = (SELECT MAX(readEd) FROM ReadingDay WHERE book = :book) AND book = :book")
+    fun selectMaxRead(book : String) : ReadingDay
 
     @Query("DELETE FROM ReadingDay WHERE year = :year AND month = :month AND day = :day")
     fun deleteReadingDay(year : String, month : String, day : String) : Int
@@ -22,4 +22,9 @@ interface ReadingDao {
 
     @Query("UPDATE ReadingDay SET book = :book, readSt = :readSt, readEd = :readEd, maxPage = :maxPage WHERE year = :year and month = :month and day = :day")
     fun updateReadingDay(year : String, month : String, day : String, book: String, readSt : String, readEd : String, maxPage : String)
+
+    @Query("SELECT DISTINCT * FROM ReadingDay WHERE readEd = maxPage")
+    fun selectFinishRead() : List<ReadingDay>
+
+
 }

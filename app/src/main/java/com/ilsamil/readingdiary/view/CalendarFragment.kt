@@ -59,8 +59,6 @@ class CalendarFragment : Fragment() {
         //독서 정보
         readingList = mainViewModel.getReadingDate(selectedDate.year.toString(), selectedDate.monthValue.toString())
 
-        Log.d(TAG, "read = $readingList")
-
         //년,월 텍스트 뷰 셋팅
         binding.calCurrentDateTv.text = monthYearFromDate(selectedDate)
 

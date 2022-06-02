@@ -8,21 +8,18 @@ import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.data.remote.model.Books
+import com.ilsamil.readingdiary.databinding.ItemSearchResultBinding
 
 class SearchAdapter() : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     private var sItem : List<Books> = ArrayList()
     private lateinit var sItemClickListener : SearchOnItemClickListener
 
     inner class SearchViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val listCl : ConstraintLayout = itemView.findViewById(R.id.item_search_list_cl)
-        var searchImg: ImageView = itemView.findViewById(R.id.item_search_img)
-        var nameTv: TextView = itemView.findViewById(R.id.item_search_name_tv)
-        var authorsTv: TextView = itemView.findViewById(R.id.item_search_authors_tv)
-        var dateTimeTv: TextView = itemView.findViewById(R.id.item_search_datetime)
-        var contentTv: TextView = itemView.findViewById(R.id.item_search_content)
+        val binding = ItemSearchResultBinding.bind(itemView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): SearchViewHolder {
@@ -31,27 +28,38 @@ class SearchAdapter() : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: SearchAdapter.SearchViewHolder, position: Int) {
-        val item = sItem[position]
-
-        var authors = ""
-        for(i in item.authors) authors += "$i "
-
-        holder.apply {
-            searchImg.setImageResource(R.drawable.ic_baseline_brightness_check_1_24)
-            nameTv.text = item.title
-            authorsTv.text = authors
-            dateTimeTv.text = item.datetime.substring(0,10)
-            contentTv.text = item.contents
-        }
+        holder.binding.books = sItem[position]
 
         // 클릭 이벤트
-        holder.listCl.setOnClickListener {
+        holder.binding.itemSearchListCl.setOnClickListener {
             sItemClickListener.onClick(it, position, sItem[position])
         }
     }
 
     override fun getItemCount(): Int {
         return sItem.size
+    }
+
+    object SearchBindingAdapter {
+        @BindingAdapter("setAuthors")
+        @JvmStatic
+        fun setAuthors(tv : TextView, books: Books) {
+            var authors = ""
+            for(i in books.authors) authors += "$i "
+            tv.text = authors
+        }
+
+        @BindingAdapter("setDateTime")
+        @JvmStatic
+        fun setDateTime(tv : TextView, books: Books) {
+            tv.text = books.datetime.substring(0,10)
+        }
+
+        @BindingAdapter("setImg")
+        @JvmStatic
+        fun setImg(iv : ImageView, books: Books) {
+            iv.setImageResource(R.drawable.ic_baseline_brightness_check_1_24)
+        }
     }
 
     fun updateItem(item : List<Books>) {
@@ -66,5 +74,4 @@ class SearchAdapter() : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     fun setItemClickListener(onItemClickListener : SearchOnItemClickListener) {
         this.sItemClickListener = onItemClickListener
     }
-
 }

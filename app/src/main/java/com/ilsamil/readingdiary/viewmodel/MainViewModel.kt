@@ -72,7 +72,7 @@ class MainViewModel(application : Application) : AndroidViewModel(application) {
         return db.myBookDao().selectMyBook()
     }
 
-    fun getCurPage(book : String) : String {
+    fun getCurPage(book : String) : ReadingDay {
         return db.readingDao().selectMaxRead(book)
     }
 
@@ -86,10 +86,6 @@ class MainViewModel(application : Application) : AndroidViewModel(application) {
 
     fun updateReadingDay(readingDay : ReadingDay) {
         return db.readingDao().updateReadingDay(readingDay.year, readingDay.month, readingDay.day, readingDay.book, readingDay.readSt.toString(), readingDay.readEd.toString(), readingDay.maxPage.toString())
-    }
-
-    fun setCurPage(lastDate : String, curPage : String, name : String) {
-        return db.myBookDao().updateCurPage(lastDate, curPage, name)
     }
 
 

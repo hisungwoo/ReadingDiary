@@ -48,7 +48,19 @@
             android:layout_marginStart="10dp"
             app:layout_constraintTop_toBottomOf="@+id/books_title_tv"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/books_category_finish_btn"
+            app:layout_constraintEnd_toStartOf="@+id/books_category_reading_btn"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/books_category_reading_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="읽고 있는 책"
+            android:layout_marginStart="10dp"
+            app:layout_constraintTop_toTopOf="@id/books_category_all_btn"
+            app:layout_constraintStart_toEndOf="@+id/books_category_all_btn"
+            app:layout_constraintEnd_toStartOf="@id/books_category_finish_btn"
             />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -57,21 +69,11 @@
             android:layout_height="wrap_content"
             android:text="다 읽은 책"
             android:layout_marginStart="10dp"
-            app:layout_constraintTop_toTopOf="@+id/books_category_all_btn"
-            app:layout_constraintStart_toEndOf="@+id/books_category_all_btn"
-            app:layout_constraintEnd_toStartOf="@+id/books_category_reading_btn"
-            />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/books_category_reading_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="읽고 있는 책"
-            android:layout_marginStart="10dp"
-            app:layout_constraintTop_toTopOf="@+id/books_category_all_btn"
-            app:layout_constraintStart_toEndOf="@+id/books_category_finish_btn"
+            app:layout_constraintTop_toTopOf="@id/books_category_all_btn"
+            app:layout_constraintStart_toEndOf="@+id/books_category_reading_btn"
             app:layout_constraintEnd_toEndOf="parent"
             />
+
 
 
         <androidx.recyclerview.widget.RecyclerView
