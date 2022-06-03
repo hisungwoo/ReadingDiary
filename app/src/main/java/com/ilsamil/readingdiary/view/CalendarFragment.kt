@@ -75,6 +75,8 @@ class CalendarFragment : Fragment() {
         //클릭 이벤트
         calendarAdapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int, item : CalendarDay) {
+
+                // 독서 정보가 있는 경우
                 if (!item.isEmpty && item.isRead) {
                     val calInfo = mainViewModel.getReadingDay(item.year, item.month, item.day)
                     Log.d("ttest", "calInfo = $calInfo")

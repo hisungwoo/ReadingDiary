@@ -1,5 +1,6 @@
 package com.ilsamil.readingdiary.adapter
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.data.remote.model.Books
 import com.ilsamil.readingdiary.databinding.ItemSearchResultBinding
@@ -57,8 +60,11 @@ class SearchAdapter() : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
         @BindingAdapter("setImg")
         @JvmStatic
-        fun setImg(iv : ImageView, books: Books) {
-            iv.setImageResource(R.drawable.ic_baseline_brightness_check_1_24)
+        fun setImg(iv : ImageView, url : String) {
+            Glide.with(iv.context)
+                .load(url)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(iv)
         }
     }
 

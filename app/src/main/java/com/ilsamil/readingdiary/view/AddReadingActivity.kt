@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.navArgs
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.viewmodel.MainViewModel
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.databinding.ActivityAddReadingBinding
@@ -68,6 +70,7 @@ class AddReadingActivity : AppCompatActivity() {
                 .setTitle("읽은 책을 선택해주세요")
                 .setItems(items) { dialog, which ->
                     selBook = items[which].toString()
+                    val imgUrl = books[which].imgUrl
 
                     val reading = mainViewModel.getCurPage(selBook!!)
                     if (reading == null) {
@@ -81,6 +84,12 @@ class AddReadingActivity : AppCompatActivity() {
                     binding.addReadingPageTv.text = "${readSt} / ${maxPage} 페이지"
                     binding.addReadingEditPageBtn.isEnabled = true
                     binding.addReadingSaveBtn.isEnabled = true
+
+                    Glide.with(this)
+                        .load(imgUrl)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .into(binding.addReadingBookIv)
+
                 }
             builder.show()
         }

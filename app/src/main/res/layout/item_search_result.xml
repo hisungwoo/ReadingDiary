@@ -22,7 +22,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
-            app:setImg="@{books}"
+            app:setImg="@{books.thumbnail}"
             tools:src="@drawable/ic_baseline_brightness_check_1_24"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"

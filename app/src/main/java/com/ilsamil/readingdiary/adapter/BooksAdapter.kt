@@ -60,6 +60,7 @@ class BooksAdapter() : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
         fun setReadingText(tv : TextView, myBook : MyBook) {
             tv.text = "${myBook.curPage}/${myBook.edPage} 페이지"
         }
+
     }
 
 }
