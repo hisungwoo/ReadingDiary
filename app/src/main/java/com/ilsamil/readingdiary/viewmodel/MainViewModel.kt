@@ -1,21 +1,32 @@
 package com.ilsamil.readingdiary.viewmodel
 
 import android.app.Application
+import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.room.Room
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.data.db.AppDatabase
 import com.ilsamil.readingdiary.data.db.entity.CalendarDay
 import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import java.time.YearMonth
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MainViewModel(application : Application) : AndroidViewModel(application) {
     val calReadList = MutableLiveData<ArrayList<CalendarDay>>()
+    val selBooks = MutableLiveData<List<MyBook>>()
 
-    private val db = Room.databaseBuilder(application, AppDatabase::class.java, "database-app")
+    private val db = Room.databaseBuilder(
+            application,
+            AppDatabase::class.java, "database-app")
         .allowMainThreadQueries()
         .build()
 
@@ -64,17 +75,27 @@ class MainViewModel(application : Application) : AndroidViewModel(application) {
         return db.readingDao().selectReadingDate(year, month)
     }
 
-    fun addReadingDiary(data : ReadingDay) : Long {
-        return db.readingDao().insertReadingDay(data)
+    fun addReadingDiary(data : ReadingDay) {
+        viewModelScope.launch {
+            db.readingDao().insertReadingDay(data)
+        }
     }
 
-    fun getBooks() : List<MyBook> {
-        return db.myBookDao().selectMyBook()
+    fun setSelectBook() {
+        viewModelScope.launch {
+            val books = db.myBookDao().selectMyBook()
+            if(books != null) {
+                for (i in books.indices) {
+                    val curPage = db.readingDao().selectMaxRead(books[i].name)
+
+                    if(curPage == null) books[i].curPage = 0
+                    else  books[i].curPage = curPage.readEd!!
+                }
+                selBooks.value = books
+            }
+        }
     }
 
-    fun getCurPage(book : String) : ReadingDay {
-        return db.readingDao().selectMaxRead(book)
-    }
 
     fun getReadingDay(year : String, month : String, day : String) : ReadingDay {
         return db.readingDao().selectReadingDay(year, month, day)

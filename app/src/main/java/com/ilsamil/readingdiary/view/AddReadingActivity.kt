@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.Observer
 import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -70,25 +71,22 @@ class AddReadingActivity : AppCompatActivity() {
         }
 
         binding.addReadingSelbookBtn.setOnClickListener {
-            val books = mainViewModel.getBooks()
-            val items = arrayOfNulls<String>(books.size)
-            for (i in books.indices) items[i] = books[i].name
+            mainViewModel.setSelectBook()
+        }
+
+        mainViewModel.selBooks.observe(this, Observer {
+            val items = Array(it.size) { "null" }
+            for (i in items.indices) items[i] = it[i].name
 
             val builder = AlertDialog.Builder(this)
                 .setTitle("읽은 책을 선택해주세요")
                 .setItems(items) { dialog, which ->
-                    selBook = items[which].toString()
-                    val imgUrl = books[which].imgUrl
+                    selBook = it[which].name
+                    val imgUrl = it[which].imgUrl
+                    readSt = it[which].curPage.toString()
 
-                    val reading = mainViewModel.getCurPage(selBook!!)
-                    if (reading == null) {
-                        readSt = "0"
-                    } else {
-                        readSt = reading.readEd.toString()
-                    }
-
-                    maxPage = books[which].edPage.toString()
-                    binding.addReadingBookNameTitle.text = items[which]
+                    maxPage = it[which].edPage.toString()
+                    binding.addReadingBookNameTitle.text = it[which].name
                     binding.addReadingPageTv.text = "${readSt} / ${maxPage} 페이지"
                     binding.addReadingEditPageBtn.isEnabled = true
                     binding.addReadingSaveBtn.isEnabled = true
@@ -100,7 +98,7 @@ class AddReadingActivity : AppCompatActivity() {
 
                 }
             builder.show()
-        }
+        })
 
         binding.addReadingEditPageBtn.setOnClickListener {
             AlertDialog.Builder(this)
@@ -142,10 +140,6 @@ class AddReadingActivity : AppCompatActivity() {
             if (selBook != null && readSt != null && readEd != null) {
                 val readItem = ReadingDay(year, month, day, selBook!!, readSt, readEd, maxPage)
                 mainViewModel.addReadingDiary(readItem)
-
-//                val lastDate = "${year}-${month}-${day}"
-//                mainViewModel.setCurPage(lastDate, readEd.toString(), selBook.toString())
-
                 finish()
             } else {
                 Toast.makeText(this, "페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
@@ -154,15 +148,8 @@ class AddReadingActivity : AppCompatActivity() {
 
         binding.addReadingEditBtn.setOnClickListener {
             if (selBook != null && readSt != null && readEd != null) {
-//                val curPage = mainViewModel.getCurPage(selBook.toString()).toInt()
                 val readItem = ReadingDay(year, month, day, selBook!!, readSt, readEd, maxPage)
                 mainViewModel.updateReadingDay(readItem)
-
-//                if (curPage < readEd!!.toInt()) {
-//                    val lastDate = "${year}-${month}-${day}"
-//                    mainViewModel.setCurPage(lastDate, readEd.toString(), selBook.toString())
-//                }
-
                 finish()
             } else {
                 Toast.makeText(this, "페이지를 입력해주세요", Toast.LENGTH_SHORT).show()

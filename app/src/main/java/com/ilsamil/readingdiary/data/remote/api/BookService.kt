@@ -1,4 +1,4 @@
-package com.ilsamil.readingdiary
+package com.ilsamil.readingdiary.data.remote.api
 
 import com.ilsamil.readingdiary.data.remote.model.SearchBookDto
 import retrofit2.Call
