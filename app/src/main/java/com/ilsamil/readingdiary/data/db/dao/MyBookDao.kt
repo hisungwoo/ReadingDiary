@@ -19,4 +19,7 @@ interface MyBookDao {
     @Query("SELECT * FROM MyBook WHERE name = :name")
     fun selectReadingBook(name: String) : MyBook
 
+    @Query("SELECT imgUrl FROM MyBook WHERE name = :name")
+    fun selectImgUrl(name: String) : String
+
 }

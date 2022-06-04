@@ -88,5 +88,8 @@ class MainViewModel(application : Application) : AndroidViewModel(application) {
         return db.readingDao().updateReadingDay(readingDay.year, readingDay.month, readingDay.day, readingDay.book, readingDay.readSt.toString(), readingDay.readEd.toString(), readingDay.maxPage.toString())
     }
 
+    fun getImgUrl(name : String) : String {
+        return db.myBookDao().selectImgUrl(name)
+    }
 
 }

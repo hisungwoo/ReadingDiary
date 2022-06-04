@@ -49,6 +49,14 @@ class AddReadingActivity : AppCompatActivity() {
         if (!args.calday.isEmpty && args.calday.isRead) {
             isAdd = false
             val calInfo = mainViewModel.getReadingDay(year, month, day)
+            val imgUrl = mainViewModel.getImgUrl(calInfo.book)
+
+            Glide.with(this)
+                .load(imgUrl)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(binding.addReadingBookIv)
+
+
             binding.addReadingBookNameTitle.text = calInfo.book
             binding.addReadingPageTv.text = "${calInfo.readEd} / ${calInfo.maxPage} 페이지"
             binding.addReadingEditPageBtn.isEnabled = true

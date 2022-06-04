@@ -15,6 +15,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.BR
 import com.ilsamil.readingdiary.viewmodel.MainViewModel
 import com.ilsamil.readingdiary.R
@@ -79,6 +81,7 @@ class CalendarFragment : Fragment() {
                 // 독서 정보가 있는 경우
                 if (!item.isEmpty && item.isRead) {
                     val calInfo = mainViewModel.getReadingDay(item.year, item.month, item.day)
+                    val imgUrl = mainViewModel.getImgUrl(calInfo.book)
                     Log.d("ttest", "calInfo = $calInfo")
 
                     AlertDialog.Builder(inflater.context)
@@ -96,6 +99,13 @@ class CalendarFragment : Fragment() {
 
                             val editBtn = alertDialog.findViewById<Button>(R.id.dialog_cal_edit_btn)
                             val removeBtn = alertDialog.findViewById<Button>(R.id.dialog_cal_remove_btn)
+                            val bookImg = alertDialog.findViewById<ImageView>(R.id.dialog_cal_img_iv)
+
+                            Glide.with(inflater.context)
+                                .load(imgUrl)
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .into(bookImg!!)
+
 
 
                             dateTitleTv?.text = "${item.year}년 ${item.month}월 ${item.day}일"

@@ -1,6 +1,7 @@
 package com.ilsamil.readingdiary.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
@@ -48,8 +49,12 @@ class BooksViewModel(application : Application) : AndroidViewModel(application) 
         val myBook = getMyBooks()
         val items = ArrayList<MyBook>()
         for (i in myBook.indices) {
-            val curDay = getCurDay(myBook[i].name)
-            if (curDay.readEd != null && curDay.readEd.toString() != myBook[i].edPage.toString()) {
+            val curDay : ReadingDay? = getCurDay(myBook[i].name)
+            if (curDay == null) {
+                val item = MyBook(myBook[i].name, myBook[i].imgUrl, "", myBook[i].edPage, 0)
+                items.add(item)
+
+            } else if (curDay.readEd.toString() != myBook[i].edPage.toString()) {
                 val item = myBook[i]
                 item.curPage = curDay.readEd!!
                 myBook[i].lastDate = "${curDay.year}.${curDay.month}.${curDay.day}"
