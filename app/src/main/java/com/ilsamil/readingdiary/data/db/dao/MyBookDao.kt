@@ -10,16 +10,12 @@ interface MyBookDao {
     @Query("SELECT * FROM MyBook")
     suspend fun selectMyBook() : List<MyBook>
 
-    @Query("UPDATE MyBook SET lastDate = :lastDate, CurPage = :curPage WHERE name = :name")
-    fun updateCurPage(lastDate : String, curPage : String, name: String)
-
     @Insert
-    fun insertBook(book : MyBook) : Long
+    suspend fun insertBook(book : MyBook) : Long
 
     @Query("SELECT * FROM MyBook WHERE name = :name")
     suspend fun selectReadingBook(name: String) : MyBook
 
     @Query("SELECT imgUrl FROM MyBook WHERE name = :name")
-    fun selectImgUrl(name: String) : String
-
+    suspend fun selectImgUrl(name: String) : String
 }

@@ -19,9 +19,14 @@ import com.ilsamil.readingdiary.viewmodel.MainViewModel
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.databinding.ActivityAddReadingBinding
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
+import com.ilsamil.readingdiary.viewmodel.AddReadingViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class AddReadingActivity : AppCompatActivity() {
     private val mainViewModel : MainViewModel by viewModels()
+    private val addReadingViewModel : AddReadingViewModel by viewModels()
     private lateinit var binding : ActivityAddReadingBinding
     private val args by navArgs<AddReadingActivityArgs>()
 
@@ -49,32 +54,34 @@ class AddReadingActivity : AppCompatActivity() {
         //수정하기
         if (!args.calday.isEmpty && args.calday.isRead) {
             isAdd = false
-            val calInfo = mainViewModel.getReadingDay(year, month, day)
-            val imgUrl = mainViewModel.getImgUrl(calInfo.book)
-
-            Glide.with(this)
-                .load(imgUrl)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(binding.addReadingBookIv)
-
-
-            binding.addReadingBookNameTitle.text = calInfo.book
-            binding.addReadingPageTv.text = "${calInfo.readEd} / ${calInfo.maxPage} 페이지"
+            addReadingViewModel.setEdit(year, month, day)
             binding.addReadingEditPageBtn.isEnabled = true
             binding.addReadingSaveBtn.visibility = View.INVISIBLE
             binding.addReadingEditBtn.visibility = View.VISIBLE
-
-            selBook = calInfo.book
-            maxPage = calInfo.maxPage
-            readSt = calInfo.readSt
-
         }
+
+        addReadingViewModel.editReadingDay.observe(this, Observer {
+            binding.addReadingBookNameTitle.text = it.book
+            binding.addReadingPageTv.text = "${it.readEd} / ${it.maxPage} 페이지"
+            selBook = it.book
+            maxPage = it.maxPage
+            readSt = it.readSt
+            addReadingViewModel.setEditImg(it.book)
+        })
+
+        addReadingViewModel.editImg.observe(this, Observer {
+            Glide.with(this)
+                .load(it)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(binding.addReadingBookIv)
+        })
+
 
         binding.addReadingSelbookBtn.setOnClickListener {
-            mainViewModel.setSelectBook()
+            addReadingViewModel.setSelectBook()
         }
 
-        mainViewModel.selBooks.observe(this, Observer {
+        addReadingViewModel.selBooks.observe(this, Observer {
             val items = Array(it.size) { "null" }
             for (i in items.indices) items[i] = it[i].name
 
@@ -139,7 +146,7 @@ class AddReadingActivity : AppCompatActivity() {
         binding.addReadingSaveBtn.setOnClickListener {
             if (selBook != null && readSt != null && readEd != null) {
                 val readItem = ReadingDay(year, month, day, selBook!!, readSt, readEd, maxPage)
-                mainViewModel.addReadingDiary(readItem)
+                addReadingViewModel.addReadingDiary(readItem)
                 finish()
             } else {
                 Toast.makeText(this, "페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
@@ -149,7 +156,7 @@ class AddReadingActivity : AppCompatActivity() {
         binding.addReadingEditBtn.setOnClickListener {
             if (selBook != null && readSt != null && readEd != null) {
                 val readItem = ReadingDay(year, month, day, selBook!!, readSt, readEd, maxPage)
-                mainViewModel.updateReadingDay(readItem)
+                addReadingViewModel.updateReadingDay(readItem)
                 finish()
             } else {
                 Toast.makeText(this, "페이지를 입력해주세요", Toast.LENGTH_SHORT).show()

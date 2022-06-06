@@ -1,14 +1,10 @@
 package com.ilsamil.readingdiary.viewmodel
 
 import android.app.Application
-import android.util.Log
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.data.db.AppDatabase
 import com.ilsamil.readingdiary.data.db.entity.CalendarDay
 import com.ilsamil.readingdiary.data.db.entity.MyBook
@@ -17,20 +13,16 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import java.time.YearMonth
-import java.util.*
-import kotlin.collections.ArrayList
 
 class MainViewModel(application : Application) : AndroidViewModel(application) {
     val calReadList = MutableLiveData<ArrayList<CalendarDay>>()
-    val selBooks = MutableLiveData<List<MyBook>>()
 
     private val db = Room.databaseBuilder(
             application,
             AppDatabase::class.java, "database-app")
-        .allowMainThreadQueries()
         .build()
 
-    fun setCalendarList(date : LocalDate, readingList : List<String>) {
+    private fun setCalendarList(date : LocalDate, readingList : List<String>) {
         val dayList = ArrayList<CalendarDay>()
         val yearMonth = YearMonth.from(date)
 
@@ -71,46 +63,33 @@ class MainViewModel(application : Application) : AndroidViewModel(application) {
     }
 
 
-    fun getReadingDate(year : String, month : String) : List<String> {
-        return db.readingDao().selectReadingDate(year, month)
-    }
+    fun setCalendar(selectedDate : LocalDate) {
+        val year = selectedDate.year.toString()
+        val month = selectedDate.monthValue.toString()
 
-    fun addReadingDiary(data : ReadingDay) {
         viewModelScope.launch {
-            db.readingDao().insertReadingDay(data)
-        }
-    }
-
-    fun setSelectBook() {
-        viewModelScope.launch {
-            val books = db.myBookDao().selectMyBook()
-            if(books != null) {
-                for (i in books.indices) {
-                    val curPage = db.readingDao().selectMaxRead(books[i].name)
-
-                    if(curPage == null) books[i].curPage = 0
-                    else  books[i].curPage = curPage.readEd!!
-                }
-                selBooks.value = books
-            }
+            val readingList = db.readingDao().selectReadingDate(year, month)
+            setCalendarList(selectedDate , readingList)
         }
     }
 
 
-    fun getReadingDay(year : String, month : String, day : String) : ReadingDay {
-        return db.readingDao().selectReadingDay(year, month, day)
+    suspend fun getCalInfo(item : CalendarDay) : ReadingDay {
+        return withContext(viewModelScope.coroutineContext) {
+            db.readingDao().selectReadingDay(item.year, item.month, item.day)
+        }
     }
 
-    fun removeReadingDay(year : String, month : String, day : String) : Int {
-        return db.readingDao().deleteReadingDay(year, month, day)
+    suspend fun getImgUrl2(readingDay : ReadingDay) : String {
+        return withContext(viewModelScope.coroutineContext) {
+            db.myBookDao().selectImgUrl(readingDay.book)
+        }
     }
 
-    fun updateReadingDay(readingDay : ReadingDay) {
-        return db.readingDao().updateReadingDay(readingDay.year, readingDay.month, readingDay.day, readingDay.book, readingDay.readSt.toString(), readingDay.readEd.toString(), readingDay.maxPage.toString())
-    }
-
-    fun getImgUrl(name : String) : String {
-        return db.myBookDao().selectImgUrl(name)
+    suspend fun removeReadingDay(year : String, month : String, day : String) : Int {
+        return withContext(viewModelScope.coroutineContext) {
+            db.readingDao().deleteReadingDay(year, month, day)
+        }
     }
 
 }

@@ -38,7 +38,6 @@ class SearchResultFragment : Fragment() {
             searchResultDatetimeTv.text = args.books.datetime.substring(0,10)
         }
 
-
         binding.searchResultBackBtn.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -47,6 +46,12 @@ class SearchResultFragment : Fragment() {
             val book = MyBook(args.books.title, args.books.thumbnail, "", 1200,  0)
             srViewModel.addBooks(book)
         }
+
+
+
+
+
+
         return binding.root
     }
 
