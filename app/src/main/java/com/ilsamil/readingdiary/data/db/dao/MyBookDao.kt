@@ -1,6 +1,7 @@
 package com.ilsamil.readingdiary.data.db.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.ilsamil.readingdiary.data.db.entity.MyBook
@@ -18,4 +19,7 @@ interface MyBookDao {
 
     @Query("SELECT imgUrl FROM MyBook WHERE name = :name")
     suspend fun selectImgUrl(name: String) : String
+
+    @Delete
+    suspend fun deleteBook(book : MyBook)
 }

@@ -17,6 +17,9 @@ interface ReadingDao {
     @Query("DELETE FROM ReadingDay WHERE year = :year AND month = :month AND day = :day")
     suspend fun deleteReadingDay(year : String, month : String, day : String) : Int
 
+    @Query("DELETE FROM ReadingDay WHERE book = :book")
+    suspend fun deleteAllReadingDay(book : String) : Int
+
     @Insert
     suspend fun insertReadingDay(data : ReadingDay) : Long
 
@@ -25,6 +28,5 @@ interface ReadingDao {
 
     @Query("SELECT DISTINCT * FROM ReadingDay WHERE readEd = maxPage")
     suspend fun selectFinishRead() : List<ReadingDay>
-
 
 }
