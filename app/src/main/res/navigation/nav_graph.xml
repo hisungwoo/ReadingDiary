@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_booksFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_booksFragment_to_selBookFragment"
+            app:destination="@id/selBookFragment" />
     </fragment>
 
     <fragment
@@ -61,5 +64,14 @@
         <argument
             android:name="books"
             app:argType="com.ilsamil.readingdiary.data.remote.model.Books" />
+    </fragment>
+    <fragment
+        android:id="@+id/selBookFragment"
+        android:name="com.ilsamil.readingdiary.view.SelBookFragment"
+        android:label="fragment_sel_book"
+        tools:layout="@layout/fragment_sel_book" >
+        <argument
+            android:name="mybook"
+            app:argType="com.ilsamil.readingdiary.data.db.entity.MyBook" />
     </fragment>
 </navigation>

@@ -41,6 +41,12 @@ class BooksFragment : Fragment() {
         val adapter = BooksAdapter()
         binding.booksRecyclerView.adapter = adapter
 
+        adapter.setBooksItemClickListener(object : BooksAdapter.BooksItemClickListener{
+            override fun onClick(v: View, position: Int, item: MyBook) {
+                val action = BooksFragmentDirections.actionBooksFragmentToSelBookFragment(item)
+                findNavController().navigate(action)
+            }
+        })
 
         booksViewModel.apply {
             setCategoryAll()

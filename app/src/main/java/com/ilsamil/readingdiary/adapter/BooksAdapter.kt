@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -16,6 +17,7 @@ import java.lang.Math.round
 
 class BooksAdapter() : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
     private var bItem : List<MyBook> = ArrayList()
+    private lateinit var booksItemClickListener : BooksItemClickListener
 
     inner class BooksViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val binding = ItemMybooksBinding.bind(itemView)
@@ -28,6 +30,11 @@ class BooksAdapter() : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
 
     override fun onBindViewHolder(holder: BooksViewHolder, position: Int) {
         holder.binding.myBook = bItem[position]
+
+        // 클릭 이벤트
+        holder.binding.itemMybooksCl.setOnClickListener {
+            booksItemClickListener.onClick(it, position, bItem[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -62,5 +69,15 @@ class BooksAdapter() : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
         }
 
     }
+
+
+    interface BooksItemClickListener {
+        fun onClick(v: View, position: Int, item : MyBook)
+    }
+
+    fun setBooksItemClickListener(booksItemClickListener : BooksItemClickListener) {
+        this.booksItemClickListener = booksItemClickListener
+    }
+
 
 }
