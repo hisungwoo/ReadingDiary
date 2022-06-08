@@ -29,6 +29,7 @@ class SearchResultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_result, container, false)
+        val resultItem = args.books
 
         binding.apply {
             searchResultNameTv.text = args.books.title
@@ -43,7 +44,7 @@ class SearchResultFragment : Fragment() {
         }
 
         binding.searchResultSaveBtn.setOnClickListener {
-            val book = MyBook(args.books.title, args.books.thumbnail, "", 1200,  0)
+            val book = MyBook(resultItem.title, resultItem.thumbnail, "", 0,  1200, resultItem.contents, resultItem.url)
             srViewModel.addBooks(book)
         }
 

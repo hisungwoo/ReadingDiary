@@ -11,8 +11,10 @@ data class MyBook (
     var name : String,
     var imgUrl : String,
     var lastDate : String,
-    var edPage : Int,
     var curPage : Int,
+    var edPage : Int,
+    var introduce : String,
+    var contentUrl : String
 ) : Parcelable {
     @PrimaryKey(autoGenerate = true) var bookId : Int = 0
 }

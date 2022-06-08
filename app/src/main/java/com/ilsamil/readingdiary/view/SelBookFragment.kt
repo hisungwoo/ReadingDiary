@@ -1,5 +1,7 @@
 package com.ilsamil.readingdiary.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -36,6 +38,7 @@ class SelBookFragment : Fragment() {
         Log.d("ttest", "책 이름 : ${item.name}")
 
         binding.selBookName.text = item.name
+        binding.selBookIntroduceTv.text = item.introduce
 
         Glide.with(this)
             .load(item.imgUrl)
@@ -46,6 +49,12 @@ class SelBookFragment : Fragment() {
             selBookViewModel.removeBook(args.mybook)
             selBookViewModel.removeReading(args.mybook.name)
             findNavController().popBackStack()
+        }
+
+        binding.selBookDetailBtn.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(item.contentUrl)
+            startActivity(intent)
         }
 
 
