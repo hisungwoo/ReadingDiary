@@ -17,6 +17,12 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.databinding.FragmentSelBookBinding
 import com.ilsamil.readingdiary.viewmodel.SelBookViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.Period
+import java.time.temporal.ChronoUnit
 
 class SelBookFragment : Fragment() {
     private val selBookViewModel by activityViewModels<SelBookViewModel>()
@@ -32,13 +38,39 @@ class SelBookFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sel_book, container, false)
-
         val item = args.mybook
-        Log.d("ttest", "들어왔음!!!!!!!!!!!!!!")
-        Log.d("ttest", "책 이름 : ${item.name}")
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val stReading = selBookViewModel.getStartReading(item.name)
+            val edReading = selBookViewModel.getCurReading(item.name)
+            val curPage = edReading?.readEd
+
+            if (stReading != null) {
+                binding.selBookStDateTv.text = "${stReading.year}.${stReading.month}.${stReading.day}"
+            }
+
+            if (edReading != null && curPage != null) {
+                binding.selBookProgressBar.progress = curPage
+                binding.selBookProgressReadTv.text = "${curPage}/${item.edPage}페이지"
+                binding.selBookProgressPerTv.text = Math.floor((curPage.toDouble()/item.edPage.toDouble())*100).toInt().toString()+ "%"
+                binding.selBookEdDateTv.text = "${edReading.year}.${edReading.month}.${edReading.day}"
+
+            }
+
+            if (stReading != null && edReading != null) {
+                val stDate = LocalDate.of(stReading.year.toInt(), stReading.month.toInt(), stReading.day.toInt())
+                val edDate = LocalDate.of(edReading.year.toInt(), edReading.month.toInt(), edReading.day.toInt())
+                val readingDay = ChronoUnit.DAYS.between(stDate, edDate) + 1
+
+                binding.selBookReadingDayTv.text = readingDay.toString()
+            }
+
+        }
 
         binding.selBookName.text = item.name
         binding.selBookIntroduceTv.text = item.introduce
+        binding.selBookProgressBar.max = item.edPage
+
 
         Glide.with(this)
             .load(item.imgUrl)
