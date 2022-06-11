@@ -10,6 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.databinding.FragmentSearchResultBinding
@@ -39,12 +41,17 @@ class SearchResultFragment : Fragment() {
             searchResultDatetimeTv.text = args.books.datetime.substring(0,10)
         }
 
+        Glide.with(this)
+            .load(resultItem.thumbnail)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .into(binding.searchResultImg)
+
         binding.searchResultBackBtn.setOnClickListener {
             findNavController().popBackStack()
         }
 
         binding.searchResultSaveBtn.setOnClickListener {
-            val book = MyBook(resultItem.title, resultItem.thumbnail, "", 0,  1200, resultItem.contents, resultItem.url)
+            val book = MyBook(resultItem.title, resultItem.thumbnail, "", 0,  1200, resultItem.contents, resultItem.url, resultItem.publisher)
             srViewModel.addBooks(book)
         }
 

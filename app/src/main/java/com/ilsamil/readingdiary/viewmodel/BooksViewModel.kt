@@ -42,7 +42,7 @@ class BooksViewModel(application : Application) : AndroidViewModel(application) 
             for (i in myBook.indices) {
                 val curDay : ReadingDay? = db.readingDao().selectMaxRead(myBook[i].name)
                 if (curDay == null) {
-                    val item = MyBook(myBook[i].name, myBook[i].imgUrl, "", myBook[i].edPage, 0, "", "")
+                    val item = MyBook(myBook[i].name, myBook[i].imgUrl, "", myBook[i].edPage, 0, "", "", "")
                     items.add(item)
 
                 } else if (curDay.readEd.toString() != myBook[i].edPage.toString()) {

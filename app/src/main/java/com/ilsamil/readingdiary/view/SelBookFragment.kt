@@ -1,6 +1,8 @@
 package com.ilsamil.readingdiary.view
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +10,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -70,6 +77,7 @@ class SelBookFragment : Fragment() {
         binding.selBookName.text = item.name
         binding.selBookIntroduceTv.text = item.introduce
         binding.selBookProgressBar.max = item.edPage
+        binding.selBookPublisherTv.text = item.publisher
 
 
         Glide.with(this)
@@ -78,9 +86,30 @@ class SelBookFragment : Fragment() {
             .into(binding.selBookImgIv)
 
         binding.selBookDelBtn.setOnClickListener {
-            selBookViewModel.removeBook(args.mybook)
-            selBookViewModel.removeReading(args.mybook.name)
-            findNavController().popBackStack()
+
+            AlertDialog.Builder(inflater.context)
+                .setView(R.layout.dialog_page_eidt)
+                .show()
+                .also { alertDialog ->
+                    if (alertDialog == null) return@also
+
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                    val saveBtn = alertDialog.findViewById<Button>(R.id.dialog_page_save_btn)
+                    val cancelBtn = alertDialog.findViewById<Button>(R.id.dialog_page_cancel_btn)
+
+                    saveBtn?.setOnClickListener {
+                        selBookViewModel.removeBook(args.mybook)
+                        selBookViewModel.removeReading(args.mybook.name)
+                        alertDialog.dismiss()
+                        findNavController().popBackStack()
+                    }
+
+                    cancelBtn?.setOnClickListener {
+                        alertDialog.dismiss()
+                    }
+                }
+
         }
 
         binding.selBookDetailBtn.setOnClickListener {
@@ -89,6 +118,9 @@ class SelBookFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.selBookBackBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
 
         return binding.root
