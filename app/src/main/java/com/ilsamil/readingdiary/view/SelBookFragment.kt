@@ -88,24 +88,24 @@ class SelBookFragment : Fragment() {
         binding.selBookDelBtn.setOnClickListener {
 
             AlertDialog.Builder(inflater.context)
-                .setView(R.layout.dialog_page_eidt)
+                .setView(R.layout.dialog_message)
                 .show()
                 .also { alertDialog ->
                     if (alertDialog == null) return@also
 
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-                    val saveBtn = alertDialog.findViewById<Button>(R.id.dialog_page_save_btn)
-                    val cancelBtn = alertDialog.findViewById<Button>(R.id.dialog_page_cancel_btn)
+                    val yesBtn = alertDialog.findViewById<Button>(R.id.dialog_message_save_btn)
+                    val noBtn = alertDialog.findViewById<Button>(R.id.dialog_message_cancel_btn)
 
-                    saveBtn?.setOnClickListener {
+                    yesBtn?.setOnClickListener {
                         selBookViewModel.removeBook(args.mybook)
                         selBookViewModel.removeReading(args.mybook.name)
                         alertDialog.dismiss()
                         findNavController().popBackStack()
                     }
 
-                    cancelBtn?.setOnClickListener {
+                    noBtn?.setOnClickListener {
                         alertDialog.dismiss()
                     }
                 }
