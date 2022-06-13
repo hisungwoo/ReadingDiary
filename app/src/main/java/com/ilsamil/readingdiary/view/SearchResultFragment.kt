@@ -15,6 +15,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.databinding.FragmentSearchResultBinding
+import com.ilsamil.readingdiary.utils.Util
 import com.ilsamil.readingdiary.viewmodel.SearchResultViewModel
 
 class SearchResultFragment : Fragment() {
@@ -51,10 +52,14 @@ class SearchResultFragment : Fragment() {
         }
 
         binding.searchResultSaveBtn.setOnClickListener {
-            val book = MyBook(resultItem.title, resultItem.thumbnail, "", 0,  1200, resultItem.contents, resultItem.url, resultItem.publisher)
-            srViewModel.addBooks(book)
+            val util = Util()
+            val addBook : () -> Unit = {
+                val book = MyBook(resultItem.title, resultItem.thumbnail, "", 0,  1200, resultItem.contents, resultItem.url, resultItem.publisher)
+                srViewModel.addBooks(book)
+                findNavController().popBackStack()
+            }
+            util.showDialog(inflater.context, addBook, "내 서재에 책을 추가하시겠습니까?", "")
         }
-
 
 
 

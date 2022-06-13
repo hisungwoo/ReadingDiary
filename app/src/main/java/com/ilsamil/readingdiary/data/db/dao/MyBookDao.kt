@@ -20,6 +20,6 @@ interface MyBookDao {
     @Query("SELECT imgUrl FROM MyBook WHERE name = :name")
     suspend fun selectImgUrl(name: String) : String
 
-    @Delete
-    suspend fun deleteBook(book : MyBook)
+    @Query("DELETE FROM MyBook WHERE name = :name")
+    suspend fun deleteBook(name: String)
 }

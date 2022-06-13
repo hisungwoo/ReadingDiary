@@ -1,20 +1,12 @@
 package com.ilsamil.readingdiary.view
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -23,12 +15,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.databinding.FragmentSelBookBinding
+import com.ilsamil.readingdiary.utils.Util
 import com.ilsamil.readingdiary.viewmodel.SelBookViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.time.LocalDate
-import java.time.Period
 import java.time.temporal.ChronoUnit
 
 class SelBookFragment : Fragment() {
@@ -86,29 +78,35 @@ class SelBookFragment : Fragment() {
             .into(binding.selBookImgIv)
 
         binding.selBookDelBtn.setOnClickListener {
+            val util = Util()
+            val removeBook : () -> Unit = {
+                selBookViewModel.removeBook(args.mybook.name)
+                findNavController().popBackStack()
+            }
 
-            AlertDialog.Builder(inflater.context)
-                .setView(R.layout.dialog_message)
-                .show()
-                .also { alertDialog ->
-                    if (alertDialog == null) return@also
+            util.showDialog(inflater.context, removeBook,"정말로 삭제 하시겠습니까?", "삭제 하시면 데이터 복구가 되지 않습니다.")
 
-                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-                    val yesBtn = alertDialog.findViewById<Button>(R.id.dialog_message_save_btn)
-                    val noBtn = alertDialog.findViewById<Button>(R.id.dialog_message_cancel_btn)
-
-                    yesBtn?.setOnClickListener {
-                        selBookViewModel.removeBook(args.mybook)
-                        selBookViewModel.removeReading(args.mybook.name)
-                        alertDialog.dismiss()
-                        findNavController().popBackStack()
-                    }
-
-                    noBtn?.setOnClickListener {
-                        alertDialog.dismiss()
-                    }
-                }
+//            AlertDialog.Builder(inflater.context)
+//                .setView(R.layout.dialog_message)
+//                .show()
+//                .also { alertDialog ->
+//                    if (alertDialog == null) return@also
+//
+//                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//
+//                    val yesBtn = alertDialog.findViewById<Button>(R.id.dialog_message_yes_btn)
+//                    val noBtn = alertDialog.findViewById<Button>(R.id.dialog_message_no_btn)
+//
+//                    yesBtn?.setOnClickListener {
+//                        selBookViewModel.removeBook(args.mybook.name)
+//                        alertDialog.dismiss()
+//                        findNavController().popBackStack()
+//                    }
+//
+//                    noBtn?.setOnClickListener {
+//                        alertDialog.dismiss()
+//                    }
+//                }
 
         }
 

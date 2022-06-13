@@ -29,15 +29,11 @@ class SelBookViewModel (application : Application) : AndroidViewModel(applicatio
         }
     }
 
-    fun removeBook(book : MyBook) {
+    fun removeBook(book : String)  {
         viewModelScope.launch {
             db.myBookDao().deleteBook(book)
-        }
-    }
-
-    fun removeReading(book : String) {
-        viewModelScope.launch {
             db.readingDao().deleteAllReadingDay(book)
         }
     }
+
 }
