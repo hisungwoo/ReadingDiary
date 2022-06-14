@@ -109,17 +109,17 @@ class AddReadingActivity : AppCompatActivity() {
 
         binding.addReadingEditPageBtn.setOnClickListener {
             AlertDialog.Builder(this)
-                .setView(R.layout.dialog_page_eidt)
+                .setView(R.layout.dialog_page_update)
                 .show()
                 .also { alertDialog ->
                     if (alertDialog == null) return@also
 
                     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-                    val saveBtn = alertDialog.findViewById<Button>(R.id.dialog_page_save_btn)
-                    val cancelBtn = alertDialog.findViewById<Button>(R.id.dialog_page_cancel_btn)
-                    val edPageTv = alertDialog.findViewById<TextView>(R.id.dialog_page_end_tv)
-                    val pageEt = alertDialog.findViewById<EditText>(R.id.dialog_page_edit_et)
+                    val saveBtn = alertDialog.findViewById<Button>(R.id.dialog_update_save_btn)
+                    val cancelBtn = alertDialog.findViewById<Button>(R.id.dialog_update_cancel_btn)
+                    val edPageTv = alertDialog.findViewById<TextView>(R.id.dialog_update_end_tv)
+                    val pageEt = alertDialog.findViewById<EditText>(R.id.dialog_update_edit_et)
 
                     edPageTv?.text = "/ $maxPage 페이지"
 

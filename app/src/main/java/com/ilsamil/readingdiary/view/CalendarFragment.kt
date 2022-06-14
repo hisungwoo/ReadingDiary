@@ -1,11 +1,9 @@
 package com.ilsamil.readingdiary.view
 
 import android.content.Context
-import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,9 +23,7 @@ import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.adapter.CalendarAdapter
 import com.ilsamil.readingdiary.databinding.CalendarListBinding
 import com.ilsamil.readingdiary.data.db.entity.CalendarDay
-import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -53,12 +49,6 @@ class CalendarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
-
-//        val bookItem1 = MyBook("전지적 독자 시점", "www.naver.com", "2022-05-29","555", "0", false)
-//        val bookItem2 = MyBook("화산 귀환", "www.naver.com", "2022-05-30", "1252","0", false)
-//        mainViewModel.addBook(bookItem1)
-//        mainViewModel.addBook(bookItem2)
-
 
         //현재 날짜
         selectedDate = LocalDate.now()
