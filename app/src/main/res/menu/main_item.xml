@@ -3,8 +3,8 @@
     <item
         android:id="@+id/calendarFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_home_24"
-        android:title="홈" />
+        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:title="캘린더" />
 
     <item
         android:id="@+id/booksFragment"

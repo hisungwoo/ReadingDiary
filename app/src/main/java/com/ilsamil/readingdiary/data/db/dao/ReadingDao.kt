@@ -17,6 +17,9 @@ interface ReadingDao {
     @Query("SELECT * FROM ReadingDay WHERE readEd = (SELECT Min(readEd) FROM ReadingDay WHERE book = :book) AND book = :book")
     suspend fun selectMinRead(book : String) : ReadingDay
 
+    @Query("SELECT COUNT(*) FROM ReadingDay WHERE book = :book")
+    suspend fun selectReadCnt(book : String) : String
+
     @Query("DELETE FROM ReadingDay WHERE year = :year AND month = :month AND day = :day")
     suspend fun deleteReadingDay(year : String, month : String, day : String) : Int
 

@@ -29,6 +29,12 @@ class SelBookViewModel (application : Application) : AndroidViewModel(applicatio
         }
     }
 
+    suspend fun getReadingCnt(name : String) : String? {
+        return withContext(viewModelScope.coroutineContext) {
+            db.readingDao().selectReadCnt(name)
+        }
+    }
+
     fun removeBook(book : String)  {
         viewModelScope.launch {
             db.myBookDao().deleteBook(book)

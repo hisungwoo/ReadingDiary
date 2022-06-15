@@ -14,6 +14,7 @@ import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.databinding.ItemMybooksBinding
 import java.lang.Math.round
+import kotlin.math.floor
 
 class BooksAdapter() : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
     private var bItem : List<MyBook> = ArrayList()
@@ -58,7 +59,7 @@ class BooksAdapter() : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
         @BindingAdapter("setProgressText")
         @JvmStatic
         fun setProgressText(tv : TextView, myBook : MyBook) {
-            tv.text = Math.floor((myBook.curPage.toDouble()/myBook.edPage.toDouble())*100).toInt().toString()+ "%"
+            tv.text = floor((myBook.curPage.toDouble()/myBook.edPage.toDouble())*100).toInt().toString()+ "%"
         }
 
         @SuppressLint("SetTextI18n")

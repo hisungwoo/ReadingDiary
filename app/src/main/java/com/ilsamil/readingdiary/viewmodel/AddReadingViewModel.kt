@@ -39,14 +39,24 @@ class AddReadingViewModel(application : Application) : AndroidViewModel(applicat
     fun setSelectBook() {
         viewModelScope.launch {
             val books = db.myBookDao().selectMyBook()
+            val items = ArrayList<MyBook>()
+
             if(books != null) {
                 for (i in books.indices) {
-                    val curPage = db.readingDao().selectMaxRead(books[i].name)
+                    val curDay : ReadingDay? = db.readingDao().selectMaxRead(books[i].name)
+                    if(curDay == null) {
+                        val item = books[i]
+                        item.curPage = 0
+                        items.add(item)
 
-                    if(curPage == null) books[i].curPage = 0
-                    else  books[i].curPage = curPage.readEd!!
+                    } else if (curDay.readEd != books[i].edPage) {
+                        val item = books[i]
+                        item.curPage = curDay.readEd!!
+                        books[i].lastDate = "${curDay.year}.${curDay.month}.${curDay.day}"
+                        items.add(item)
+                    }
                 }
-                selBooks.value = books
+                selBooks.value = items
             }
         }
     }

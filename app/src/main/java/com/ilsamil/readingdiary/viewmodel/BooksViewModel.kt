@@ -25,7 +25,10 @@ class BooksViewModel(application : Application) : AndroidViewModel(application) 
             val items = db.myBookDao().selectMyBook()
             for (i in items.indices) {
                 val curDay : ReadingDay? = db.readingDao().selectMaxRead(items[i].name)
-                if (curDay == null) items[i].curPage = 0
+                if (curDay == null) {
+                    items[i].curPage = 0
+                    items[i].lastDate = "- 독서를 시작해보세요"
+                }
                 else {
                     items[i].curPage = curDay.readEd!!
                     items[i].lastDate = "${curDay.year}.${curDay.month}.${curDay.day}"
@@ -42,9 +45,10 @@ class BooksViewModel(application : Application) : AndroidViewModel(application) 
             for (i in myBook.indices) {
                 val curDay : ReadingDay? = db.readingDao().selectMaxRead(myBook[i].name)
                 if (curDay == null) {
-                    val item = MyBook(myBook[i].name, myBook[i].imgUrl, "", myBook[i].edPage, 0, "", "", "")
+                    val item = myBook[i]
+                    item.curPage = 0
+                    item.lastDate = "- 독서를 시작해보세요"
                     items.add(item)
-
                 } else if (curDay.readEd.toString() != myBook[i].edPage.toString()) {
                     val item = myBook[i]
                     item.curPage = curDay.readEd!!

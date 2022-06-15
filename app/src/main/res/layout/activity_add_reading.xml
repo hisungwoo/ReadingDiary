@@ -76,7 +76,7 @@
         />
 
     <Button
-        android:id="@+id/add_reading_edit_page_btn"
+        android:id="@+id/add_reading_update_page_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="클릭하여 변경해주세요"
-        app:layout_constraintTop_toBottomOf="@+id/add_reading_edit_page_btn"
+        app:layout_constraintTop_toBottomOf="@+id/add_reading_update_page_btn"
         app:layout_constraintStart_toStartOf="@+id/add_reading_book_st_title"
         />
 
@@ -102,8 +102,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0 / 0 페이지"
-        app:layout_constraintTop_toBottomOf="@+id/add_reading_edit_page_btn"
-        app:layout_constraintEnd_toEndOf="@+id/add_reading_edit_page_btn"
+        app:layout_constraintTop_toBottomOf="@+id/add_reading_update_page_btn"
+        app:layout_constraintEnd_toEndOf="@+id/add_reading_update_page_btn"
     />
 
 

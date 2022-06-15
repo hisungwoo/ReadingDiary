@@ -25,7 +25,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class AddReadingActivity : AppCompatActivity() {
-    private val mainViewModel : MainViewModel by viewModels()
     private val addReadingViewModel : AddReadingViewModel by viewModels()
     private lateinit var binding : ActivityAddReadingBinding
     private val args by navArgs<AddReadingActivityArgs>()
@@ -55,7 +54,7 @@ class AddReadingActivity : AppCompatActivity() {
         if (!args.calday.isEmpty && args.calday.isRead) {
             isAdd = false
             addReadingViewModel.setEdit(year, month, day)
-            binding.addReadingEditPageBtn.isEnabled = true
+            binding.addReadingUpdatePageBtn.isEnabled = true
             binding.addReadingSaveBtn.visibility = View.INVISIBLE
             binding.addReadingEditBtn.visibility = View.VISIBLE
         }
@@ -76,7 +75,6 @@ class AddReadingActivity : AppCompatActivity() {
                 .into(binding.addReadingBookIv)
         })
 
-
         binding.addReadingSelbookBtn.setOnClickListener {
             addReadingViewModel.setSelectBook()
         }
@@ -95,7 +93,7 @@ class AddReadingActivity : AppCompatActivity() {
                     maxPage = it[which].edPage.toString()
                     binding.addReadingBookNameTitle.text = it[which].name
                     binding.addReadingPageTv.text = "${readSt} / ${maxPage} 페이지"
-                    binding.addReadingEditPageBtn.isEnabled = true
+                    binding.addReadingUpdatePageBtn.isEnabled = true
                     binding.addReadingSaveBtn.isEnabled = true
 
                     Glide.with(this)
@@ -107,7 +105,7 @@ class AddReadingActivity : AppCompatActivity() {
             builder.show()
         })
 
-        binding.addReadingEditPageBtn.setOnClickListener {
+        binding.addReadingUpdatePageBtn.setOnClickListener {
             AlertDialog.Builder(this)
                 .setView(R.layout.dialog_page_update)
                 .show()

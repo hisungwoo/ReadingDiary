@@ -44,7 +44,7 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>
             if (!calDay.isEmpty) {
                 imageButton.visibility = View.VISIBLE
                 if (calDay.isRead) {
-                    imageButton.setImageResource(R.drawable.ic_baseline_brightness_check_1_24)
+                    imageButton.setImageResource(R.drawable.reading3)
                 } else {
                     imageButton.setImageResource(R.drawable.ic_baseline_brightness_1_24)
                 }
