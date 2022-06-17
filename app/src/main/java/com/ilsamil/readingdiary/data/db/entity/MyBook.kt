@@ -15,7 +15,8 @@ data class MyBook (
     var edPage : Int,
     var introduce : String,
     var contentUrl : String,
-    var publisher : String
+    var publisher : String,
+    var authors : String
 
 ) : Parcelable {
     @PrimaryKey(autoGenerate = true) var bookId : Int = 0

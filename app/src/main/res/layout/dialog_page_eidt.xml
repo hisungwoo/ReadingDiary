@@ -48,7 +48,7 @@
         android:id="@+id/dialog_edit_cancel_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/dialog_background_round_left"
+        android:background="@drawable/dialog_background_round_red"
         android:text="취소하기"
         android:textColor="@color/white"
         android:textStyle="bold"

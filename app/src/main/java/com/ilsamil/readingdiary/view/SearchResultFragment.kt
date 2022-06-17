@@ -118,11 +118,14 @@ class SearchResultFragment : Fragment() {
             } else {
                 val util = Util()
                 val addBook : () -> Unit = {
-                    val book = MyBook(resultItem.title, resultItem.thumbnail, "", 0,  maxPage, resultItem.contents, resultItem.url, resultItem.publisher)
+                    var authors = ""
+                    for(i in resultItem.authors) authors += "$i "
+
+                    val book = MyBook(resultItem.title, resultItem.thumbnail, "", 0,  maxPage, resultItem.contents, resultItem.url, resultItem.publisher, authors)
                     srViewModel.addBooks(book)
                     findNavController().popBackStack()
                 }
-                util.showDialog(inflater.context, addBook, "내 서재에 책을 추가하시겠습니까?", "")
+                util.showDialog(inflater.context, addBook, "내 서재에 책을 추가하시겠습니까?", "추가")
             }
         }
         return binding.root

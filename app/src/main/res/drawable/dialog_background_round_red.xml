@@ -8,12 +8,9 @@
         <shape android:shape="rectangle">
             <!-- 각 모서리 dip 만큼 코너형식 -->
             <corners
-                android:radius="18dip"
-                android:topLeftRadius="0dp"
-                android:topRightRadius="0dp"
-                android:bottomRightRadius="0dp" />
+                android:radius="8dp"/>
             <!-- 배경색 -->
-            <solid android:color="#C8C8C8" />
+            <solid android:color="#EC5A7D" />
             <!-- 라인색 및 두께 -->
             <stroke android:width="0dp" android:color="#ff0000"/>
         </shape>

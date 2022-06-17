@@ -10,7 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import com.ilsamil.readingdiary.R
 
 class Util {
-    fun showDialog(context: Context, operation: () -> Unit, title : String, message : String) {
+    fun showDialog(context: Context, operation: () -> Unit, title : String, yes : String) {
         AlertDialog.Builder(context)
             .setView(R.layout.dialog_message)
             .show()
@@ -20,12 +20,11 @@ class Util {
                 alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                 val titleTv = alertDialog.findViewById<TextView>(R.id.dialog_message_title_tv)
-                val massageTv = alertDialog.findViewById<TextView>(R.id.dialog_message_tv)
                 val yesBtn = alertDialog.findViewById<Button>(R.id.dialog_message_yes_btn)
                 val noBtn = alertDialog.findViewById<Button>(R.id.dialog_message_no_btn)
 
                 titleTv?.text = title
-                massageTv?.text = message
+                yesBtn?.text = yes
 
                 yesBtn?.setOnClickListener {
                     operation()

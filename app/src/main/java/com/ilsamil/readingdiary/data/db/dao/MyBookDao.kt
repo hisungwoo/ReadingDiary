@@ -15,7 +15,7 @@ interface MyBookDao {
     suspend fun insertBook(book : MyBook) : Long
 
     @Query("SELECT * FROM MyBook WHERE name = :name")
-    suspend fun selectReadingBook(name: String) : MyBook
+    suspend fun selectReadingBook(name: String) : MyBook?
 
     @Query("SELECT imgUrl FROM MyBook WHERE name = :name")
     suspend fun selectImgUrl(name: String) : String

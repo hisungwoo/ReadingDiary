@@ -24,6 +24,7 @@ import com.ilsamil.readingdiary.adapter.CalendarAdapter
 import com.ilsamil.readingdiary.databinding.CalendarListBinding
 import com.ilsamil.readingdiary.data.db.entity.CalendarDay
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
+import com.ilsamil.readingdiary.utils.Util
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -155,13 +156,12 @@ class CalendarFragment : Fragment() {
                 }
 
                 removeBtn?.setOnClickListener { view ->
-                    GlobalScope.launch {
-                        val isComplete = mainViewModel.removeReadingDay(readingDay.year, readingDay.month, readingDay.day)
-                        if (isComplete >= 1) {
-                            mainViewModel.setCalendar(selectedDate)
-                            alertDialog.dismiss()
-                        }
+                    val util = Util()
+                    val removeBook : () -> Unit = {
+                        mainViewModel.removeReadingDay(readingDay.year, readingDay.month, readingDay.day, selectedDate)
+                        alertDialog.dismiss()
                     }
+                    util.showDialog(context, removeBook,"정말로 삭제 하시겠습니까?", "삭제")
                 }
 
                 cancelBtn?.setOnClickListener {

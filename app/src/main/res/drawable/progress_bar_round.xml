@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 다이얼로그 배경 -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_height="wrap_content"
+android:layout_width="wrap_content">
+    <item>
+        <shape>
+            <corners android:radius="6dp"/>
+            <solid android:color="#D5D5D5"/>
+        </shape>
+    </item>
+    <item>
+        <clip>
+            <shape>
+                <corners android:radius="6dp" />
+                <solid android:color="#EF5F64" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>

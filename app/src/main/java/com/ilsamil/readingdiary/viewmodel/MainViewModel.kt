@@ -86,9 +86,15 @@ class MainViewModel(application : Application) : AndroidViewModel(application) {
         }
     }
 
-    suspend fun removeReadingDay(year : String, month : String, day : String) : Int {
-        return withContext(viewModelScope.coroutineContext) {
-            db.readingDao().deleteReadingDay(year, month, day)
+    fun removeReadingDay(year : String, month : String, day : String, selectedDate : LocalDate) {
+        viewModelScope.launch {
+            val isComplete = db.readingDao().deleteReadingDay(year, month, day)
+            if (isComplete >= 1) {
+                val year = selectedDate.year.toString()
+                val month = selectedDate.monthValue.toString()
+                val readingList = db.readingDao().selectReadingDate(year, month)
+                setCalendarList(selectedDate , readingList)
+            }
         }
     }
 

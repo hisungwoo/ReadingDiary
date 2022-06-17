@@ -81,7 +81,7 @@ class SelBookFragment : Fragment() {
                 findNavController().popBackStack()
             }
 
-            util.showDialog(inflater.context, removeBook,"정말로 삭제 하시겠습니까?", "삭제 하시면 데이터 복구가 되지 않습니다.")
+            util.showDialog(inflater.context, removeBook,"정말로 삭제 하시겠습니까?", "삭제")
         }
 
         binding.selBookDetailBtn.setOnClickListener {

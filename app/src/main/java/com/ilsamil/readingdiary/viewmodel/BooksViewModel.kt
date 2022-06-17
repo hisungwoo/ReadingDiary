@@ -18,7 +18,9 @@ class BooksViewModel(application : Application) : AndroidViewModel(application) 
             AppDatabase::class.java,"database-app")
         .build()
 
-    val bookList = MutableLiveData<List<MyBook>>()
+    val bookAllList = MutableLiveData<List<MyBook>>()
+    val bookReadingList = MutableLiveData<List<MyBook>>()
+    val bookFinishList = MutableLiveData<List<MyBook>>()
 
     fun setCategoryAll() {
         viewModelScope.launch {
@@ -34,7 +36,7 @@ class BooksViewModel(application : Application) : AndroidViewModel(application) 
                     items[i].lastDate = "${curDay.year}.${curDay.month}.${curDay.day}"
                 }
             }
-            bookList.value = items
+            bookAllList.value = items
         }
     }
 
@@ -56,7 +58,7 @@ class BooksViewModel(application : Application) : AndroidViewModel(application) 
                     items.add(item)
                 }
             }
-            bookList.value = items
+            bookReadingList.value = items
         }
     }
 
@@ -66,11 +68,13 @@ class BooksViewModel(application : Application) : AndroidViewModel(application) 
             val items = ArrayList<MyBook>()
             for (i in readingDays) {
                 val item = db.myBookDao().selectReadingBook(i.book)
-                item.curPage = item.edPage
-                item.lastDate = "${i.year}.${i.month}.${i.day}"
-                items.add(item)
+                if (item != null) {
+                    item.curPage = item.edPage
+                    item.lastDate = "${i.year}.${i.month}.${i.day}"
+                    items.add(item)
+                }
             }
-            bookList.value = items
+            bookFinishList.value = items
         }
     }
 

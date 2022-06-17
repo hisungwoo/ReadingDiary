@@ -13,7 +13,7 @@
                 android:topRightRadius="0dp"
                 android:bottomLeftRadius="0dp" />
             <!-- 배경색 -->
-            <solid android:color="#EC5A7D" />
+            <solid android:color="#A6A6A6" />
             <!-- 라인색 및 두께 -->
             <stroke android:width="0dp" android:color="#ff0000"/>
         </shape>
