@@ -140,6 +140,20 @@
         />
 
     <TextView
+        android:id="@+id/dialog_cal_progress_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0%"
+        android:textColor="#FF6868"
+        android:elevation="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="3dp"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_cal_progress_bar"
+        app:layout_constraintStart_toStartOf="@+id/dialog_cal_progress_bar"
+    />
+
+
+    <TextView
         android:id="@+id/dialog_cal_page_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -156,9 +170,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="5dp"
-        android:text="210장을 읽었습니다"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_cal_page_tv"
-        app:layout_constraintStart_toStartOf="@+id/dialog_cal_read_tv" />
+        android:text="00장을 읽었습니다"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_cal_progress_tv"
+        app:layout_constraintStart_toStartOf="@+id/dialog_cal_read_vw"
+        app:layout_constraintEnd_toEndOf="@+id/dialog_cal_read_vw"
+        />
 
 
     <androidx.appcompat.widget.AppCompatButton

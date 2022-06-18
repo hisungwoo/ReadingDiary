@@ -41,10 +41,11 @@ class SelBookFragment : Fragment() {
         val item = args.mybook
 
         binding.selBookName.text = item.name
-        binding.selBookIntroduceTv.text = item.introduce
+        binding.selBookIntroduceTv.text = item.introduce + "···"
         binding.selBookProgressBar.max = item.edPage
         binding.selBookPublisherTv.text = item.publisher
         binding.selBookProgressReadTv.text = "0 / ${item.edPage} 페이지"
+        binding.selBookReadingAuthorsTv.text = item.authors
 
         GlobalScope.launch(Dispatchers.Main) {
             val stReading = selBookViewModel.getStartReading(item.name)

@@ -70,12 +70,20 @@ class SearchFragment : Fragment() {
             } else false
         }
 
+        binding.searchClearBtn.setOnClickListener {
+            binding.searchEt.setText("")
+            focusKy()
+        }
 
         return binding.root
     }
 
     override fun onStart() {
         super.onStart()
+        focusKy()
+    }
+
+    private fun focusKy() {
         imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         binding.searchEt.requestFocus()
         imm.showSoftInput(binding.searchEt, InputMethodManager.SHOW_IMPLICIT)

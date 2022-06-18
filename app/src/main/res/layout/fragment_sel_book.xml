@@ -16,31 +16,26 @@
             android:background="#00000000"
             android:layout_marginStart="15dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/sel_book_title_tv"
-            app:layout_constraintBottom_toBottomOf="@+id/sel_book_title_tv"
+            app:layout_constraintTop_toTopOf="@+id/sel_book_del_btn"
+            app:layout_constraintBottom_toBottomOf="@+id/sel_book_del_btn"
             />
 
-        <TextView
-            android:id="@+id/sel_book_title_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="나의 서재"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_marginTop="17dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/sel_book_del_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_remove_circle_24"
+            android:drawableTint="#FF3D3D"
+            android:paddingStart="20dp"
+            android:paddingEnd="5dp"
             android:text="삭제"
+            android:textSize="15sp"
+            android:textColor="#FF1F1F"
             android:background="#00000000"
-            app:layout_constraintBaseline_toBaselineOf="@+id/sel_book_title_tv"
-            app:layout_constraintTop_toTopOf="@+id/sel_book_title_tv"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             />
 
@@ -49,11 +44,11 @@
             android:id="@+id/sel_book_line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="20dp"
             android:background="#D6D6D6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sel_book_title_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/sel_book_back_btn" />
 
 
 
@@ -61,6 +56,7 @@
             android:id="@+id/sel_book_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="#F8F8F8"
             app:layout_constraintTop_toBottomOf="@+id/sel_book_line"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,13 +72,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     tools:text="전지적 독자 시점"
-                    android:textSize="17dp"
-                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="#4E4E4E"
                     android:maxLines="2"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginTop="30dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -90,27 +87,59 @@
 
                 <ImageView
                     android:id="@+id/sel_book_img_iv"
-                    android:layout_width="180dp"
-                    android:layout_height="230dp"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_brightness_check_1_24"
-                    android:layout_marginTop="30dp"
+                    android:elevation="5dp"
+                    android:background="@color/white"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintTop_toBottomOf="@+id/sel_book_name"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     />
 
+                <TextView
+                    android:id="@+id/sel_book_reading_authors_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="지은이 알 수 없음"
+                    android:textSize="15sp"
+                    android:layout_marginTop="13dp"
+                    app:layout_constraintTop_toBottomOf="@+id/sel_book_img_iv"
+                    app:layout_constraintStart_toStartOf="@+id/sel_book_img_iv"
+                    app:layout_constraintEnd_toEndOf="@+id/sel_book_img_iv"
+                    />
+
+
+                <View
+                    android:id="@+id/sel_book_reading_date_vw"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/dialog_background_round2"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="30dp"
+                    android:elevation="2dp"
+                    app:layout_constraintTop_toBottomOf="@+id/sel_book_reading_authors_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/sel_book_progress_title_tv"
+                    />
 
                 <TextView
                     android:id="@+id/sel_book_reading_date_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="독서 기간"
-                    android:textSize="15sp"
+                    android:textColor="#6C6C6C"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintTop_toBottomOf="@+id/sel_book_img_iv"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:elevation="3dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintTop_toTopOf="@+id/sel_book_reading_date_vw"
+                    app:layout_constraintStart_toStartOf="@+id/sel_book_reading_date_vw"
                     />
 
                 <TextView
@@ -118,9 +147,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="시작일"
+                    android:elevation="3dp"
                     android:textColor="#DC5858"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintTop_toBottomOf="@+id/sel_book_reading_date_tv"
                     app:layout_constraintStart_toStartOf="@+id/sel_book_reading_date_tv"
                     />
@@ -130,6 +159,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-"
+                    android:elevation="3dp"
                     android:layout_marginStart="8dp"
                     app:layout_constraintTop_toTopOf="@+id/sel_book_st_tv"
                     app:layout_constraintStart_toEndOf="@+id/sel_book_st_tv"
@@ -141,6 +171,7 @@
                     android:layout_height="wrap_content"
                     android:text="종료일"
                     android:textColor="#DC5858"
+                    android:elevation="3dp"
                     android:layout_marginStart="20dp"
                     app:layout_constraintTop_toTopOf="@+id/sel_book_st_tv"
                     app:layout_constraintStart_toEndOf="@+id/sel_book_st_date_tv"
@@ -152,6 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-"
+                    android:elevation="3dp"
                     android:layout_marginStart="8dp"
                     app:layout_constraintTop_toTopOf="@+id/sel_book_st_tv"
                     app:layout_constraintStart_toEndOf="@+id/sel_book_ed_tv"
@@ -166,6 +198,8 @@
                     android:textColor="#DC5858"
                     android:textSize="15dp"
                     android:textStyle="bold"
+                    android:elevation="3dp"
+                    android:layout_marginTop="3dp"
                     app:layout_constraintStart_toStartOf="@+id/sel_book_st_tv"
                     />
 
@@ -175,9 +209,27 @@
                     android:layout_height="wrap_content"
                     android:text="일 동안 읽었어요"
                     android:layout_marginStart="5dp"
+                    android:elevation="3dp"
                     app:layout_constraintBaseline_toBaselineOf="@id/sel_book_reading_day_tv"
                     app:layout_constraintTop_toTopOf="@+id/sel_book_reading_day_tv"
                     app:layout_constraintStart_toEndOf="@+id/sel_book_reading_day_tv"
+                    />
+
+
+                <View
+                    android:id="@+id/sel_book_reading_progress_vw"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/dialog_background_round2"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="30dp"
+                    android:elevation="2dp"
+                    app:layout_constraintTop_toBottomOf="@+id/sel_book_reading_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/sel_book_introduce_title_tv"
                     />
 
                 <TextView
@@ -185,12 +237,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="진행률"
-                    android:textSize="15sp"
+                    android:textColor="#6C6C6C"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintTop_toBottomOf="@+id/sel_book_reading_day_tv"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:elevation="3dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintTop_toTopOf="@+id/sel_book_reading_progress_vw"
+                    app:layout_constraintStart_toStartOf="@+id/sel_book_reading_progress_vw"
                     />
 
                 <ProgressBar
@@ -198,13 +252,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:max="100"
+                    android:progress="77"
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="6dp"
+                    android:elevation="3dp"
+                    android:scaleY="0.7"
+                    android:progressDrawable="@drawable/progress_bar_round"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="15dp"
                     app:layout_constraintTop_toBottomOf="@+id/sel_book_progress_title_tv"
-                    app:layout_constraintStart_toStartOf="@+id/sel_book_progress_title_tv"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/sel_book_reading_progress_vw"
+                    app:layout_constraintEnd_toEndOf="@+id/sel_book_reading_progress_vw"
                     />
 
                 <TextView
@@ -213,6 +271,8 @@
                     android:layout_height="wrap_content"
                     android:text="0%"
                     android:textColor="#FF6868"
+                    android:elevation="3dp"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@+id/sel_book_progress_bar"
                     app:layout_constraintStart_toStartOf="@+id/sel_book_progress_bar"
                     />
@@ -222,8 +282,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="353/1200 페이지"
-                    app:layout_constraintTop_toBottomOf="@+id/sel_book_progress_bar"
+                    android:elevation="3dp"
+                    app:layout_constraintTop_toTopOf="@+id/sel_book_progress_per_tv"
                     app:layout_constraintEnd_toEndOf="@+id/sel_book_progress_bar"
+                    />
+
+                <View
+                    android:id="@+id/sel_book_reading_introduce_vw"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/dialog_background_round2"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="30dp"
+                    android:elevation="2dp"
+                    app:layout_constraintTop_toBottomOf="@+id/sel_book_progress_read_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/sel_book_publisher_title_tv"
                     />
 
                 <TextView
@@ -231,24 +308,47 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="책 소개"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
+                    android:textColor="#6C6C6C"
                     android:textStyle="bold"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintTop_toBottomOf="@+id/sel_book_progress_per_tv"
-                    app:layout_constraintStart_toStartOf="@+id/sel_book_progress_title_tv"
+                    android:elevation="3dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintTop_toTopOf="@+id/sel_book_reading_introduce_vw"
+                    app:layout_constraintStart_toStartOf="@+id/sel_book_reading_introduce_vw"
                     />
+
 
                 <TextView
                     android:id="@+id/sel_book_introduce_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     tools:text="원고지 2500매에 담은 초거대서사의 항연. 웹 소설의 현재 진행형 레전드, 마침내 단행본 출간!"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginTop="8dp"
+                    android:ellipsize="end"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginTop="10dp"
+                    android:lineSpacingExtra="2dp"
+                    android:elevation="3dp"
                     app:layout_constraintTop_toBottomOf="@+id/sel_book_introduce_title_tv"
+                    app:layout_constraintStart_toStartOf="@+id/sel_book_reading_introduce_vw"
+                    app:layout_constraintEnd_toEndOf="@+id/sel_book_reading_introduce_vw"
+                    />
+
+                <View
+                    android:id="@+id/sel_book_reading_publisher_vw"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/dialog_background_round2"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="35dp"
+                    android:elevation="2dp"
+                    app:layout_constraintTop_toBottomOf="@+id/sel_book_introduce_tv"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/sel_book_detail_btn"
                     />
 
                 <TextView
@@ -256,21 +356,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="출판사"
-                    android:textSize="15sp"
+                    android:textColor="#6C6C6C"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintTop_toBottomOf="@+id/sel_book_introduce_tv"
-                    app:layout_constraintStart_toStartOf="@+id/sel_book_introduce_title_tv"
+                    android:elevation="3dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintTop_toTopOf="@+id/sel_book_reading_publisher_vw"
+                    app:layout_constraintStart_toStartOf="@+id/sel_book_reading_publisher_vw"
                     />
+
 
                 <TextView
                     android:id="@+id/sel_book_publisher_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     tools:text="비채"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:elevation="3dp"
                     app:layout_constraintTop_toBottomOf="@+id/sel_book_publisher_title_tv"
                     app:layout_constraintStart_toStartOf="@+id/sel_book_publisher_title_tv"
                     />
@@ -278,12 +382,18 @@
 
                 <Button
                     android:id="@+id/sel_book_detail_btn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="자세히 보기"
-                    android:layout_marginTop="20dp"
+                    android:text="책 자세히 알아보기"
+                    android:background="@drawable/dialog_background_round_red"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
                     app:layout_constraintTop_toBottomOf="@+id/sel_book_publisher_tv"
-                    app:layout_constraintStart_toStartOf="@id/sel_book_publisher_title_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     />
 
 

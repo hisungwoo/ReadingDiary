@@ -2,6 +2,7 @@ package com.ilsamil.readingdiary.view
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -59,23 +60,24 @@ class AddReadingActivity : AppCompatActivity() {
             binding.addReadingEditBtn.visibility = View.VISIBLE
         }
 
-        addReadingViewModel.editReadingDay.observe(this, Observer {
-            binding.addReadingBookNameTitle.text = it.book
-            binding.addReadingPageTv.text = "${it.readEd} / ${it.maxPage} 페이지"
-            selBook = it.book
-            maxPage = it.maxPage
-            readSt = it.readSt
-            addReadingViewModel.setEditImg(it.book)
-        })
+//        addReadingViewModel.editReadingDay.observe(this, Observer {
+//            binding.addReadingBookTitleTv.text = it.book
+//            binding.addReadingCurPageTv.text = it.readEd.toString()
+//            binding.addReadingLastPageTv.text = it.maxPage
+//            selBook = it.book
+//            maxPage = it.maxPage
+//            readSt = it.readSt
+//            addReadingViewModel.setEditImg(it.book)
+//        })
 
         addReadingViewModel.editImg.observe(this, Observer {
             Glide.with(this)
                 .load(it)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(binding.addReadingBookIv)
+//                .into(binding.addReadingBookIv)
         })
 
-        binding.addReadingSelbookBtn.setOnClickListener {
+        binding.addReadingBookNullVw.setOnClickListener {
             addReadingViewModel.setSelectBook()
         }
 
@@ -91,15 +93,23 @@ class AddReadingActivity : AppCompatActivity() {
                     readSt = it[which].curPage.toString()
 
                     maxPage = it[which].edPage.toString()
-                    binding.addReadingBookNameTitle.text = it[which].name
-                    binding.addReadingPageTv.text = "${readSt} / ${maxPage} 페이지"
+                    binding.addReadingBookTitleTv.text = it[which].name
+                    binding.addReadingCurPageTv.text = readSt
+                    binding.addReadingLastPageTv.text = maxPage
+
                     binding.addReadingUpdatePageBtn.isEnabled = true
                     binding.addReadingSaveBtn.isEnabled = true
+
+                    binding.addReadingBookNullIv.visibility = View.INVISIBLE
+                    binding.addReadingBookNullTv.visibility = View.INVISIBLE
+                    binding.addReadingBookNullVw.visibility = View.INVISIBLE
+                    binding.addReadingBookSelIv.visibility = View.VISIBLE
+                    binding.addReadingBookTitleTv.visibility = View.VISIBLE
 
                     Glide.with(this)
                         .load(imgUrl)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .into(binding.addReadingBookIv)
+                        .into(binding.addReadingBookSelIv)
 
                 }
             builder.show()
@@ -122,14 +132,16 @@ class AddReadingActivity : AppCompatActivity() {
                     edPageTv?.text = "/ $maxPage 페이지"
 
                     saveBtn?.setOnClickListener {
-                        readEd = pageEt?.text.toString().toInt()
+                        val isInput = pageEt?.text.toString().toInt()
 
-                        if (readSt!!.toInt() >= readEd!!.toInt()) {
+                        if (readSt!!.toInt() >= isInput) {
                             Toast.makeText(this, "전보다 많은 페이지 입력", Toast.LENGTH_SHORT).show()
-                        } else if(readEd!!.toInt() > maxPage!!.toInt()) {
+                        } else if(isInput > maxPage!!.toInt()) {
                             Toast.makeText(this, "마지막 페이지를 넘음", Toast.LENGTH_SHORT).show()
                         } else {
-                            binding.addReadingPageTv.text = "$readEd / $maxPage 페이지"
+//                            binding.addReadingPageTv.text = "$readEd / $maxPage 페이지"
+                            binding.addReadingUpdatePageBtn.text = "${isInput} 페이지를 읽었습니다"
+                            readEd = isInput
                             alertDialog.dismiss()
                         }
                     }

@@ -31,6 +31,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.math.floor
 
 class CalendarFragment : Fragment() {
     private val mainViewModel by activityViewModels<MainViewModel>()
@@ -123,6 +124,7 @@ class CalendarFragment : Fragment() {
                 val dateTitleTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_date_tv)
                 val bookNameTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_book_tv)
                 val progressBar = alertDialog.findViewById<ProgressBar>(R.id.dialog_cal_progress_bar)
+                val progressTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_progress_tv)
                 val pageTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_page_tv)
                 val readingTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_reading_tv)
 
@@ -139,7 +141,8 @@ class CalendarFragment : Fragment() {
                 dateTitleTv?.text = "${readingDay.year}년 ${readingDay.month}월 ${readingDay.day}일"
                 bookNameTv?.text = "${readingDay.book}"
                 progressBar?.max = readingDay.maxPage?.toInt()!!
-                progressBar?.progress = readingDay.readEd?.toInt()!!
+                progressBar?.progress = readingDay.readEd!!
+                progressTv?.text = floor((readingDay.readEd!!.toDouble()/ readingDay.maxPage!!.toDouble())*100).toInt().toString()+ "%"
                 pageTv?.text = "${readingDay.readEd} / ${readingDay.maxPage}"
 
                 val readingPage = readingDay.readEd!!.toInt() - readingDay.readSt!!.toInt()

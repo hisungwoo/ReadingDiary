@@ -1,32 +1,28 @@
 package com.ilsamil.readingdiary.adapter
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.data.remote.model.Books
-import com.ilsamil.readingdiary.databinding.ItemSearchResultBinding
+import com.ilsamil.readingdiary.databinding.ItemSearchBinding
 
 class SearchAdapter() : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     private var sItem : List<Books> = ArrayList()
     private lateinit var sItemClickListener : SearchOnItemClickListener
 
     inner class SearchViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val binding = ItemSearchResultBinding.bind(itemView)
+        val binding = ItemSearchBinding.bind(itemView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): SearchViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_search_result, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_search, parent, false)
         return SearchViewHolder(view)
     }
 

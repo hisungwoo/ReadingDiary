@@ -44,6 +44,18 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
+        <ImageButton
+            android:id="@+id/search_clear_btn"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_baseline_cancel_12"
+            android:layout_marginEnd="5dp"
+            android:background="#00000000"
+            app:layout_constraintTop_toTopOf="@+id/search_et"
+            app:layout_constraintBottom_toBottomOf="@+id/search_et"
+            app:layout_constraintEnd_toEndOf="@+id/search_et" />
+
+
         <View
             android:id="@+id/search_line"
             android:layout_width="match_parent"
@@ -57,10 +69,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:scrollbarFadeDuration="0"
             android:scrollbars="vertical"
-            android:layout_marginTop="10dp"
             app:layout_constrainedHeight="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

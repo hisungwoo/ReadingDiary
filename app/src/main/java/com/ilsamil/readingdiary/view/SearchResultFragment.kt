@@ -48,10 +48,13 @@ class SearchResultFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_result, container, false)
         val resultItem = args.books
 
+        var authors = ""
+        for(i in resultItem.authors) authors += "$i "
+
         binding.apply {
             searchResultNameTv.text = args.books.title
-            searchResultAuthorsTv.text = args.books.authors.toString()
-            searchResultContentTv.text = args.books.contents
+            searchResultAuthorsTv.text = authors
+            searchResultContentTv.text = args.books.contents + "···"
             searchResultPublisherTv.text = args.books.publisher
             searchResultDatetimeTv.text = args.books.datetime.substring(0,10)
             searchResultDetailBtn.setOnClickListener {
@@ -59,7 +62,6 @@ class SearchResultFragment : Fragment() {
                 intent.data = Uri.parse(resultItem.url)
                 startActivity(intent)
             }
-
 
             GlobalScope.launch(Dispatchers.Main) {
                 val cnt = srViewModel.getPageCnt(resultItem.url)
@@ -69,7 +71,6 @@ class SearchResultFragment : Fragment() {
                     searchResultPageTv.text = cnt
                     maxPage = cnt.toInt()
                 }
-
             }
         }
 
