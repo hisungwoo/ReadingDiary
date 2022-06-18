@@ -57,15 +57,16 @@ class SearchFragment : Fragment() {
             }
         })
 
-        // 키보드 엔터 혹은 검색버튼 클릭 시 mainViewModel 함수 호출
+        // 키보드 엔터 혹은 검색버튼 클릭 시 searchViewModel 함수 호출
         binding.searchEt.setOnKeyListener { view, i, keyEvent ->
             if ((keyEvent.action == KeyEvent.ACTION_DOWN) && (i == KeyEvent.KEYCODE_ENTER)) {
-                val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.hideSoftInputFromWindow(binding.searchEt.windowToken, 0)
-//                binding.searchProgressBar.visibility = View.VISIBLE
-
                 val searchText = binding.searchEt.text.toString()
-                searchViewModel.getSearchBook(searchText)
+                if (searchText != "") {
+                    val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(binding.searchEt.windowToken, 0)
+//                binding.searchProgressBar.visibility = View.VISIBLE
+                    searchViewModel.getSearchBook(searchText)
+                }
                 true
             } else false
         }

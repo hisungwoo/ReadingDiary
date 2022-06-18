@@ -143,7 +143,7 @@ class CalendarFragment : Fragment() {
                 progressBar?.max = readingDay.maxPage?.toInt()!!
                 progressBar?.progress = readingDay.readEd!!
                 progressTv?.text = floor((readingDay.readEd!!.toDouble()/ readingDay.maxPage!!.toDouble())*100).toInt().toString()+ "%"
-                pageTv?.text = "${readingDay.readEd} / ${readingDay.maxPage}"
+                pageTv?.text = "${readingDay.readEd} / ${readingDay.maxPage} 페이지"
 
                 val readingPage = readingDay.readEd!!.toInt() - readingDay.readSt!!.toInt()
                 readingTv?.text = "$readingPage 장을 읽었습니다."

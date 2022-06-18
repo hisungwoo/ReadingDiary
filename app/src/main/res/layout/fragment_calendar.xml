@@ -15,6 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#F4F3F3"
         android:orientation="vertical">
 
         <!-- 헤더 -->
@@ -30,22 +31,30 @@
             app:layout_constraintEnd_toEndOf="parent"
             >
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
             <ImageButton
                 android:id="@+id/cal_prev_btn"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:src="@drawable/ic_baseline_navigate_before_24"
-                android:layout_weight="1"
+                android:background="@drawable/button_background_circle_red"
+                android:layout_weight="2"
                 android:layout_gravity="center"
                 />
-
 
             <TextView
                 android:id="@+id/cal_currentDate_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
+                android:layout_weight="15"
                 android:padding="16dp"
+                android:textColor="#6E6E6E"
+                android:textStyle="bold"
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:textSize="20sp"
@@ -55,11 +64,19 @@
             <ImageButton
                 android:id="@+id/cal_next_btn"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:src="@drawable/ic_baseline_navigate_next_24"
-                android:layout_weight="1"
+                android:background="@drawable/button_background_circle_red"
+                android:layout_weight="2"
                 android:layout_gravity="center"
                 />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
         </LinearLayout>
 
         <!-- 요일 -->
@@ -67,7 +84,7 @@
             android:id="@+id/calendar_day_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@+id/calendar_header_ly"
             >
 
@@ -77,6 +94,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="일"
+                android:textStyle="bold"
+                android:textColor="#878787"
                 android:textSize="15sp" />
 
             <TextView
@@ -85,6 +104,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="월"
+                android:textStyle="bold"
+                android:textColor="#878787"
                 android:textSize="15sp" />
 
             <TextView
@@ -93,6 +114,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="화"
+                android:textStyle="bold"
+                android:textColor="#878787"
                 android:textSize="15sp" />
 
             <TextView
@@ -101,6 +124,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="수"
+                android:textStyle="bold"
+                android:textColor="#878787"
                 android:textSize="15sp" />
 
             <TextView
@@ -109,6 +134,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="목"
+                android:textStyle="bold"
+                android:textColor="#878787"
                 android:textSize="15sp" />
 
             <TextView
@@ -117,6 +144,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="금"
+                android:textStyle="bold"
+                android:textColor="#878787"
                 android:textSize="15sp" />
 
             <TextView
@@ -125,6 +154,8 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="토"
+                android:textStyle="bold"
+                android:textColor="#878787"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -134,6 +165,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             app:layout_constraintTop_toBottomOf="@+id/calendar_day_title"
             />
 

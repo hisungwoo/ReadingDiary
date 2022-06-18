@@ -30,7 +30,7 @@ class AddReadingViewModel(application : Application) : AndroidViewModel(applicat
         }
     }
 
-    fun setEditImg(name : String) {
+    fun setImg(name : String) {
         viewModelScope.launch {
             editImg.value = db.myBookDao().selectImgUrl(name)
         }

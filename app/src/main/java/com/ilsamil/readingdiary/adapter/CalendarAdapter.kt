@@ -3,7 +3,7 @@ package com.ilsamil.readingdiary.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ilsamil.readingdiary.R
@@ -40,16 +40,20 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>
     object DataBindingAdapter {
         @BindingAdapter("readCheck")
         @JvmStatic
-        fun setReadCheck(imageButton: ImageButton, calDay : CalendarDay) {
+        fun setReadCheck(imgView: ImageView, calDay : CalendarDay) {
             if (!calDay.isEmpty) {
-                imageButton.visibility = View.VISIBLE
+                imgView.visibility = View.VISIBLE
                 if (calDay.isRead) {
-                    imageButton.setImageResource(R.drawable.reading3)
+                    when(calDay.day.toInt()) {
+                        in 1..10 -> imgView.setImageResource(R.drawable.on2)
+                        in 11..21 -> imgView.setImageResource(R.drawable.on)
+                        else -> imgView.setImageResource(R.drawable.on3)
+                    }
                 } else {
-                    imageButton.setImageResource(R.drawable.ic_baseline_brightness_1_24)
+                    imgView.setImageResource(R.drawable.off)
                 }
             } else {
-                imageButton.visibility = View.INVISIBLE
+                imgView.visibility = View.INVISIBLE
             }
         }
     }
