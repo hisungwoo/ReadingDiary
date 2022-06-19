@@ -46,7 +46,7 @@
 
 <div>
   <span align="center">
-    <img width="30%" src="https://user-images.githubusercontent.com/37431121/174484627-a4d5fc63-14c8-4697-bdaf-b2d390f31b60.gif">
+    <img width="30%" src="https://user-images.githubusercontent.com/37431121/174491624-25947e55-cfc5-4379-b9e5-6de7b1c2cd3d.gif">
   </span>
   
   <span>
