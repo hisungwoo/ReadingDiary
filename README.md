@@ -42,7 +42,7 @@
 <br>
 <h2>⭐️ Feature  </h1>
 
-* __책 검색 및 추가&nbsp;&&nbsp;독서날&nbsp; __
+* __책 검색 및 추가&nbsp;&&nbsp;독서날&nbsp;추가__
 
 <div>
   <span align="center">
@@ -56,27 +56,28 @@
 
 <br>
 
+* __내&nbsp;서재&nbsp;&&nbsp;독서날&nbsp;삭제__
 
-
-
-
-
-
-
-<br>
-<h2>:computer: 사용 기술 </h1>
-
-* MVVM 패턴
-
-* ViewModel
-* Jetpack Nivagation
-* RecyClerView를 이용한 달력 생성
-* Safe Arg
-* DataBinding
-* LiveData
+<div>
+  <span align="center">
+    <img width="30%" src="https://user-images.githubusercontent.com/37431121/174484875-e4267463-8d44-4463-b021-1f894d9880d2.gif">
+  </span>
+  
+  <span>
+    <img width="30%" src="https://user-images.githubusercontent.com/37431121/174484894-6e179e43-377b-43e9-87ac-8049ae46f168.gif">
+  </span>
+</div>
 
 
 <br>
+
+
+
+<h2>:books: 개발 스택 </h1>
+
+```kotlin``` ```JetPack``` ```ViewModel``` ```Retrofit``` ```MVVM``` ```Coroutine``` ```Room``` ```Recyclerview``` ```LiveData```
+
+```DataBinding``` ```Kakao Api``` ```Glide``` ```TabLayout``` ```Jsoup```  
 
 
 
