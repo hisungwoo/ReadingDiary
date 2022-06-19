@@ -50,7 +50,7 @@
   </span>
   
   <span>
-    <img width="30%" src="https://user-images.githubusercontent.com/37431121/174484635-448d726b-bb3e-40cb-844c-802bf7d21031.gif">
+    <img width="30%" src="https://user-images.githubusercontent.com/37431121/174491747-1460d049-748c-48b9-93e4-64e7660ff933.gif">
   </span>
 </div>
 
@@ -60,11 +60,11 @@
 
 <div>
   <span align="center">
-    <img width="30%" src="https://user-images.githubusercontent.com/37431121/174484875-e4267463-8d44-4463-b021-1f894d9880d2.gif">
+    <img width="30%" src="https://user-images.githubusercontent.com/37431121/174491804-9658443e-5a36-40b1-a516-52ae6ef17726.gif">
   </span>
   
   <span>
-    <img width="30%" src="https://user-images.githubusercontent.com/37431121/174484894-6e179e43-377b-43e9-87ac-8049ae46f168.gif">
+    <img width="30%" src="https://user-images.githubusercontent.com/37431121/174491867-7e935d17-0c29-4d43-a373-2a99f6ddd86a.gif">
   </span>
 </div>
 
