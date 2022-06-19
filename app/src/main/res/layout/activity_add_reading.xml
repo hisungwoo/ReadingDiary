@@ -13,7 +13,8 @@
         android:background="#E6E6E6"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/add_reading_cl"
@@ -85,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:elevation="3dp"
-                android:src="@drawable/click_guide_img"
+                android:src="@drawable/img_sel_calendar_guide_img"
                 app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintEnd_toEndOf="@+id/add_reading_book_null_vw"
                 app:layout_constraintStart_toStartOf="@+id/add_reading_book_null_vw"
@@ -291,6 +292,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
+                android:elevation="2dp"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/dialog_background_round2"
                 app:layout_constraintTop_toBottomOf="@+id/add_reading_last_page_tv"
@@ -313,17 +315,17 @@
                 app:layout_constraintStart_toStartOf="@+id/add_reading_today_vw"
                 />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/add_reading_update_page_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:textSize="16sp"
                 android:enabled="false"
-                android:textColor="@color/white"
-                android:elevation="5dp"
+                android:elevation="3dp"
+                android:stateListAnimator="@null"
                 android:text="오늘 읽은 페이지 입력"
                 app:layout_constraintTop_toBottomOf="@+id/add_reading_today_title"
                 app:layout_constraintStart_toStartOf="@+id/add_reading_today_vw"
@@ -331,11 +333,11 @@
                 />
 
             <TextView
-                android:id="@+id/add_reading_guild_tv"
+                android:id="@+id/add_reading_guide_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:elevation="3dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:text="클릭하여 변경해주세요"
                 android:textSize="13sp"
                 app:layout_constraintTop_toBottomOf="@+id/add_reading_update_page_btn"
@@ -352,6 +354,7 @@
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

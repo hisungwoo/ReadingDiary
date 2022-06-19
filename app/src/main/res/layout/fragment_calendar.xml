@@ -57,7 +57,7 @@
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:textAlignment="center"
-                android:textSize="20sp"
+                android:textSize="21sp"
                 tools:text="2022년 06월"
                 />
 

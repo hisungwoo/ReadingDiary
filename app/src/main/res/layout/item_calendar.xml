@@ -41,7 +41,7 @@
             android:layout_marginTop="3dp"
             android:layout_marginBottom="5dp"
             android:background="#F4F3F3"
-            android:src="@drawable/on"
+            android:src="@drawable/img_all_reading_icon_1"
             android:visibility="invisible"
             app:readCheck="@{calDay}"
             app:layout_constraintStart_toStartOf="@+id/item_dayText_tv"

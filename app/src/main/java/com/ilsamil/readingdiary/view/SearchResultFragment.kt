@@ -125,6 +125,7 @@ class SearchResultFragment : Fragment() {
                     val book = MyBook(resultItem.title, resultItem.thumbnail, "", 0,  maxPage, resultItem.contents, resultItem.url, resultItem.publisher, authors)
                     srViewModel.addBooks(book)
                     findNavController().popBackStack()
+                    findNavController().popBackStack()
                 }
                 util.showDialog(inflater.context, addBook, "내 서재에 책을 추가하시겠습니까?", "추가")
             }

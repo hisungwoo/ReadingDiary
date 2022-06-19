@@ -88,7 +88,7 @@ class AddReadingActivity : AppCompatActivity() {
             for (i in items.indices) items[i] = it[i].name
 
             val builder = AlertDialog.Builder(this)
-                .setTitle("읽은 책을 선택해주세요")
+                .setTitle("책 선택")
                 .setItems(items) { dialog, which ->
                     selBook = it[which].name
                     readSt = it[which].curPage.toString()
@@ -191,7 +191,11 @@ class AddReadingActivity : AppCompatActivity() {
 
     private fun setSelBook() {
         binding.apply {
+            addReadingSaveBtn.visibility = View.VISIBLE
             addReadingUpdatePageBtn.isEnabled = true
+            addReadingUpdatePageBtn.setBackgroundColor(getColor(R.color.update_btn))
+            addReadingUpdatePageBtn.setTextColor(getColor(R.color.white))
+
             addReadingBookNullIv.visibility = View.INVISIBLE
             addReadingBookNullTv.visibility = View.INVISIBLE
             addReadingBookNullVw.visibility = View.INVISIBLE
@@ -207,12 +211,16 @@ class AddReadingActivity : AppCompatActivity() {
         maxPage = null
 
         binding.apply {
+            addReadingUpdatePageBtn.isEnabled = false
+            addReadingUpdatePageBtn.setBackgroundColor(getColor(R.color.update_btn_cancel_bak))
+            addReadingUpdatePageBtn.setTextColor(getColor(R.color.update_btn_cancel_text))
+
             addReadingBookTitleTv.text = ""
             addReadingCurPageTv.text = "-"
             addReadingLastPageTv.text = "-"
-            addReadingUpdatePageBtn.isEnabled = false
             addReadingUpdatePageBtn.text = "오늘 읽은 페이지 입력"
 
+            addReadingSaveBtn.visibility = View.INVISIBLE
             addReadingBookNullIv.visibility = View.VISIBLE
             addReadingBookNullTv.visibility = View.VISIBLE
             addReadingBookNullVw.visibility = View.VISIBLE
