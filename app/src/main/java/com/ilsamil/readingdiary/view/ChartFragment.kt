@@ -8,11 +8,6 @@ import android.view.ViewGroup
 import com.ilsamil.readingdiary.R
 
 class ChartFragment : Fragment() {
-    companion object {
-        fun newInstance() : ChartFragment {
-            return ChartFragment()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
