@@ -35,4 +35,6 @@ interface ReadingDao {
     @Query("SELECT DISTINCT * FROM ReadingDay WHERE readEd = maxPage")
     suspend fun selectFinishRead() : List<ReadingDay>
 
+    @Query("SELECT count(*) FROM ReadingDay")
+    suspend fun selectReadingCount() : Int
 }

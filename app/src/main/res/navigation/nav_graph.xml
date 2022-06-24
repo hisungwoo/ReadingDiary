@@ -30,9 +30,9 @@
 
     <fragment
         android:id="@+id/chartFragment"
-        android:name="com.ilsamil.readingdiary.view.ChartFragment"
+        android:name="com.ilsamil.readingdiary.view.StatsFragment"
         android:label="fragment_chart"
-        tools:layout="@layout/fragment_chart" />
+        tools:layout="@layout/fragment_stats" />
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.ilsamil.readingdiary.view.SettingFragment"
