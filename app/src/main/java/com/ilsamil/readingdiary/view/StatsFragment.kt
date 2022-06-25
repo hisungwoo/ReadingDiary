@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ilsamil.readingdiary.R
+import com.ilsamil.readingdiary.adapter.StatsAdapter
 import com.ilsamil.readingdiary.databinding.FragmentStatsBinding
 import com.ilsamil.readingdiary.viewmodel.StatsViewModel
 
@@ -35,6 +38,21 @@ class StatsFragment : Fragment() {
 
         statsViewModel.setReadCnt()
         statsViewModel.setBookCnt()
+
+        binding.bookshelfRecyclerView.layoutManager = LinearLayoutManager(
+            container?.context,
+            RecyclerView.HORIZONTAL,
+            false
+        )
+
+        val adapter = StatsAdapter()
+        binding.bookshelfRecyclerView.adapter = adapter
+
+        var ss = ArrayList<String>()
+        ss.add("1")
+        ss.add("2")
+
+        adapter.updateItems(ss)
 
 
 
