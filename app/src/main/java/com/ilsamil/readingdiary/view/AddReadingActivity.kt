@@ -66,7 +66,7 @@ class AddReadingActivity : AppCompatActivity() {
             binding.addReadingBookTitleTv.text = it.book
             binding.addReadingCurPageTv.text = it.readSt
             binding.addReadingLastPageTv.text = it.maxPage
-            binding.addReadingUpdatePageBtn.text = "오늘 ${it.readEd.toString()}페이지까지 읽었습니다"
+            binding.addReadingTodayReadTv.text = it.readEd.toString()
 
             addReadingViewModel.setImg(it.book)
         })
@@ -120,8 +120,13 @@ class AddReadingActivity : AppCompatActivity() {
                     val saveBtn = alertDialog.findViewById<Button>(R.id.dialog_update_save_btn)
                     val cancelBtn = alertDialog.findViewById<Button>(R.id.dialog_update_cancel_btn)
                     val edPageTv = alertDialog.findViewById<TextView>(R.id.dialog_update_end_tv)
+                    val beforeTv = alertDialog.findViewById<TextView>(R.id.dialog_update_before_tv)
                     val pageEt = alertDialog.findViewById<EditText>(R.id.dialog_update_edit_et)
-                    edPageTv?.text = "/ $maxPage 페이지"
+
+
+                    beforeTv?.text = "마지막 독서  ${readSt}장"
+                    edPageTv?.text = "마지막 페이지  ${maxPage}장"
+
 
                     saveBtn?.setOnClickListener {
                         if (pageEt?.text.toString() != "") {
@@ -131,7 +136,7 @@ class AddReadingActivity : AppCompatActivity() {
                             } else if(isInput > maxPage!!.toInt()) {
                                 Toast.makeText(this, "페이지 총수보다 적게 입력해주세요", Toast.LENGTH_SHORT).show()
                             } else {
-                                binding.addReadingUpdatePageBtn.text = "오늘 ${isInput}페이지까지 읽었습니다"
+                                binding.addReadingTodayReadTv.text = isInput.toString()
                                 readEd = isInput
                                 alertDialog.dismiss()
                             }
