@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ilsamil.readingdiary.R
 
@@ -11,7 +12,7 @@ class StatsAdapter : RecyclerView.Adapter<StatsAdapter.StatsViewHolder>() {
     private var bookShelfList : List<String> = ArrayList()
 
     inner class StatsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var statsImg : ImageView = itemView.findViewById(R.id.item_stats_bookshelf)
+        val statsNameTv : TextView = itemView.findViewById(R.id.item_stats_name_tv)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatsViewHolder {
@@ -21,7 +22,7 @@ class StatsAdapter : RecyclerView.Adapter<StatsAdapter.StatsViewHolder>() {
 
     override fun onBindViewHolder(holder: StatsViewHolder, position: Int) {
         val item = bookShelfList[position]
-        holder.statsImg.setImageResource(R.drawable.img_bookshelf)
+        holder.statsNameTv.text = item
     }
 
     override fun getItemCount(): Int {

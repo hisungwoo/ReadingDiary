@@ -29,18 +29,18 @@ class StatsFragment : Fragment() {
         val binding = FragmentStatsBinding.inflate(inflater)
 
         statsViewModel.statsReadCnt.observe(this, Observer {
-            binding.bookshelfReadingCountTv.text = it.toString() + "일"
+            binding.statsReadingCountTv.text = it.toString() + "일"
         })
 
         statsViewModel.statsBookCnt.observe(this, Observer {
-            binding.bookshelfReadingBooksTv.text = it.toString() + "권"
+            binding.statsReadingBooksTv.text = it.toString() + "권"
         })
 
         statsViewModel.finishBook.observe(this, Observer {
             Log.d("ttestaa", it.toString())
 
             val adapter = StatsAdapter()
-            binding.bookshelfRecyclerView.adapter = adapter
+            binding.statsRecyclerView.adapter = adapter
             adapter.updateItems(it)
         })
 
@@ -49,7 +49,7 @@ class StatsFragment : Fragment() {
         statsViewModel.setBookCnt()
         statsViewModel.getFinishBook()
 
-        binding.bookshelfRecyclerView.layoutManager = LinearLayoutManager(
+        binding.statsRecyclerView.layoutManager = LinearLayoutManager(
             container?.context,
             RecyclerView.HORIZONTAL,
             false
