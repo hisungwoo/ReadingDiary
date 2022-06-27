@@ -17,6 +17,7 @@ class StatsViewModel(application: Application) : AndroidViewModel(application) {
 
     val statsReadCnt = MutableLiveData<Int>()
     val statsBookCnt = MutableLiveData<Int>()
+    val finishBook = MutableLiveData<List<String>>()
 
     fun setReadCnt() {
         viewModelScope.launch {
@@ -27,6 +28,20 @@ class StatsViewModel(application: Application) : AndroidViewModel(application) {
     fun setBookCnt() {
         viewModelScope.launch {
             statsBookCnt.value = db.readingDao().selectFinishRead().size
+        }
+    }
+
+    fun getFinishBook() {
+        viewModelScope.launch {
+            val readingDays = db.readingDao().selectFinishRead()
+            val items = ArrayList<String>()
+            for (i in readingDays) {
+                val item = db.myBookDao().selectReadingBook(i.book)
+                if (item != null) {
+                    items.add(item.name)
+                }
+            }
+            finishBook.value = items
         }
     }
 

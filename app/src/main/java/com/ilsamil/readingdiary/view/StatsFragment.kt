@@ -1,6 +1,7 @@
 package com.ilsamil.readingdiary.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,24 +36,24 @@ class StatsFragment : Fragment() {
             binding.bookshelfReadingBooksTv.text = it.toString() + "권"
         })
 
+        statsViewModel.finishBook.observe(this, Observer {
+            Log.d("ttestaa", it.toString())
+
+            val adapter = StatsAdapter()
+            binding.bookshelfRecyclerView.adapter = adapter
+            adapter.updateItems(it)
+        })
+
 
         statsViewModel.setReadCnt()
         statsViewModel.setBookCnt()
+        statsViewModel.getFinishBook()
 
         binding.bookshelfRecyclerView.layoutManager = LinearLayoutManager(
             container?.context,
             RecyclerView.HORIZONTAL,
             false
         )
-
-        val adapter = StatsAdapter()
-        binding.bookshelfRecyclerView.adapter = adapter
-
-        var ss = ArrayList<String>()
-        ss.add("1")
-        ss.add("2")
-
-        adapter.updateItems(ss)
 
 
 
