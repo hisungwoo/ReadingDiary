@@ -37,8 +37,6 @@ class StatsFragment : Fragment() {
         })
 
         statsViewModel.finishBook.observe(this, Observer {
-            Log.d("ttestaa", it.toString())
-
             val adapter = StatsAdapter()
             binding.statsRecyclerView.adapter = adapter
             adapter.updateItems(it)

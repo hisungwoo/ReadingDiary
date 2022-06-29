@@ -6,9 +6,9 @@
 
     <View
         android:id="@+id/item_stats_book"
-        android:layout_width="18dp"
-        android:layout_height="130dp"
-        android:background="@drawable/stats_bookshelf"
+        android:layout_width="22dp"
+        android:layout_height="150dp"
+        android:background="@drawable/stats_book_item"
         android:layout_marginEnd="5dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +22,8 @@
         android:layout_height="0dp"
         android:text="전지적작가시점이지"
         android:lineSpacingExtra="-3dp"
-        android:textSize="12sp"
+        android:textSize="14sp"
+        android:textColor="#EFEFEF"
         android:gravity="center"
         android:ellipsize="end"
         android:maxLines="8"

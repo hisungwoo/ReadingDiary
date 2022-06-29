@@ -41,6 +41,35 @@ class StatsViewModel(application: Application) : AndroidViewModel(application) {
                     items.add(item.name)
                 }
             }
+
+            //test
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+            items.add("테스트책")
+
             finishBook.value = items
         }
     }

@@ -63,7 +63,6 @@ class CalendarFragment : Fragment() {
             calRecyclerview.adapter = calendarAdapter
         }
 
-
         // 독서 정보
         mainViewModel.setCalendar(selectedDate)
 
