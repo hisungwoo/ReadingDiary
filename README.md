@@ -50,7 +50,7 @@
   </span>
   
   <span>
-    <img width="30%" src="https://user-images.githubusercontent.com/37431121/174491747-1460d049-748c-48b9-93e4-64e7660ff933.gif">
+    <img width="30%" src="https://user-images.githubusercontent.com/37431121/176616174-8a2696e9-f0a7-4687-9c04-49d09ca9b8f2.gif">
   </span>
 </div>
 
