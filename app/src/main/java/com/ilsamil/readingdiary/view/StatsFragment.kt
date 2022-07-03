@@ -29,11 +29,11 @@ class StatsFragment : Fragment() {
         val binding = FragmentStatsBinding.inflate(inflater)
 
         statsViewModel.statsReadCnt.observe(this, Observer {
-            binding.statsReadingCountTv.text = it.toString() + "일"
+            binding.statsReadingCountTv.text = it.toString()
         })
 
         statsViewModel.statsBookCnt.observe(this, Observer {
-            binding.statsReadingBooksTv.text = it.toString() + "권"
+            binding.statsReadingBooksTv.text = it.toString()
         })
 
         statsViewModel.finishBook.observe(this, Observer {
