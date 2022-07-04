@@ -11,7 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_reading_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ReadingDiary">
-        <activity android:name=".view.AddReadingActivity"></activity>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
+
+        <activity android:name=".view.AddReadingActivity" />
         <activity
             android:name=".view.MainActivity"
             android:exported="true">

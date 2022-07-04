@@ -21,6 +21,15 @@
         app:layout_constraintVertical_bias="0"
         app:navGraph="@navigation/nav_graph" />
 
+    <Button
+        android:id="@+id/adv_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
