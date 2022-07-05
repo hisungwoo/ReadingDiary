@@ -22,6 +22,7 @@ import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.databinding.ActivityAddReadingBinding
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 import com.ilsamil.readingdiary.utils.Util
+import com.ilsamil.readingdiary.view.MainActivity.Companion.adsCnt
 import com.ilsamil.readingdiary.viewmodel.AddReadingViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -159,6 +160,7 @@ class AddReadingActivity : AppCompatActivity() {
                 val addReadingDay : () -> Unit = {
                     val readItem = ReadingDay(year, month, day, selBook!!, readSt, readEd, maxPage)
                     addReadingViewModel.addReadingDiary(readItem)
+                    adsCnt++
                     finish()
                 }
                 util.showDialog(this, addReadingDay,"오늘 독서기록을 저장하시겠어요?", "저장")
@@ -174,6 +176,7 @@ class AddReadingActivity : AppCompatActivity() {
                 val updateReadingDay : () -> Unit = {
                     val readItem = ReadingDay(year, month, day, selBook!!, readSt, readEd, maxPage)
                     addReadingViewModel.updateReadingDay(readItem)
+                    adsCnt++
                     finish()
                 }
                 util.showDialog(this, updateReadingDay,"오늘 독서기록을 수정하시겠어요?", "수정")

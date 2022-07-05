@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.ilsamil.readingdiary.BuildConfig
 import com.ilsamil.readingdiary.viewmodel.MainViewModel
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.databinding.ActivityMainBinding
@@ -18,13 +19,15 @@ import com.ilsamil.readingdiary.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     companion object{
-        private const val TAG = "MainActivity"
+        private const val TAG = "MainActivity_IlSamIl"
+        var adsCnt = 0
     }
 
     private val mainViewModel : MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private var mInterstitialAd: InterstitialAd? = null
+    private var adRequest : AdRequest? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,43 +36,8 @@ class MainActivity : AppCompatActivity() {
 
         MobileAds.initialize(this) {}
 
-        var adRequest = AdRequest.Builder().build()
-        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                Log.d("ttest", adError?.message)
-                mInterstitialAd = null
-            }
-
-            override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                Log.d("ttest", "Ad was loaded.")
-                mInterstitialAd = interstitialAd
-            }
-        })
-
-
-        binding.advTest.setOnClickListener {
-            if (mInterstitialAd != null) {
-                mInterstitialAd?.show(this)
-            } else {
-                Log.d("ttest", "The interstitial ad wasn't ready yet.")
-            }
-        }
-
-        mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
-            override fun onAdDismissedFullScreenContent() {
-                Log.d("ttest", "Ad was dismissed.")
-            }
-
-            override fun onAdFailedToShowFullScreenContent(p0: AdError) {
-                Log.d("ttest", "Ad failed to show.")
-            }
-
-            override fun onAdShowedFullScreenContent() {
-                Log.d("ttest", "Ad showed fullscreen content.")
-                mInterstitialAd = null
-            }
-        }
-
+        adRequest = AdRequest.Builder().build()
+        setAd()
 
 
         // bottom_nav 설정
@@ -84,25 +52,80 @@ class MainActivity : AppCompatActivity() {
         // 검색 Fragment 이동 시 Navigation 숨김 처리
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
-                R.id.searchFragment -> binding.bottomNav.visibility = View.GONE
-                R.id.searchResultFragment -> binding.bottomNav.visibility = View.GONE
-                R.id.selBookFragment -> binding.bottomNav.visibility = View.GONE
-                else -> binding.bottomNav.visibility = View.VISIBLE
+                R.id.searchFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                    adsEvent()
+                }
+                R.id.searchResultFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                    adsEvent()
+                }
+                R.id.selBookFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                    adsEvent()
+                }
+                else -> {
+                    binding.bottomNav.visibility = View.VISIBLE
+                    adsEvent()
+                }
             }
-
-//            if(destination.id == R.id.searchFragment) {
-//                binding.bottomNav.visibility = View.GONE
-//            } else {
-//                binding.bottomNav.visibility = View.VISIBLE
-//            }
         }
-
-
         setContentView(binding.root)
     }
 
+    private fun adsEvent() {
+        adsCnt++
+        if (adsCnt == 9) {
+            adsCnt = 0
+            if (mInterstitialAd != null) {
+                mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+                    override fun onAdClicked() {
+                        // 광고에 대한 클릭이 기록될 때 호출
+                        Log.d(TAG, "Ad was clicked.")
+                    }
 
+                    override fun onAdDismissedFullScreenContent() {
+                        // 광고가 닫힐 때 호출
+                        Log.d(TAG, "Ad dismissed fullscreen content.")
+                        mInterstitialAd = null
+                        setAd()
+                    }
 
+                    override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+                        // 광고가 표시되지 않을 때 호출
+                        Log.e(TAG, "Ad failed to show fullscreen content.")
+                        mInterstitialAd = null
+                    }
 
+                    override fun onAdImpression() {
+                        // 광고에 대한 노출이 기록될 때 호출
+                        Log.d(TAG, "Ad recorded an impression.")
+                    }
+
+                    override fun onAdShowedFullScreenContent() {
+                        // 광고가 표시될 때 호출
+                        Log.d(TAG, "Ad showed fullscreen content.")
+                    }
+                }
+                mInterstitialAd?.show(this)
+            } else {
+                Log.d("ttest", "The interstitial ad wasn't ready yet.")
+            }
+        }
+    }
+
+    fun setAd() {
+        InterstitialAd.load(this,"${BuildConfig.adsId}", adRequest!!, object : InterstitialAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                Log.d("ttest", adError?.message)
+                mInterstitialAd = null
+            }
+
+            override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                Log.d("ttest", "Ad was loaded.")
+                mInterstitialAd = interstitialAd
+            }
+        })
+    }
 
 }

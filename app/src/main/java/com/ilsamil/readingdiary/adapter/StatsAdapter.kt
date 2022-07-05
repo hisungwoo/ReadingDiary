@@ -34,8 +34,6 @@ class StatsAdapter : RecyclerView.Adapter<StatsAdapter.StatsViewHolder>() {
         val item = bookShelfList[position]
         val colNum = random.nextInt(5)
 
-        Log.d("ttest","colNum = $colNum")
-
         holder.statsNameTv.text = item
         holder.statsView.setBackgroundResource(colorArr[colNum])
 //        holder.statsView.setBackgroundColor(R.color.stats_item_color1)

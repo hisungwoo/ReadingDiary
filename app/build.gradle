@@ -8,6 +8,7 @@ plugins {
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def ads_meta_data = properties.getProperty("ads_meta_data")
 
 android {
     compileSdkVersion 31
@@ -23,6 +24,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "kakaoAuthorization", properties["kakao_authorization"]
+        buildConfigField "String", "adsId", properties["ads_id"]
+        manifestPlaceholders = [adsMetaData : ads_meta_data]
     }
 
     buildTypes {
