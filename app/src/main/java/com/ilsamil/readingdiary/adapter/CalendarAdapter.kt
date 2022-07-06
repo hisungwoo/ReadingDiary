@@ -45,12 +45,12 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>
                 imgView.visibility = View.VISIBLE
                 if (calDay.isRead) {
                     when(calDay.day.toInt()) {
-                        in 1..10 -> imgView.setImageResource(R.drawable.img_all_reading_icon_2)
-                        in 11..21 -> imgView.setImageResource(R.drawable.img_all_reading_icon_1)
-                        else -> imgView.setImageResource(R.drawable.img_all_reading_icon_3)
+                        in 1..10 -> imgView.setImageResource(R.drawable.img_all_reading_icon_22)
+                        in 11..21 -> imgView.setImageResource(R.drawable.img_all_reading_icon_11)
+                        else -> imgView.setImageResource(R.drawable.img_all_reading_icon_33)
                     }
                 } else {
-                    imgView.setImageResource(R.drawable.img_claendar_not_reading_icon)
+                    imgView.setImageResource(R.drawable.img_claendar_not_reading_icon2)
                 }
             } else {
                 imgView.visibility = View.INVISIBLE

@@ -9,7 +9,7 @@
         android:id="@+id/dialog_version_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="독서 일기 \n Version 1.0.1"
+        android:text="리딩데이\n Version 1.0.1"
         android:gravity="center"
         android:layout_marginTop="35dp"
         android:textSize="17sp"

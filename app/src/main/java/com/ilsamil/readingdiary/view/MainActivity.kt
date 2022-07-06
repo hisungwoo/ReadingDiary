@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         var adsCnt = 0
     }
 
-    private val mainViewModel : MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private var mInterstitialAd: InterstitialAd? = null
@@ -109,7 +108,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 mInterstitialAd?.show(this)
             } else {
-                Log.d("ttest", "The interstitial ad wasn't ready yet.")
+                Log.d(TAG, "The interstitial ad wasn't ready yet.")
             }
         }
     }
@@ -117,12 +116,12 @@ class MainActivity : AppCompatActivity() {
     fun setAd() {
         InterstitialAd.load(this,"${BuildConfig.adsId}", adRequest!!, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
-                Log.d("ttest", adError?.message)
+                Log.d(TAG, adError?.message)
                 mInterstitialAd = null
             }
 
             override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                Log.d("ttest", "Ad was loaded.")
+                Log.d(TAG, "Ad was loaded.")
                 mInterstitialAd = interstitialAd
             }
         })

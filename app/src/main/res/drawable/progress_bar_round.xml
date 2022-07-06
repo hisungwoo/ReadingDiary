@@ -6,7 +6,7 @@ android:layout_width="wrap_content">
     <item>
         <shape>
             <corners android:radius="6dp"/>
-            <solid android:color="#D5D5D5"/>
+            <solid android:color="@color/progress_bar_color"/>
         </shape>
     </item>
     <item>

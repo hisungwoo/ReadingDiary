@@ -13,6 +13,7 @@
     <color name="update_btn">#EC5A7D</color>
     <color name="update_btn_cancel_bak">#D3D3D3</color>
     <color name="update_btn_cancel_text">#9C9C9C</color>
+    <color name="progress_bar_color">#ECECEC</color>
 
 
     <color name="stats_item_color1">#46789E</color>
