@@ -3,6 +3,7 @@ package com.ilsamil.readingdiary.view
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,12 @@ import java.time.temporal.ChronoUnit
 import kotlin.math.floor
 
 class SelBookFragment : Fragment() {
+
+    companion object{
+        private const val TAG = "SelBookFragment_IlSamIl"
+        var adsCnt = 0
+    }
+
     private val selBookViewModel by activityViewModels<SelBookViewModel>()
     private lateinit var binding : FragmentSelBookBinding
     private val args by navArgs<SelBookFragmentArgs>()
@@ -43,6 +50,7 @@ class SelBookFragment : Fragment() {
         binding.selBookName.text = item.name
         binding.selBookIntroduceTv.text = item.introduce + "···"
         binding.selBookProgressBar.max = item.edPage
+        binding.selBookProgressBar.progress = 1
         binding.selBookPublisherTv.text = item.publisher
         binding.selBookProgressReadTv.text = "0 / ${item.edPage} 페이지"
         binding.selBookReadingAuthorsTv.text = item.authors
@@ -58,6 +66,7 @@ class SelBookFragment : Fragment() {
             }
 
             if (edReading != null && curPage != null) {
+                Log.d(TAG, "cur page = $curPage")
                 binding.selBookProgressBar.progress = curPage
                 binding.selBookProgressReadTv.text = "${curPage}/${item.edPage}페이지"
                 binding.selBookProgressPerTv.text = floor((curPage.toDouble()/item.edPage.toDouble())*100).toInt().toString()+ "%"

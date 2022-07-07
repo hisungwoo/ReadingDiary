@@ -250,7 +250,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:max="100"
-                    android:progress="77"
+                    android:progress="0"
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:elevation="3dp"
                     android:scaleY="0.7"

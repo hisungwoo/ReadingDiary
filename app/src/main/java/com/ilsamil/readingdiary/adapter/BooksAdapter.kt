@@ -51,8 +51,13 @@ class BooksAdapter() : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
         @BindingAdapter("setProgress")
         @JvmStatic
         fun setProgress(progressBar : ProgressBar, myBook : MyBook) {
-            progressBar.max = myBook.edPage
-            progressBar.setProgress(myBook.curPage, true)
+            if(myBook.curPage == 0) {
+                progressBar.max = 10000
+                progressBar.progress = 1
+            } else {
+                progressBar.max = myBook.edPage
+                progressBar.progress = myBook.curPage
+            }
         }
 
         @SuppressLint("SetTextI18n")
