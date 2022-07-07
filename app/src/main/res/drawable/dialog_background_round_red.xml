@@ -10,7 +10,7 @@
             <corners
                 android:radius="8dp"/>
             <!-- 배경색 -->
-            <solid android:color="#F16A8A" />
+            <solid android:color="#FF5770" />
             <!-- 라인색 및 두께 -->
             <stroke android:width="0dp" android:color="#ff0000"/>
         </shape>

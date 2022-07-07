@@ -64,7 +64,6 @@ class SearchFragment : Fragment() {
                 if (searchText != "") {
                     val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     inputMethodManager.hideSoftInputFromWindow(binding.searchEt.windowToken, 0)
-//                binding.searchProgressBar.visibility = View.VISIBLE
                     searchViewModel.getSearchBook(searchText)
                 }
                 true

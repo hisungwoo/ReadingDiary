@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         MobileAds.initialize(this) {}
-
         adRequest = AdRequest.Builder().build()
         setAd()
 

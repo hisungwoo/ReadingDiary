@@ -59,6 +59,8 @@ class SearchAdapter() : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
         fun setImg(iv : ImageView, url : String) {
             Glide.with(iv.context)
                 .load(url)
+                .placeholder(R.drawable.img_loading)
+                .error(R.drawable.img_not)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(iv)
         }

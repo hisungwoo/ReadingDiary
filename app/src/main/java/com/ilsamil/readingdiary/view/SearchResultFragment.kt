@@ -76,6 +76,9 @@ class SearchResultFragment : Fragment() {
 
         Glide.with(this)
             .load(resultItem.thumbnail)
+            .placeholder(R.drawable.img_loading)
+            .error(R.drawable.img_not)
+            .override(580,630)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .into(binding.searchResultImg)
 

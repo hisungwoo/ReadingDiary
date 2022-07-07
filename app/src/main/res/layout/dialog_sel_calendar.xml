@@ -64,12 +64,15 @@
 
     <TextView
         android:id="@+id/dialog_cal_book_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="전지적 독자 시점"
         android:textSize="16sp"
         android:textStyle="bold"
         android:elevation="5dp"
+        android:gravity="center"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginTop="33dp"
         app:layout_constraintTop_toBottomOf="@+id/dialog_cal_date_tv"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +83,7 @@
     <ImageView
         android:id="@+id/dialog_cal_img_iv"
         android:layout_width="wrap_content"
-        android:layout_height="220dp"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_brightness_check_1_24"
         android:background="#ffffff"
         android:elevation="5dp"

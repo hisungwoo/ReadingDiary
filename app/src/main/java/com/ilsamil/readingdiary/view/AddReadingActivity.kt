@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -29,6 +30,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class AddReadingActivity : AppCompatActivity() {
+
+    companion object{
+        private const val TAG = "AddReadingActivity_IlSamIl"
+        var adsCnt = 0
+    }
+
     private val addReadingViewModel : AddReadingViewModel by viewModels()
     private lateinit var binding : ActivityAddReadingBinding
     private val args by navArgs<AddReadingActivityArgs>()
@@ -76,6 +83,9 @@ class AddReadingActivity : AppCompatActivity() {
         addReadingViewModel.editImg.observe(this, Observer {
             Glide.with(this)
                 .load(it)
+                .placeholder(R.drawable.img_loading)
+                .error(R.drawable.img_not)
+                .override(580,630)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(binding.addReadingBookSelIv)
         })
@@ -104,6 +114,9 @@ class AddReadingActivity : AppCompatActivity() {
                     Glide.with(this)
                         .load(imgUrl)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .placeholder(R.drawable.img_loading)
+                        .error(R.drawable.img_not)
+                        .override(580,630)
                         .into(binding.addReadingBookSelIv)
 
                 }

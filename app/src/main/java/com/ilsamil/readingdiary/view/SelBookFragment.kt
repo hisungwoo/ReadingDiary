@@ -72,7 +72,10 @@ class SelBookFragment : Fragment() {
 
         Glide.with(this)
             .load(item.imgUrl)
+            .placeholder(R.drawable.img_loading)
+            .error(R.drawable.img_not)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .override(470,530)
             .into(binding.selBookImgIv)
 
         binding.selBookDelBtn.setOnClickListener {

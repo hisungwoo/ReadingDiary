@@ -65,7 +65,6 @@ class CalendarFragment : Fragment() {
 
         // 독서 정보
         mainViewModel.setCalendar(selectedDate)
-
         mainViewModel.calReadList.observe(this, androidx.lifecycle.Observer {
             calendarAdapter.updateItem(it)
         })
@@ -134,6 +133,9 @@ class CalendarFragment : Fragment() {
 
                 Glide.with(context)
                     .load(imgUrl)
+                    .placeholder(R.drawable.img_loading)
+                    .error(R.drawable.img_not)
+                    .override(470,530)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(bookImg!!)
 
