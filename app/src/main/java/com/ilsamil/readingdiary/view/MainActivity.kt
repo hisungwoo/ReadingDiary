@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun adsEvent() {
         adsCnt++
-        if (adsCnt == 9) {
+        if (adsCnt == 10) {
             adsCnt = 0
             if (mInterstitialAd != null) {
                 mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
