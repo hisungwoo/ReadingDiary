@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_calendarFragment_to_addReadingActivity"
             app:destination="@id/addReadingActivity" />
+        <action
+            android:id="@+id/action_calendarFragment_to_writeReadingFragment"
+            app:destination="@id/writeReadingFragment" />
     </fragment>
 
     <fragment
@@ -42,7 +45,7 @@
         android:id="@+id/addReadingActivity"
         android:name="com.ilsamil.readingdiary.view.AddReadingActivity"
         android:label="activity_add_reading"
-        tools:layout="@layout/activity_add_reading" >
+        tools:layout="@layout/activity_add_reading">
         <argument
             android:name="calday"
             app:argType="com.ilsamil.readingdiary.data.db.entity.CalendarDay" />
@@ -73,5 +76,19 @@
         <argument
             android:name="mybook"
             app:argType="com.ilsamil.readingdiary.data.db.entity.MyBook" />
+    </fragment>
+    <fragment
+        android:id="@+id/writeReadingFragment"
+        android:name="com.ilsamil.readingdiary.view.WriteReadingFragment"
+        android:label="fragment_write_reading"
+        tools:layout="@layout/fragment_write_reading" >
+        <argument
+            android:name="calday"
+            app:argType="com.ilsamil.readingdiary.data.db.entity.CalendarDay" />
+        <action
+            android:id="@+id/action_writeReadingFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:popUpTo="@id/calendarFragment"
+            />
     </fragment>
 </navigation>

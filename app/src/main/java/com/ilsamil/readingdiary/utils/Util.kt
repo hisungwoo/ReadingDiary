@@ -11,12 +11,11 @@ import com.ilsamil.readingdiary.R
 
 class Util {
     fun showDialog(context: Context, operation: () -> Unit, title : String, yes : String) {
-        AlertDialog.Builder(context)
+        val builder = AlertDialog.Builder(context)
             .setView(R.layout.dialog_message)
             .show()
             .also { alertDialog ->
                 if (alertDialog == null) return@also
-
                 alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                 val titleTv = alertDialog.findViewById<TextView>(R.id.dialog_message_title_tv)
@@ -27,14 +26,16 @@ class Util {
                 yesBtn?.text = yes
 
                 yesBtn?.setOnClickListener {
-                    operation()
                     alertDialog.dismiss()
+                    operation()
                 }
 
                 noBtn?.setOnClickListener {
                     alertDialog.dismiss()
                 }
             }
+        builder.create()
+        builder.show()
     }
 
 

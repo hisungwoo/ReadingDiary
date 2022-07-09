@@ -62,6 +62,10 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNav.visibility = View.GONE
                     adsEvent()
                 }
+                R.id.writeReadingFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                    adsEvent()
+                }
                 else -> {
                     binding.bottomNav.visibility = View.VISIBLE
                     adsEvent()

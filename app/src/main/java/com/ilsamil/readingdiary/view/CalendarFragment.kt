@@ -39,7 +39,7 @@ class CalendarFragment : Fragment() {
     private lateinit var selectedDate : LocalDate
 
     companion object {
-        private const val TAG = "DEBUG_TAG_CalendarFragment"
+        private const val TAG = "CalendarFragment_IlSamIl"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,7 +72,6 @@ class CalendarFragment : Fragment() {
         //클릭 이벤트
         calendarAdapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int, item : CalendarDay) {
-
                 // 독서 정보가 있는 경우
                 if (!item.isEmpty && item.isRead) {
                     GlobalScope.launch(Dispatchers.Main) {
@@ -82,7 +81,7 @@ class CalendarFragment : Fragment() {
                     }
 
                 } else {
-                    val action = CalendarFragmentDirections.actionCalendarFragmentToAddReadingActivity(item)
+                    val action = CalendarFragmentDirections.actionCalendarFragmentToWriteReadingFragment(item)
                     findNavController().navigate(action)
                 }
             }
@@ -152,10 +151,7 @@ class CalendarFragment : Fragment() {
 
                 editBtn?.setOnClickListener {
                     alertDialog.dismiss()
-                    val action =
-                        CalendarFragmentDirections.actionCalendarFragmentToAddReadingActivity(
-                            item
-                        )
+                    val action = CalendarFragmentDirections.actionCalendarFragmentToWriteReadingFragment(item)
                     findNavController().navigate(action)
                 }
 

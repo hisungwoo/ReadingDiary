@@ -11,7 +11,7 @@ import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class AddReadingViewModel(application : Application) : AndroidViewModel(application) {
+class WriteReadingViewModel(application : Application) : AndroidViewModel(application) {
     val isEdit = MutableLiveData<Boolean>()
 
     val editReadingDay = MutableLiveData<ReadingDay>()

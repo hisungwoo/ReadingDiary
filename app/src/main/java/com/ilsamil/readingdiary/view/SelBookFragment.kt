@@ -66,7 +66,6 @@ class SelBookFragment : Fragment() {
             }
 
             if (edReading != null && curPage != null) {
-                Log.d(TAG, "cur page = $curPage")
                 binding.selBookProgressBar.progress = curPage
                 binding.selBookProgressReadTv.text = "${curPage}/${item.edPage}페이지"
                 binding.selBookProgressPerTv.text = floor((curPage.toDouble()/item.edPage.toDouble())*100).toInt().toString()+ "%"

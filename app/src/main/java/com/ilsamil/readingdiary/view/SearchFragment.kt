@@ -44,7 +44,6 @@ class SearchFragment : Fragment() {
         )
         val adapter = SearchAdapter()
         binding.searchRecyclerView.adapter = adapter
-
         searchViewModel.searchItem.observe(this, Observer {
             adapter.updateItem(it)
         })
@@ -80,6 +79,10 @@ class SearchFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
         focusKy()
     }
 

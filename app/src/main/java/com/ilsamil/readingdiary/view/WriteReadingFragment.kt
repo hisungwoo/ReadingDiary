@@ -2,43 +2,38 @@ package com.ilsamil.readingdiary.view
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.opengl.Visibility
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.getColor
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navArgs
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.ilsamil.readingdiary.viewmodel.MainViewModel
 import com.ilsamil.readingdiary.R
-import com.ilsamil.readingdiary.databinding.ActivityAddReadingBinding
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
+import com.ilsamil.readingdiary.databinding.FragmentWriteReadingBinding
 import com.ilsamil.readingdiary.utils.Util
-import com.ilsamil.readingdiary.view.MainActivity.Companion.adsCnt
-import com.ilsamil.readingdiary.viewmodel.AddReadingViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.ilsamil.readingdiary.viewmodel.WriteReadingViewModel
 
-class AddReadingActivity : AppCompatActivity() {
+class WriteReadingFragment : Fragment() {
 
-    companion object{
-        private const val TAG = "AddReadingActivity_IlSamIl"
-        var adsCnt = 0
+    companion object {
+        private const val TAG = "WriteReadingFragment_IlSamIl"
     }
 
-    private val addReadingViewModel : AddReadingViewModel by viewModels()
-    private lateinit var binding : ActivityAddReadingBinding
-    private val args by navArgs<AddReadingActivityArgs>()
+    private val addReadingViewModel : WriteReadingViewModel by viewModels()
+    private lateinit var binding : FragmentWriteReadingBinding
+    private val args by navArgs<WriteReadingFragmentArgs>()
 
     private lateinit var year : String
     private lateinit var month : String
@@ -49,10 +44,15 @@ class AddReadingActivity : AppCompatActivity() {
     private var readSt : String? = null
     private var readEd : Int? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddReadingBinding.inflate(layoutInflater)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentWriteReadingBinding.inflate(inflater, container, false)
 
         year = args.calday.year
         month = args.calday.month
@@ -95,36 +95,45 @@ class AddReadingActivity : AppCompatActivity() {
         }
 
         addReadingViewModel.selBooks.observe(this, Observer {
-            val items = Array(it.size) { "null" }
-            for (i in items.indices) items[i] = it[i].name
-
-            val builder = AlertDialog.Builder(this)
-                .setTitle("책 선택")
-                .setItems(items) { dialog, which ->
-                    selBook = it[which].name
-                    readSt = it[which].curPage.toString()
-                    maxPage = it[which].edPage.toString()
-
-                    binding.addReadingBookTitleTv.text = it[which].name
-                    binding.addReadingCurPageTv.text = readSt
-                    binding.addReadingLastPageTv.text = maxPage
-                    setSelBook()
-
-                    val imgUrl = it[which].imgUrl
-                    Glide.with(this)
-                        .load(imgUrl)
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .placeholder(R.drawable.img_loading)
-                        .error(R.drawable.img_not)
-                        .override(580,630)
-                        .into(binding.addReadingBookSelIv)
-
+            if (it.isEmpty()) {
+                val util = Util()
+                val moveSearch : () -> Unit = {
+                    findNavController().navigate(R.id.action_writeReadingFragment_to_searchFragment)
                 }
-            builder.show()
+                util.showDialog(inflater.context, moveSearch,"등록된 책이 없습니다 책을 추가해주세요", "이동")
+            } else {
+                val items = Array(it.size) { "null" }
+                for (i in items.indices) items[i] = it[i].name
+
+                val builder = AlertDialog.Builder(inflater.context)
+                    .setTitle("책 선택")
+                    .setItems(items) { dialog, which ->
+                        selBook = it[which].name
+                        readSt = it[which].curPage.toString()
+                        maxPage = it[which].edPage.toString()
+
+                        binding.addReadingBookTitleTv.text = it[which].name
+                        binding.addReadingCurPageTv.text = readSt
+                        binding.addReadingLastPageTv.text = maxPage
+                        setSelBook()
+
+                        val imgUrl = it[which].imgUrl
+                        Glide.with(this)
+                            .load(imgUrl)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .placeholder(R.drawable.img_loading)
+                            .error(R.drawable.img_not)
+                            .override(580,630)
+                            .into(binding.addReadingBookSelIv)
+
+                        dialog.dismiss()
+                    }
+                builder.show()
+            }
         })
 
         binding.addReadingUpdatePageBtn.setOnClickListener {
-            AlertDialog.Builder(this)
+            AlertDialog.Builder(inflater.context)
                 .setView(R.layout.dialog_page_update)
                 .show()
                 .also { alertDialog ->
@@ -146,9 +155,9 @@ class AddReadingActivity : AppCompatActivity() {
                         if (pageEt?.text.toString() != "") {
                             val isInput = pageEt?.text.toString().toInt()
                             if (readSt!!.toInt() >= isInput) {
-                                Toast.makeText(this, "이전보다 많은 페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(inflater.context, "이전보다 많은 페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
                             } else if(isInput > maxPage!!.toInt()) {
-                                Toast.makeText(this, "페이지 총수보다 적게 입력해주세요", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(inflater.context, "페이지 총수보다 적게 입력해주세요", Toast.LENGTH_SHORT).show()
                             } else {
                                 binding.addReadingTodayReadTv.text = isInput.toString()
                                 readEd = isInput
@@ -173,13 +182,12 @@ class AddReadingActivity : AppCompatActivity() {
                 val addReadingDay : () -> Unit = {
                     val readItem = ReadingDay(year, month, day, selBook!!, readSt, readEd, maxPage)
                     addReadingViewModel.addReadingDiary(readItem)
-                    adsCnt++
-                    finish()
+                    findNavController().popBackStack()
                 }
-                util.showDialog(this, addReadingDay,"오늘 독서기록을 저장하시겠어요?", "저장")
+                util.showDialog(inflater.context, addReadingDay,"오늘 독서기록을 저장하시겠어요?", "저장")
 
             } else {
-                Toast.makeText(this, "페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(inflater.context, "페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -189,17 +197,16 @@ class AddReadingActivity : AppCompatActivity() {
                 val updateReadingDay : () -> Unit = {
                     val readItem = ReadingDay(year, month, day, selBook!!, readSt, readEd, maxPage)
                     addReadingViewModel.updateReadingDay(readItem)
-                    adsCnt++
-                    finish()
+                    findNavController().popBackStack()
                 }
-                util.showDialog(this, updateReadingDay,"오늘 독서기록을 수정하시겠어요?", "수정")
+                util.showDialog(inflater.context, updateReadingDay,"오늘 독서기록을 수정하시겠어요?", "수정")
 
             } else {
-                Toast.makeText(this, "페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(inflater.context, "페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
             }
         }
 
-        setContentView(binding.root)
+        return binding.root
     }
 
     private fun setEditType() {
@@ -214,8 +221,8 @@ class AddReadingActivity : AppCompatActivity() {
         binding.apply {
             addReadingSaveBtn.visibility = View.VISIBLE
             addReadingUpdatePageBtn.isEnabled = true
-            addReadingUpdatePageBtn.setBackgroundColor(getColor(R.color.update_btn))
-            addReadingUpdatePageBtn.setTextColor(getColor(R.color.white))
+            addReadingUpdatePageBtn.setBackgroundColor(getColor(context!!, R.color.update_btn))
+            addReadingUpdatePageBtn.setTextColor(getColor(context!!, R.color.white))
 
             addReadingBookNullIv.visibility = View.INVISIBLE
             addReadingBookNullTv.visibility = View.INVISIBLE
@@ -233,8 +240,8 @@ class AddReadingActivity : AppCompatActivity() {
 
         binding.apply {
             addReadingUpdatePageBtn.isEnabled = false
-            addReadingUpdatePageBtn.setBackgroundColor(getColor(R.color.update_btn_cancel_bak))
-            addReadingUpdatePageBtn.setTextColor(getColor(R.color.update_btn_cancel_text))
+            addReadingUpdatePageBtn.setBackgroundColor(getColor(context!!, R.color.update_btn_cancel_bak))
+            addReadingUpdatePageBtn.setTextColor(getColor(context!!, R.color.update_btn_cancel_text))
 
             addReadingBookTitleTv.text = ""
             addReadingCurPageTv.text = "-"
