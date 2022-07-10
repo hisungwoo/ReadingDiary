@@ -75,26 +75,25 @@ class SettingFragment : Fragment() {
                         alertDialog.dismiss()
                     }
                 }
+        }
 
-            binding.settingVerBtn.setOnClickListener {
-                AlertDialog.Builder(inflater.context)
-                    .setView(R.layout.dialog_setting_version)
-                    .show()
-                    .also { alertDialog ->
-                        if (alertDialog == null) return@also
-                        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        binding.settingVerBtn.setOnClickListener {
+            AlertDialog.Builder(inflater.context)
+                .setView(R.layout.dialog_setting_version)
+                .show()
+                .also { alertDialog ->
+                    if (alertDialog == null) return@also
+                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-                        val closeBtn = alertDialog.findViewById<Button>(R.id.dialog_version_close_btn)
-                        closeBtn?.setOnClickListener {
-                            alertDialog.dismiss()
-                        }
+                    val closeBtn = alertDialog.findViewById<Button>(R.id.dialog_version_close_btn)
+                    closeBtn?.setOnClickListener {
+                        alertDialog.dismiss()
                     }
-            }
+                }
+        }
 
-            binding.settingEvalBtn.setOnClickListener {
-                Toast.makeText(inflater.context, "준비중입니다", Toast.LENGTH_SHORT).show()
-            }
-
+        binding.settingEvalBtn.setOnClickListener {
+            Toast.makeText(inflater.context, "준비중입니다", Toast.LENGTH_SHORT).show()
         }
 
         return binding.root

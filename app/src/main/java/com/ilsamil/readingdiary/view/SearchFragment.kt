@@ -1,6 +1,7 @@
 package com.ilsamil.readingdiary.view
 
 import android.content.Context
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -45,6 +46,8 @@ class SearchFragment : Fragment() {
         val adapter = SearchAdapter()
         binding.searchRecyclerView.adapter = adapter
         searchViewModel.searchItem.observe(this, Observer {
+            binding.searchGuideTv.visibility = View.INVISIBLE
+            binding.searchRecyclerView.visibility = View.VISIBLE
             adapter.updateItem(it)
         })
 

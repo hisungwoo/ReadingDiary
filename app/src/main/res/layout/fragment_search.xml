@@ -78,7 +78,25 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_line"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            android:visibility="invisible"
+            />
+
+        <TextView
+            android:id="@+id/search_guide_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="읽을 책을 검색해서 추가해봐요"
+            android:drawableTop="@drawable/ic_baseline_add_circle_24"
+            android:drawablePadding="10dp"
+            android:drawableTint="#E17C7C"
+            android:textSize="15sp"
+            app:layout_constraintVertical_bias="0.4"
+            app:layout_constraintTop_toBottomOf="@+id/search_line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
