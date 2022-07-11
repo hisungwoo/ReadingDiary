@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
 import com.ilsamil.readingdiary.data.db.AppDatabase
+import com.ilsamil.readingdiary.data.db.ReadingDatabase
 import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 import kotlinx.coroutines.launch
@@ -18,32 +19,28 @@ class WriteReadingViewModel(application : Application) : AndroidViewModel(applic
     val editImg = MutableLiveData<String>()
     val selBooks = MutableLiveData<List<MyBook>>()
 
-    private val db = Room.databaseBuilder(
-        application,
-        AppDatabase::class.java, "database-app")
-        .build()
-
+    private val db = ReadingDatabase.getInstance(application.applicationContext)
 
     fun setEdit(year : String, month : String, day : String) {
         viewModelScope.launch {
-            editReadingDay.value = db.readingDao().selectReadingDay(year, month, day)
+            editReadingDay.value = db!!.readingDao().selectReadingDay(year, month, day)
         }
     }
 
     fun setImg(name : String) {
         viewModelScope.launch {
-            editImg.value = db.myBookDao().selectImgUrl(name)
+            editImg.value = db!!.myBookDao().selectImgUrl(name)
         }
     }
 
     fun setSelectBook() {
         viewModelScope.launch {
-            val books = db.myBookDao().selectMyBook()
+            val books = db!!.myBookDao().selectMyBook()
             val items = ArrayList<MyBook>()
 
             if(books != null) {
                 for (i in books.indices) {
-                    val curDay : ReadingDay? = db.readingDao().selectMaxRead(books[i].name)
+                    val curDay : ReadingDay? = db!!.readingDao().selectMaxRead(books[i].name)
                     if(curDay == null) {
                         val item = books[i]
                         item.curPage = 0
@@ -63,13 +60,13 @@ class WriteReadingViewModel(application : Application) : AndroidViewModel(applic
 
     fun addReadingDiary(data : ReadingDay) {
         viewModelScope.launch {
-            db.readingDao().insertReadingDay(data)
+            db!!.readingDao().insertReadingDay(data)
         }
     }
 
     fun updateReadingDay(readingDay : ReadingDay) {
         viewModelScope.launch {
-            db.readingDao().updateReadingDay(readingDay.year,
+            db!!.readingDao().updateReadingDay(readingDay.year,
                 readingDay.month, readingDay.day, readingDay.book,
                 readingDay.readSt.toString(),
                 readingDay.readEd.toString(),

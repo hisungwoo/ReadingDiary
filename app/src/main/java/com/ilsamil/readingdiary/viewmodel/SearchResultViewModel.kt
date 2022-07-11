@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
 import com.ilsamil.readingdiary.data.db.AppDatabase
+import com.ilsamil.readingdiary.data.db.ReadingDatabase
 import com.ilsamil.readingdiary.data.db.entity.MyBook
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,14 +14,11 @@ import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 
 class SearchResultViewModel(application: Application) : AndroidViewModel(application) {
-    private val db = Room.databaseBuilder(
-            application,
-            AppDatabase::class.java, "database-app")
-        .build()
+    private val db = ReadingDatabase.getInstance(application.applicationContext)
 
     fun addBooks(book : MyBook) {
         viewModelScope.launch {
-            db.myBookDao().insertBook(book)
+            db!!.myBookDao().insertBook(book)
         }
     }
 

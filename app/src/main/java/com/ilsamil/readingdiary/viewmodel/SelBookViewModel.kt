@@ -5,40 +5,37 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
 import com.ilsamil.readingdiary.data.db.AppDatabase
+import com.ilsamil.readingdiary.data.db.ReadingDatabase
 import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SelBookViewModel (application : Application) : AndroidViewModel(application)  {
-    private val db = Room.databaseBuilder(
-        application,
-        AppDatabase::class.java,"database-app")
-        .build()
-
+    private val db = ReadingDatabase.getInstance(application.applicationContext)
 
     suspend fun getCurReading(name : String) : ReadingDay? {
         return withContext(viewModelScope.coroutineContext) {
-            db.readingDao().selectMaxRead(name)
+            db!!.readingDao().selectMaxRead(name)
         }
     }
 
     suspend fun getStartReading(name : String) : ReadingDay? {
         return withContext(viewModelScope.coroutineContext) {
-            db.readingDao().selectMinRead(name)
+            db!!.readingDao().selectMinRead(name)
         }
     }
 
     suspend fun getReadingCnt(name : String) : String? {
         return withContext(viewModelScope.coroutineContext) {
-            db.readingDao().selectReadCnt(name)
+            db!!.readingDao().selectReadCnt(name)
         }
     }
 
     fun removeBook(book : String)  {
         viewModelScope.launch {
-            db.myBookDao().deleteBook(book)
-            db.readingDao().deleteAllReadingDay(book)
+            db!!.myBookDao().deleteBook(book)
+            db!!.readingDao().deleteAllReadingDay(book)
         }
     }
 

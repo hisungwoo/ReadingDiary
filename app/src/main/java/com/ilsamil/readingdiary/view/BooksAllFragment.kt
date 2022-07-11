@@ -41,7 +41,6 @@ class BooksAllFragment() : Fragment() {
         val spaceDecoration = RecyclerDecoration(25)
         binding.booksAllRecyclerView.addItemDecoration(spaceDecoration)
 
-
         adapter.setBooksItemClickListener(object : BooksAdapter.BooksItemClickListener{
             override fun onClick(v: View, position: Int, item: MyBook) {
                 val action = BooksFragmentDirections.actionBooksFragmentToSelBookFragment(item)

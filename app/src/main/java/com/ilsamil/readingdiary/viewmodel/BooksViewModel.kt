@@ -7,16 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
 import com.ilsamil.readingdiary.data.db.AppDatabase
+import com.ilsamil.readingdiary.data.db.ReadingDatabase
 import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class BooksViewModel(application : Application) : AndroidViewModel(application) {
-    private val db = Room.databaseBuilder(
-            application,
-            AppDatabase::class.java,"database-app")
-        .build()
+    private val db = ReadingDatabase.getInstance(application.applicationContext)
 
     val bookAllList = MutableLiveData<List<MyBook>>()
     val bookReadingList = MutableLiveData<List<MyBook>>()
@@ -24,9 +22,9 @@ class BooksViewModel(application : Application) : AndroidViewModel(application) 
 
     fun setCategoryAll() {
         viewModelScope.launch {
-            val items = db.myBookDao().selectMyBook()
+            val items = db!!.myBookDao().selectMyBook()
             for (i in items.indices) {
-                val curDay : ReadingDay? = db.readingDao().selectMaxRead(items[i].name)
+                val curDay : ReadingDay? = db!!.readingDao().selectMaxRead(items[i].name)
                 if (curDay == null) {
                     items[i].curPage = 0
                     items[i].lastDate = "- 독서를 시작해보세요"
@@ -42,7 +40,7 @@ class BooksViewModel(application : Application) : AndroidViewModel(application) 
 
     fun setCategoryReading() {
         viewModelScope.launch {
-            val myBook = db.myBookDao().selectMyBook()
+            val myBook = db!!.myBookDao().selectMyBook()
             val items = ArrayList<MyBook>()
             for (i in myBook.indices) {
                 val curDay : ReadingDay? = db.readingDao().selectMaxRead(myBook[i].name)
@@ -64,7 +62,7 @@ class BooksViewModel(application : Application) : AndroidViewModel(application) 
 
     fun setCategoryFinish() {
         viewModelScope.launch {
-            val readingDays = db.readingDao().selectFinishRead()
+            val readingDays = db!!.readingDao().selectFinishRead()
             val items = ArrayList<MyBook>()
             for (i in readingDays) {
                 val item = db.myBookDao().selectReadingBook(i.book)

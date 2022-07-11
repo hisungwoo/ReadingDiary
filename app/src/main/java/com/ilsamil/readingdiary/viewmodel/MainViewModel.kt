@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
 import com.ilsamil.readingdiary.data.db.AppDatabase
+import com.ilsamil.readingdiary.data.db.ReadingDatabase
 import com.ilsamil.readingdiary.data.db.entity.CalendarDay
 import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
@@ -17,10 +18,7 @@ import java.time.YearMonth
 class MainViewModel(application : Application) : AndroidViewModel(application) {
     val calReadList = MutableLiveData<ArrayList<CalendarDay>>()
 
-    private val db = Room.databaseBuilder(
-            application,
-            AppDatabase::class.java, "database-app")
-        .build()
+    private val db = ReadingDatabase.getInstance(application.applicationContext)
 
     private fun setCalendarList(date : LocalDate, readingList : List<String>) {
         val dayList = ArrayList<CalendarDay>()
@@ -68,7 +66,7 @@ class MainViewModel(application : Application) : AndroidViewModel(application) {
         val month = selectedDate.monthValue.toString()
 
         viewModelScope.launch {
-            val readingList = db.readingDao().selectReadingDate(year, month)
+            val readingList = db!!.readingDao().selectReadingDate(year, month)
             setCalendarList(selectedDate , readingList)
         }
     }
@@ -76,19 +74,19 @@ class MainViewModel(application : Application) : AndroidViewModel(application) {
 
     suspend fun getCalInfo(item : CalendarDay) : ReadingDay {
         return withContext(viewModelScope.coroutineContext) {
-            db.readingDao().selectReadingDay(item.year, item.month, item.day)
+            db!!.readingDao().selectReadingDay(item.year, item.month, item.day)
         }
     }
 
     suspend fun getImgUrl2(readingDay : ReadingDay) : String {
         return withContext(viewModelScope.coroutineContext) {
-            db.myBookDao().selectImgUrl(readingDay.book)
+            db!!.myBookDao().selectImgUrl(readingDay.book)
         }
     }
 
     fun removeReadingDay(year : String, month : String, day : String, selectedDate : LocalDate) {
         viewModelScope.launch {
-            val isComplete = db.readingDao().deleteReadingDay(year, month, day)
+            val isComplete = db!!.readingDao().deleteReadingDay(year, month, day)
             if (isComplete >= 1) {
                 val year = selectedDate.year.toString()
                 val month = selectedDate.monthValue.toString()
