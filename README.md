@@ -77,7 +77,7 @@
 
 ```kotlin``` ```JetPack``` ```ViewModel``` ```Retrofit``` ```MVVM``` ```Coroutine``` ```Room``` ```Recyclerview``` ```LiveData```
 
-```DataBinding``` ```Kakao Api``` ```Glide``` ```TabLayout``` ```Jsoup```  
+```DataBinding``` ```Kakao Api``` ```Glide``` ```TabLayout``` ```Jsoup``` ```Singleton```
 
 
 
