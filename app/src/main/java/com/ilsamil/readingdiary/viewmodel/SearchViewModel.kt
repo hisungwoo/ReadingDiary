@@ -31,6 +31,5 @@ class SearchViewModel(application : Application) : AndroidViewModel(application)
             val searchBooks = service.getBookInfo(SearchText, "accuracy", 50, "title")
             searchItem.value = searchBooks.bookInfo
         }
-
     }
 }

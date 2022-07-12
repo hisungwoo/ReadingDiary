@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.BR
-import com.ilsamil.readingdiary.viewmodel.MainViewModel
+import com.ilsamil.readingdiary.viewmodel.CalendarViewModel
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.adapter.CalendarAdapter
 import com.ilsamil.readingdiary.databinding.CalendarListBinding
@@ -34,7 +34,7 @@ import java.util.*
 import kotlin.math.floor
 
 class CalendarFragment : Fragment() {
-    private val mainViewModel by activityViewModels<MainViewModel>()
+    private val mainViewModel by activityViewModels<CalendarViewModel>()
     private lateinit var binding : CalendarListBinding
     private lateinit var selectedDate : LocalDate
 
@@ -76,7 +76,7 @@ class CalendarFragment : Fragment() {
                 if (!item.isEmpty && item.isRead) {
                     GlobalScope.launch(Dispatchers.Main) {
                         val calInfo = mainViewModel.getCalInfo(item)
-                        val imgUrl = mainViewModel.getImgUrl2(calInfo)
+                        val imgUrl = mainViewModel.getImgUrl(calInfo)
                         setDialog(inflater.context, calInfo, imgUrl, item)
                     }
 
@@ -89,7 +89,7 @@ class CalendarFragment : Fragment() {
 
 
         binding.apply {
-            setVariable(BR.model, ViewModelProvider(this@CalendarFragment).get(MainViewModel::class.java))
+            setVariable(BR.model, ViewModelProvider(this@CalendarFragment).get(CalendarViewModel::class.java))
             lifecycleOwner = this@CalendarFragment
             model = mainViewModel
             executePendingBindings()

@@ -4,21 +4,17 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.room.Room
 import com.ilsamil.readingdiary.data.db.AppDatabase
-import com.ilsamil.readingdiary.data.db.ReadingDatabase
 import com.ilsamil.readingdiary.data.db.entity.CalendarDay
-import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import java.time.YearMonth
 
-class MainViewModel(application : Application) : AndroidViewModel(application) {
+class CalendarViewModel(application : Application) : AndroidViewModel(application) {
     val calReadList = MutableLiveData<ArrayList<CalendarDay>>()
-
-    private val db = ReadingDatabase.getInstance(application.applicationContext)
+    private val db = AppDatabase.getInstance(application.applicationContext)
 
     private fun setCalendarList(date : LocalDate, readingList : List<String>) {
         val dayList = ArrayList<CalendarDay>()
@@ -78,7 +74,7 @@ class MainViewModel(application : Application) : AndroidViewModel(application) {
         }
     }
 
-    suspend fun getImgUrl2(readingDay : ReadingDay) : String {
+    suspend fun getImgUrl(readingDay : ReadingDay) : String {
         return withContext(viewModelScope.coroutineContext) {
             db!!.myBookDao().selectImgUrl(readingDay.book)
         }

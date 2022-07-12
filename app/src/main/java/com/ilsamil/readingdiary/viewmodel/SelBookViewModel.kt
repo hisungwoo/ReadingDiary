@@ -3,16 +3,13 @@ package com.ilsamil.readingdiary.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.Room
 import com.ilsamil.readingdiary.data.db.AppDatabase
-import com.ilsamil.readingdiary.data.db.ReadingDatabase
-import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SelBookViewModel (application : Application) : AndroidViewModel(application)  {
-    private val db = ReadingDatabase.getInstance(application.applicationContext)
+    private val db = AppDatabase.getInstance(application.applicationContext)
 
     suspend fun getCurReading(name : String) : ReadingDay? {
         return withContext(viewModelScope.coroutineContext) {

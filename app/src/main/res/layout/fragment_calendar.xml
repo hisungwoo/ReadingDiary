@@ -9,7 +9,7 @@
         <import type="android.view.View"/>
         <variable
             name="model"
-            type="com.ilsamil.readingdiary.viewmodel.MainViewModel" />
+            type="com.ilsamil.readingdiary.viewmodel.CalendarViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

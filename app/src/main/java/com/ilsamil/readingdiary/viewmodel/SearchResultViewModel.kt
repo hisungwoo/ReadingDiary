@@ -1,12 +1,9 @@
 package com.ilsamil.readingdiary.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.Room
 import com.ilsamil.readingdiary.data.db.AppDatabase
-import com.ilsamil.readingdiary.data.db.ReadingDatabase
 import com.ilsamil.readingdiary.data.db.entity.MyBook
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +11,7 @@ import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 
 class SearchResultViewModel(application: Application) : AndroidViewModel(application) {
-    private val db = ReadingDatabase.getInstance(application.applicationContext)
+    private val db = AppDatabase.getInstance(application.applicationContext)
 
     fun addBooks(book : MyBook) {
         viewModelScope.launch {
@@ -34,6 +31,4 @@ class SearchResultViewModel(application: Application) : AndroidViewModel(applica
             result
         }
     }
-
-
 }

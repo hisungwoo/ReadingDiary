@@ -4,13 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.room.Room
 import com.ilsamil.readingdiary.data.db.AppDatabase
-import com.ilsamil.readingdiary.data.db.ReadingDatabase
 import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class WriteReadingViewModel(application : Application) : AndroidViewModel(application) {
     val isEdit = MutableLiveData<Boolean>()
@@ -19,7 +16,7 @@ class WriteReadingViewModel(application : Application) : AndroidViewModel(applic
     val editImg = MutableLiveData<String>()
     val selBooks = MutableLiveData<List<MyBook>>()
 
-    private val db = ReadingDatabase.getInstance(application.applicationContext)
+    private val db = AppDatabase.getInstance(application.applicationContext)
 
     fun setEdit(year : String, month : String, day : String) {
         viewModelScope.launch {
