@@ -34,12 +34,15 @@ class CalendarViewModel(application : Application) : AndroidViewModel(applicatio
 
         val calEmpty = CalendarDay(true, "", "", "", false)
         for(i in 1 .. 42) {
+            // 비어있는 일자
             if(i <= dayOfWeek || i > lastDay + dayOfWeek) dayList.add(calEmpty)
             else {
                 if (readingList.contains((i-dayOfWeek).toString())) {
+                    // 독서 기록 없음
                     dayList.add(CalendarDay(false, year, month,(i-dayOfWeek).toString(), true))
                 } else {
-                    dayList.add(CalendarDay(false, year, month, (i-dayOfWeek).toString(), false))
+                    // 독서 기록 있음
+                    dayList.add(CalendarDay(false, year, month,(i-dayOfWeek).toString(), false))
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.ilsamil.readingdiary.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -30,7 +31,10 @@ class BooksViewModel(application : Application) : AndroidViewModel(application) 
                     items[i].lastDate = "${curDay.year}.${curDay.month}.${curDay.day}"
                 }
             }
-            bookAllList.value = items
+
+            // 날짜 내림차순 정렬
+            val resultItems = items.sortedByDescending { it.lastDate }
+            bookAllList.value = resultItems
         }
     }
 
@@ -52,7 +56,9 @@ class BooksViewModel(application : Application) : AndroidViewModel(application) 
                     items.add(item)
                 }
             }
-            bookReadingList.value = items
+            // 날짜 내림차순 정렬
+            val resultItems = items.sortedByDescending { it.lastDate }
+            bookReadingList.value = resultItems
         }
     }
 
@@ -68,7 +74,9 @@ class BooksViewModel(application : Application) : AndroidViewModel(application) 
                     items.add(item)
                 }
             }
-            bookFinishList.value = items
+            // 날짜 내림차순 정렬
+            val resultItems = items.sortedByDescending { it.lastDate }
+            bookFinishList.value = resultItems
         }
     }
 

@@ -8,7 +8,7 @@ import com.ilsamil.readingdiary.data.db.entity.MyBook
 
 @Dao
 interface MyBookDao {
-    @Query("SELECT * FROM MyBook")
+    @Query("SELECT * FROM MyBook ORDER BY lastDate ")
     suspend fun selectMyBook() : List<MyBook>
 
     @Insert
