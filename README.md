@@ -103,7 +103,7 @@
 
 <h2>:books: 개발 스택 </h2>
 
-```kotlin``` ```JetPack``` ```ViewModel``` ```Retrofit``` ```MVVM``` ```Coroutine``` ```Room``` ```Recyclerview``` ```LiveData```
+```kotlin``` ```ViewModel``` ```Retrofit``` ```MVVM``` ```Coroutine``` ```Room``` ```Recyclerview``` ```LiveData```
 
 ```DataBinding``` ```Kakao Api``` ```Glide``` ```TabLayout``` ```Jsoup``` ```Singleton```
 
