@@ -68,18 +68,6 @@
   </span>
 </div>
 
-
-<br>
-
-
-
-<h2>:books: 개발 스택 </h2>
-
-```kotlin``` ```JetPack``` ```ViewModel``` ```Retrofit``` ```MVVM``` ```Coroutine``` ```Room``` ```Recyclerview``` ```LiveData```
-
-```DataBinding``` ```Kakao Api``` ```Glide``` ```TabLayout``` ```Jsoup``` ```Singleton```
-
-
 <br>
 
 
@@ -108,5 +96,16 @@
 
 <img width="40%" src="https://user-images.githubusercontent.com/37431121/179126784-312a7ce5-52a9-46bc-92ba-a3c50d869197.jpg">
 </p>
+
+<br>
+
+
+
+<h2>:books: 개발 스택 </h2>
+
+```kotlin``` ```JetPack``` ```ViewModel``` ```Retrofit``` ```MVVM``` ```Coroutine``` ```Room``` ```Recyclerview``` ```LiveData```
+
+```DataBinding``` ```Kakao Api``` ```Glide``` ```TabLayout``` ```Jsoup``` ```Singleton```
+
 
 
