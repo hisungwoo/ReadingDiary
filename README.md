@@ -54,6 +54,12 @@
   </span>
 </div>
 
+<p float="left">  
+<img width="40%" src="https://user-images.githubusercontent.com/37431121/177962702-d7b0d09f-97ae-4e49-8ae4-c2466244bf9e.gif">
+
+<img width="40%" src="https://user-images.githubusercontent.com/37431121/177962708-d8f2b9fb-115d-423a-8489-bcc246336d68.gif">
+</p>
+
 <br>
 
 * __내&nbsp;서재&nbsp;&&nbsp;독서날&nbsp;삭제__
