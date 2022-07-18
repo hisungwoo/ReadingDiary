@@ -122,13 +122,23 @@ class SearchResultFragment : Fragment() {
             } else {
                 val util = Util()
                 val addBook : () -> Unit = {
-                    var authors = ""
-                    for(i in resultItem.authors) authors += "$i "
 
-                    val book = MyBook(resultItem.title, resultItem.thumbnail, "", 0,  maxPage, resultItem.contents, resultItem.url, resultItem.publisher, authors)
-                    srViewModel.addBooks(book)
-                    findNavController().popBackStack()
-                    findNavController().popBackStack()
+                    GlobalScope.launch {
+                        val check = srViewModel.checkBook(resultItem.title)
+                        check.let {
+                            if (check!! > 0) {
+                                Toast.makeText(inflater.context, "이미 내 서재에 추가되어 있습니다.", Toast.LENGTH_SHORT).show()
+                            } else {
+                                var authors = ""
+                                for(i in resultItem.authors) authors += "$i "
+
+                                val book = MyBook(resultItem.title, resultItem.thumbnail, "", 0,  maxPage, resultItem.contents, resultItem.url, resultItem.publisher, authors)
+                                srViewModel.addBooks(book)
+                                findNavController().popBackStack()
+                                findNavController().popBackStack()
+                            }
+                        }
+                    }
                 }
                 util.showDialog(inflater.context, addBook, "내 서재에 책을 추가하시겠습니까?", "추가")
             }

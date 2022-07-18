@@ -5,20 +5,14 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import androidx.fragment.app.Fragment
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.databinding.FragmentSettingBinding
-import com.ilsamil.readingdiary.utils.Util
-import kotlin.math.floor
 
 class SettingFragment : Fragment() {
 
@@ -93,7 +87,9 @@ class SettingFragment : Fragment() {
         }
 
         binding.settingEvalBtn.setOnClickListener {
-            Toast.makeText(inflater.context, "준비중입니다", Toast.LENGTH_SHORT).show()
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("market://details?id=" + context?.packageName)
+            startActivity(intent)
         }
 
         return binding.root

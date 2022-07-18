@@ -8,7 +8,7 @@ import com.ilsamil.readingdiary.data.db.entity.MyBook
 
 @Dao
 interface MyBookDao {
-    @Query("SELECT * FROM MyBook ORDER BY lastDate ")
+    @Query("SELECT * FROM MyBook")
     suspend fun selectMyBook() : List<MyBook>
 
     @Insert
@@ -22,4 +22,7 @@ interface MyBookDao {
 
     @Query("DELETE FROM MyBook WHERE name = :name")
     suspend fun deleteBook(name: String)
+
+    @Query("SELECT count(*) FROM MyBook WHERE name = :name")
+    suspend fun checkBook(name : String) : Int
 }

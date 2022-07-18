@@ -13,6 +13,12 @@ import org.jsoup.Jsoup
 class SearchResultViewModel(application: Application) : AndroidViewModel(application) {
     private val db = AppDatabase.getInstance(application.applicationContext)
 
+    suspend fun checkBook(name : String) : Int? {
+        return withContext(viewModelScope.coroutineContext) {
+            db!!.myBookDao().checkBook(name)
+        }
+    }
+
     fun addBooks(book : MyBook) {
         viewModelScope.launch {
             db!!.myBookDao().insertBook(book)
