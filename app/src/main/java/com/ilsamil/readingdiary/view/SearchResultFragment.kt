@@ -17,12 +17,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.data.db.entity.MyBook
+import com.ilsamil.readingdiary.data.remote.model.Books
 import com.ilsamil.readingdiary.databinding.FragmentSearchResultBinding
 import com.ilsamil.readingdiary.utils.Util
 import com.ilsamil.readingdiary.viewmodel.SearchResultViewModel
@@ -122,27 +124,30 @@ class SearchResultFragment : Fragment() {
             } else {
                 val util = Util()
                 val addBook : () -> Unit = {
-
-                    GlobalScope.launch {
-                        val check = srViewModel.checkBook(resultItem.title)
-                        check.let {
-                            if (check!! > 0) {
-                                Toast.makeText(inflater.context, "이미 내 서재에 추가되어 있습니다.", Toast.LENGTH_SHORT).show()
-                            } else {
-                                var authors = ""
-                                for(i in resultItem.authors) authors += "$i "
-
-                                val book = MyBook(resultItem.title, resultItem.thumbnail, "", 0,  maxPage, resultItem.contents, resultItem.url, resultItem.publisher, authors)
-                                srViewModel.addBooks(book)
-                                findNavController().popBackStack()
-                                findNavController().popBackStack()
-                            }
-                        }
-                    }
+                    srViewModel.checkBook(resultItem.title)
                 }
                 util.showDialog(inflater.context, addBook, "내 서재에 책을 추가하시겠습니까?", "추가")
             }
         }
+
+
+        srViewModel.isExist.observe(this, Observer {
+            Log.d("IlSamIl", "왜 여기로왕")
+            when(it) {
+                true -> {
+                    var authors = ""
+                    for(i in resultItem.authors) authors += "$i "
+
+                    val book = MyBook(resultItem.title, resultItem.thumbnail, "", 0,  maxPage, resultItem.contents, resultItem.url, resultItem.publisher, authors)
+                    srViewModel.addBooks(book)
+                    findNavController().popBackStack()
+                    findNavController().popBackStack()
+                }
+                false -> Toast.makeText(inflater.context, "이미 내 서재에 추가되어 있습니다.", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+
         return binding.root
     }
 
@@ -155,8 +160,6 @@ class SearchResultFragment : Fragment() {
         }
         return true
     }
-
-
 
 
 }

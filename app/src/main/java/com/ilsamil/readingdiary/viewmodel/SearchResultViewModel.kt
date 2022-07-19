@@ -2,6 +2,7 @@ package com.ilsamil.readingdiary.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ilsamil.readingdiary.data.db.AppDatabase
 import com.ilsamil.readingdiary.data.db.entity.MyBook
@@ -12,10 +13,14 @@ import org.jsoup.Jsoup
 
 class SearchResultViewModel(application: Application) : AndroidViewModel(application) {
     private val db = AppDatabase.getInstance(application.applicationContext)
+    val isExist = MutableLiveData<Boolean>()
 
-    suspend fun checkBook(name : String) : Int? {
-        return withContext(viewModelScope.coroutineContext) {
-            db!!.myBookDao().checkBook(name)
+    fun checkBook(name : String) {
+        viewModelScope.launch {
+            when(db!!.myBookDao().checkBook(name)) {
+                0 -> isExist.value = true
+                else -> isExist.value = false
+            }
         }
     }
 
