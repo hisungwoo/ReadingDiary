@@ -1,6 +1,7 @@
 package com.ilsamil.readingdiary.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -15,12 +16,9 @@ class SearchResultViewModel(application: Application) : AndroidViewModel(applica
     private val db = AppDatabase.getInstance(application.applicationContext)
     val isExist = MutableLiveData<Boolean>()
 
-    fun checkBook(name : String) {
-        viewModelScope.launch {
-            when(db!!.myBookDao().checkBook(name)) {
-                0 -> isExist.value = true
-                else -> isExist.value = false
-            }
+    suspend fun checkBook(name : String) : Int {
+        return withContext(Dispatchers.IO) {
+            db!!.myBookDao().checkBook(name)
         }
     }
 

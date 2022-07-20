@@ -117,7 +117,8 @@ class MainActivity : AppCompatActivity() {
     fun setAd() {
         InterstitialAd.load(this,"${BuildConfig.adsId}", adRequest!!, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
-                Log.d(TAG, adError?.message)
+                // code 3 : 광고 요청 구현에 문제는 없고 성공했지만, 인벤토리에 광고가 없음
+                Log.d(TAG, "code : ${adError?.code.toString()}, message : ${adError?.message}")
                 mInterstitialAd = null
             }
 
