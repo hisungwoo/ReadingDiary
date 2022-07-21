@@ -28,7 +28,7 @@ import kotlin.math.floor
 class SelBookFragment : Fragment() {
 
     companion object{
-        private const val TAG = "SelBookFragment_IlSamIl"
+        private const val TAG = "SelBookFragment_1sam1"
         var adsCnt = 0
     }
 

@@ -28,7 +28,7 @@ import com.ilsamil.readingdiary.viewmodel.WriteReadingViewModel
 class WriteReadingFragment : Fragment() {
 
     companion object {
-        private const val TAG = "WriteReadingFragment_IlSamIl"
+        private const val TAG = "WriteReadingFragment_1sam1"
     }
 
     private val addReadingViewModel : WriteReadingViewModel by viewModels()
@@ -70,11 +70,10 @@ class WriteReadingFragment : Fragment() {
             selBook = it.book
             maxPage = it.maxPage
             readSt = it.readSt
-
             binding.addReadingBookTitleTv.text = it.book
             binding.addReadingCurPageTv.text = it.readSt
             binding.addReadingLastPageTv.text = it.maxPage
-            binding.addReadingTodayReadTv.text = it.readEd.toString()
+            binding.addReadingTodayReadEt.setText(it.readEd.toString())
 
             addReadingViewModel.setImg(it.book)
         })
@@ -132,51 +131,52 @@ class WriteReadingFragment : Fragment() {
             }
         })
 
-        binding.addReadingUpdatePageBtn.setOnClickListener {
-            AlertDialog.Builder(inflater.context)
-                .setView(R.layout.dialog_page_update)
-                .show()
-                .also { alertDialog ->
-                    if (alertDialog == null) return@also
-                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-                    val saveBtn = alertDialog.findViewById<Button>(R.id.dialog_update_save_btn)
-                    val cancelBtn = alertDialog.findViewById<Button>(R.id.dialog_update_cancel_btn)
-                    val edPageTv = alertDialog.findViewById<TextView>(R.id.dialog_update_end_tv)
-                    val beforeTv = alertDialog.findViewById<TextView>(R.id.dialog_update_before_tv)
-                    val pageEt = alertDialog.findViewById<EditText>(R.id.dialog_update_edit_et)
-
-
-                    beforeTv?.text = "마지막 독서  ${readSt}장"
-                    edPageTv?.text = "마지막 페이지  ${maxPage}장"
-
-
-                    saveBtn?.setOnClickListener {
-                        if (pageEt?.text.toString() != "") {
-                            val isInput = pageEt?.text.toString().toInt()
-                            if (readSt!!.toInt() >= isInput) {
-                                Toast.makeText(inflater.context, "이전보다 많은 페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
-                            } else if(isInput > maxPage!!.toInt()) {
-                                Toast.makeText(inflater.context, "페이지 총수보다 적게 입력해주세요", Toast.LENGTH_SHORT).show()
-                            } else {
-                                binding.addReadingTodayReadTv.text = isInput.toString()
-                                readEd = isInput
-                                alertDialog.dismiss()
-                            }
-                        }
-                    }
-
-                    cancelBtn?.setOnClickListener {
-                        alertDialog.dismiss()
-                    }
-                }
-        }
+//        binding.addReadingUpdatePageBtn.setOnClickListener {
+//            AlertDialog.Builder(inflater.context)
+//                .setView(R.layout.dialog_page_update)
+//                .show()
+//                .also { alertDialog ->
+//                    if (alertDialog == null) return@also
+//                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//
+//                    val saveBtn = alertDialog.findViewById<Button>(R.id.dialog_update_save_btn)
+//                    val cancelBtn = alertDialog.findViewById<Button>(R.id.dialog_update_cancel_btn)
+//                    val edPageTv = alertDialog.findViewById<TextView>(R.id.dialog_update_end_tv)
+//                    val beforeTv = alertDialog.findViewById<TextView>(R.id.dialog_update_before_tv)
+//                    val pageEt = alertDialog.findViewById<EditText>(R.id.dialog_update_edit_et)
+//
+//
+//                    beforeTv?.text = "마지막 독서  ${readSt}장"
+//                    edPageTv?.text = "마지막 페이지  ${maxPage}장"
+//
+//
+//                    saveBtn?.setOnClickListener {
+//                        if (pageEt?.text.toString() != "") {
+//                            val isInput = pageEt?.text.toString().toInt()
+//                            if (readSt!!.toInt() >= isInput) {
+//                                Toast.makeText(inflater.context, "이전보다 많은 페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
+//                            } else if(isInput > maxPage!!.toInt()) {
+//                                Toast.makeText(inflater.context, "페이지 총수보다 적게 입력해주세요", Toast.LENGTH_SHORT).show()
+//                            } else {
+//                                binding.addReadingTodayReadTv.text = isInput.toString()
+//                                readEd = isInput
+//                                alertDialog.dismiss()
+//                            }
+//                        }
+//                    }
+//
+//                    cancelBtn?.setOnClickListener {
+//                        alertDialog.dismiss()
+//                    }
+//                }
+//        }
 
         binding.addReadingCancelBtn.setOnClickListener {
             cancelBook()
         }
 
         binding.addReadingSaveBtn.setOnClickListener {
+            readEd = binding.addReadingTodayReadEt.text.toString().toInt()
             if (selBook != null && readSt != null && readEd != null) {
                 val util = Util()
                 val addReadingDay : () -> Unit = {
@@ -187,11 +187,12 @@ class WriteReadingFragment : Fragment() {
                 util.showDialog(inflater.context, addReadingDay,"오늘 독서기록을 저장하시겠어요?", "저장")
 
             } else {
-                Toast.makeText(inflater.context, "페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(inflater.context, "오늘 읽은 책을 선택하거나, 페이지 수를 제대로 입력해주세요", Toast.LENGTH_SHORT).show()
             }
         }
 
         binding.addReadingEditBtn.setOnClickListener {
+            readEd = binding.addReadingTodayReadEt.text.toString().toInt()
             if (selBook != null && readSt != null && readEd != null) {
                 val util = Util()
                 val updateReadingDay : () -> Unit = {
@@ -220,10 +221,11 @@ class WriteReadingFragment : Fragment() {
     private fun setSelBook() {
         binding.apply {
             addReadingSaveBtn.visibility = View.VISIBLE
-            addReadingUpdatePageBtn.isEnabled = true
-            addReadingUpdatePageBtn.setBackgroundColor(getColor(context!!, R.color.update_btn))
-            addReadingUpdatePageBtn.setTextColor(getColor(context!!, R.color.white))
-
+//            addReadingUpdatePageBtn.isEnabled = true
+//            addReadingUpdatePageBtn.setBackgroundColor(getColor(context!!, R.color.update_btn))
+//            addReadingUpdatePageBtn.setTextColor(getColor(context!!, R.color.white))
+//            focusable
+            addReadingTodayReadEt.isFocusable = true
             addReadingBookNullIv.visibility = View.INVISIBLE
             addReadingBookNullTv.visibility = View.INVISIBLE
             addReadingBookNullVw.visibility = View.INVISIBLE
@@ -239,14 +241,14 @@ class WriteReadingFragment : Fragment() {
         maxPage = null
 
         binding.apply {
-            addReadingUpdatePageBtn.isEnabled = false
-            addReadingUpdatePageBtn.setBackgroundColor(getColor(context!!, R.color.update_btn_cancel_bak))
-            addReadingUpdatePageBtn.setTextColor(getColor(context!!, R.color.update_btn_cancel_text))
+//            addReadingUpdatePageBtn.isEnabled = false
+//            addReadingUpdatePageBtn.setBackgroundColor(getColor(context!!, R.color.update_btn_cancel_bak))
+//            addReadingUpdatePageBtn.setTextColor(getColor(context!!, R.color.update_btn_cancel_text))
 
             addReadingBookTitleTv.text = ""
             addReadingCurPageTv.text = "-"
             addReadingLastPageTv.text = "-"
-            addReadingUpdatePageBtn.text = "오늘 읽은 페이지 입력"
+//            addReadingUpdatePageBtn.text = "오늘 읽은 페이지 입력"
 
             addReadingSaveBtn.visibility = View.INVISIBLE
             addReadingBookNullIv.visibility = View.VISIBLE

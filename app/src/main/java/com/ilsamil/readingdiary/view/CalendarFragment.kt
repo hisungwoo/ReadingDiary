@@ -39,7 +39,7 @@ class CalendarFragment : Fragment() {
     private lateinit var selectedDate : LocalDate
 
     companion object {
-        private const val TAG = "CalendarFragment_IlSamIl"
+        private const val TAG = "CalendarFragment_1sam1"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

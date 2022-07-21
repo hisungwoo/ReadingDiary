@@ -17,7 +17,7 @@ import com.ilsamil.readingdiary.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     companion object{
-        private const val TAG = "MainActivity_IlSamIl"
+        private const val TAG = "MainActivity_1sam1"
         var adsCnt = 0
     }
 

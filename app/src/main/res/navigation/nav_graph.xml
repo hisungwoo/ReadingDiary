@@ -11,9 +11,6 @@
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" >
         <action
-            android:id="@+id/action_calendarFragment_to_addReadingActivity"
-            app:destination="@id/addReadingActivity" />
-        <action
             android:id="@+id/action_calendarFragment_to_writeReadingFragment"
             app:destination="@id/writeReadingFragment" />
     </fragment>
@@ -41,15 +38,6 @@
         android:name="com.ilsamil.readingdiary.view.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
-    <activity
-        android:id="@+id/addReadingActivity"
-        android:name="com.ilsamil.readingdiary.view.AddReadingActivity"
-        android:label="activity_add_reading"
-        tools:layout="@layout/activity_add_reading">
-        <argument
-            android:name="calday"
-            app:argType="com.ilsamil.readingdiary.data.db.entity.CalendarDay" />
-    </activity>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.ilsamil.readingdiary.view.SearchFragment"
