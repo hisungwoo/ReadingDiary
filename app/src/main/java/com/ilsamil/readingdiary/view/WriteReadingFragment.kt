@@ -3,6 +3,7 @@ package com.ilsamil.readingdiary.view
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -176,18 +177,31 @@ class WriteReadingFragment : Fragment() {
         }
 
         binding.addReadingSaveBtn.setOnClickListener {
-            readEd = binding.addReadingTodayReadEt.text.toString().toInt()
-            if (selBook != null && readSt != null && readEd != null) {
-                val util = Util()
-                val addReadingDay : () -> Unit = {
-                    val readItem = ReadingDay(year, month, day, selBook!!, readSt, readEd, maxPage)
-                    addReadingViewModel.addReadingDiary(readItem)
-                    findNavController().popBackStack()
-                }
-                util.showDialog(inflater.context, addReadingDay,"오늘 독서기록을 저장하시겠어요?", "저장")
+            val inputReading : Int? = when(binding.addReadingTodayReadEt.text.isNotEmpty()) {
+                true -> binding.addReadingTodayReadEt.text.toString().toInt()
+                else -> null
+            }
 
+            if(inputReading == null) {
+                Toast.makeText(inflater.context, "오늘 독서한 페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
+            } else if (readSt!!.toInt() >= inputReading!!) {
+                Toast.makeText(inflater.context, "이전보다 많은 페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
+            } else if(inputReading > maxPage!!.toInt()) {
+                Toast.makeText(inflater.context, "페이지 총수보다 적게 입력해주세요", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(inflater.context, "오늘 읽은 책을 선택하거나, 페이지 수를 제대로 입력해주세요", Toast.LENGTH_SHORT).show()
+                readEd = inputReading
+                if (selBook != null && readSt != null && readEd != null) {
+                    val util = Util()
+                    val addReadingDay : () -> Unit = {
+                        val readItem = ReadingDay(year, month, day, selBook!!, readSt, readEd, maxPage)
+                        addReadingViewModel.addReadingDiary(readItem)
+                        findNavController().popBackStack()
+                    }
+                    util.showDialog(inflater.context, addReadingDay,"오늘 독서기록을 저장하시겠어요?", "저장")
+
+                } else {
+                    Toast.makeText(inflater.context, "오늘 읽은 책을 선택하거나, 페이지 수를 입력해주세요", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 

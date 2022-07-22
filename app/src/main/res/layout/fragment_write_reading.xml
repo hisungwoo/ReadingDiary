@@ -307,7 +307,7 @@
                 android:elevation="3dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
-                android:text="오늘 읽은 페이지"
+                android:text="오늘 독서"
                 android:textSize="16dp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="@+id/add_reading_today_vw"
@@ -319,18 +319,32 @@
                 android:id="@+id/add_reading_today_read_et"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:hint="페이지"
-                android:background="@drawable/dialog_background_round_gay"
+                android:background="@drawable/write_background_round"
                 android:inputType="number"
                 android:maxLength="5"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
+                android:textColor="@color/white"
                 android:textAlignment="center"
                 android:layout_marginTop="20dp"
+                android:layout_marginStart="65dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintTop_toBottomOf="@+id/add_reading_today_title"
                 app:layout_constraintStart_toStartOf="@+id/add_reading_today_vw"
+                app:layout_constraintEnd_toStartOf="@+id/add_reading_today_read_tv"
+                />
+
+            <TextView
+                android:id="@+id/add_reading_today_read_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="페이지까지 읽음"
+                android:textSize="16sp"
+                android:layout_marginEnd="65dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/add_reading_today_read_et"
+                app:layout_constraintStart_toEndOf="@+id/add_reading_today_read_et"
                 app:layout_constraintEnd_toEndOf="@+id/add_reading_today_vw"
                 />
+
 
 
             <androidx.appcompat.widget.AppCompatButton
