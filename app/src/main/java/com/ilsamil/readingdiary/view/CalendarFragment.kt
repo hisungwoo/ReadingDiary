@@ -24,6 +24,7 @@ import com.ilsamil.readingdiary.adapter.CalendarAdapter
 import com.ilsamil.readingdiary.databinding.CalendarListBinding
 import com.ilsamil.readingdiary.data.db.entity.CalendarDay
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
+import com.ilsamil.readingdiary.databinding.DialogSelCalendarBinding
 import com.ilsamil.readingdiary.utils.Util
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -63,11 +64,12 @@ class CalendarFragment : Fragment() {
             calRecyclerview.adapter = calendarAdapter
         }
 
-        // 독서 정보
+        // 독서 달력 셋팅
         mainViewModel.setCalendar(selectedDate)
         mainViewModel.calReadList.observe(this, androidx.lifecycle.Observer {
             calendarAdapter.updateItem(it)
         })
+
 
         //클릭 이벤트
         calendarAdapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener {
@@ -116,7 +118,6 @@ class CalendarFragment : Fragment() {
             .show()
             .also { alertDialog ->
                 if (alertDialog == null) return@also
-                alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                 val dateTitleTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_date_tv)
                 val bookNameTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_book_tv)
@@ -137,6 +138,7 @@ class CalendarFragment : Fragment() {
                     .override(470,530)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(bookImg!!)
+
 
                 dateTitleTv?.text = "${readingDay.year}년 ${readingDay.month}월 ${readingDay.day}일"
                 bookNameTv?.text = "${readingDay.book}"
@@ -167,6 +169,8 @@ class CalendarFragment : Fragment() {
                 cancelBtn?.setOnClickListener {
                     alertDialog.dismiss()
                 }
+
+
             }
     }
 

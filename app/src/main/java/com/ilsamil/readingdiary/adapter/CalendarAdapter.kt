@@ -1,5 +1,6 @@
 package com.ilsamil.readingdiary.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.databinding.ItemCalendarBinding
 import com.ilsamil.readingdiary.data.db.entity.CalendarDay
+import java.time.LocalDate
 import java.util.*
 
 class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
@@ -38,6 +40,7 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>
     }
 
     object DataBindingAdapter {
+        private val today = LocalDate.now().dayOfMonth
         @BindingAdapter("readCheck")
         @JvmStatic
         fun setReadCheck(imgView: ImageView, calDay : CalendarDay) {
@@ -45,6 +48,7 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>
                 imgView.visibility = View.VISIBLE
                 if (calDay.isRead) {
                     when(calDay.day.toInt()) {
+                        today -> imgView.setImageResource(R.drawable.img_all_reading_icon_1)
                         in 1..10 -> imgView.setImageResource(R.drawable.img_all_reading_icon_22)
                         in 11..21 -> imgView.setImageResource(R.drawable.img_all_reading_icon_11)
                         else -> imgView.setImageResource(R.drawable.img_all_reading_icon_33)
