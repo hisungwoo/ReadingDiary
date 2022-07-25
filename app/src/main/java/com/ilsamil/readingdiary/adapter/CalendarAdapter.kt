@@ -1,6 +1,5 @@
 package com.ilsamil.readingdiary.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,6 +45,7 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>
         fun setReadCheck(imgView: ImageView, calDay : CalendarDay) {
             if (!calDay.isEmpty) {
                 imgView.visibility = View.VISIBLE
+                if(today == calDay.day.toInt()) imgView.setBackgroundResource(R.drawable.calendar_today_background)
                 if (calDay.isRead) {
                     when(calDay.day.toInt()) {
                         today -> imgView.setImageResource(R.drawable.img_all_reading_icon_1)
