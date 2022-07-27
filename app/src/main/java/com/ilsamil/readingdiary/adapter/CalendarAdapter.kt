@@ -48,7 +48,6 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>
                 if(today == calDay.day.toInt()) imgView.setBackgroundResource(R.drawable.calendar_today_background)
                 if (calDay.isRead) {
                     when(calDay.day.toInt()) {
-                        today -> imgView.setImageResource(R.drawable.img_all_reading_icon_1)
                         in 1..10 -> imgView.setImageResource(R.drawable.img_all_reading_icon_22)
                         in 11..21 -> imgView.setImageResource(R.drawable.img_all_reading_icon_11)
                         else -> imgView.setImageResource(R.drawable.img_all_reading_icon_33)
