@@ -26,7 +26,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_baseline_add_circle_24"
-            android:drawableTint="#FF3D3D"
             android:textSize="15sp"
             android:textColor="#FB4B4B"
             android:background="#00000000"
