@@ -38,13 +38,10 @@ class MainActivity : AppCompatActivity() {
 
         // bottom_nav 설정
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_nav_host)
-        if (navHostFragment != null) {
-            navController = navHostFragment.findNavController()
-        }
+        if (navHostFragment != null) navController = navHostFragment.findNavController()
         binding.bottomNav.setupWithNavController(navController)
 
 
-        // Navigation 탐색 리스너
         // 검색 Fragment 이동 시 Navigation 숨김 처리
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {

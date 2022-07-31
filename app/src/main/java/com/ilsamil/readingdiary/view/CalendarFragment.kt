@@ -65,17 +65,19 @@ class CalendarFragment : Fragment() {
         }
 
         // 독서 달력 셋팅
-        mainViewModel.setCalendar(selectedDate)
-        mainViewModel.calReadList.observe(this, androidx.lifecycle.Observer {
-            calendarAdapter.updateItem(it)
-        })
-
+        mainViewModel.apply {
+            setCalendar(selectedDate)
+            calReadList.observe(this@CalendarFragment, androidx.lifecycle.Observer {
+                calendarAdapter.updateItem(it)
+            })
+        }
 
         //클릭 이벤트
         calendarAdapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int, item : CalendarDay) {
-                // 독서 정보가 있는 경우
+
                 if (!item.isEmpty && item.isRead) {
+                    // 독서 정보가 있는 경우
                     GlobalScope.launch(Dispatchers.Main) {
                         val calInfo = mainViewModel.getCalInfo(item)
                         val imgUrl = mainViewModel.getImgUrl(calInfo)
@@ -83,6 +85,7 @@ class CalendarFragment : Fragment() {
                     }
 
                 } else {
+                    // 독서 정보가 없는 경우 : 독서날 생성 페이지로 이동
                     val action = CalendarFragmentDirections.actionCalendarFragmentToWriteReadingFragment(item)
                     findNavController().navigate(action)
                 }
