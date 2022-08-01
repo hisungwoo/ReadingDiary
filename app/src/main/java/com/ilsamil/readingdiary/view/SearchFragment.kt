@@ -1,16 +1,13 @@
 package com.ilsamil.readingdiary.view
 
 import android.content.Context
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -19,9 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.adapter.SearchAdapter
+import com.ilsamil.readingdiary.data.remote.api.BookInterface
 import com.ilsamil.readingdiary.data.remote.model.Books
 import com.ilsamil.readingdiary.databinding.FragmentSearchBinding
 import com.ilsamil.readingdiary.viewmodel.SearchViewModel
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchFragment : Fragment() {
     private lateinit var binding : FragmentSearchBinding
@@ -66,6 +66,7 @@ class SearchFragment : Fragment() {
                 if (searchText != "") {
                     val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     inputMethodManager.hideSoftInputFromWindow(binding.searchEt.windowToken, 0)
+
                     searchViewModel.getSearchBook(searchText)
                 }
                 true

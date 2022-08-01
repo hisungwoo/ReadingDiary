@@ -75,7 +75,6 @@ class CalendarFragment : Fragment() {
         //클릭 이벤트
         calendarAdapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int, item : CalendarDay) {
-
                 if (!item.isEmpty && item.isRead) {
                     // 독서 정보가 있는 경우
                     GlobalScope.launch(Dispatchers.Main) {

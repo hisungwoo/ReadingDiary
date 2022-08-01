@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
 
-interface BookService {
+interface BookInterface {
     @GET("/v3/search/book?target=title")
     @Headers("Authorization:${BuildConfig.kakaoAuthorization}")
     suspend fun getBookInfo(
