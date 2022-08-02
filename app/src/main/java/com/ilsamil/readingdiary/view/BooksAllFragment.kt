@@ -35,18 +35,11 @@ class BooksAllFragment() : Fragment() {
         binding.booksAllRecyclerView.layoutManager = LinearLayoutManager(container?.context,
             RecyclerView.VERTICAL,
             false)
-        val adapter = BooksAdapter()
+        val adapter = BooksAdapter().apply { bookOnClickItem = this@BooksAllFragment::moveAllBookItem }
         binding.booksAllRecyclerView.adapter = adapter
 
         val spaceDecoration = RecyclerDecoration(25)
         binding.booksAllRecyclerView.addItemDecoration(spaceDecoration)
-
-        adapter.setBooksItemClickListener(object : BooksAdapter.BooksItemClickListener{
-            override fun onClick(v: View, position: Int, item: MyBook) {
-                val action = BooksFragmentDirections.actionBooksFragmentToSelBookFragment(item)
-                findNavController().navigate(action)
-            }
-        })
 
         booksViewModel.apply {
             setCategoryAll()
@@ -57,4 +50,11 @@ class BooksAllFragment() : Fragment() {
 
         return binding.root
     }
+
+    // 아이템 클릭
+    private fun moveAllBookItem(item: MyBook) {
+        val action = BooksFragmentDirections.actionBooksFragmentToSelBookFragment(item)
+        findNavController().navigate(action)
+    }
+
 }

@@ -34,18 +34,12 @@ class BooksReadingFragment : Fragment() {
         binding.booksReadingRecyclerView.layoutManager = LinearLayoutManager(container?.context,
             RecyclerView.VERTICAL,
             false)
-        val adapter = BooksAdapter()
+        val adapter = BooksAdapter().apply { bookOnClickItem = this@BooksReadingFragment::moveReadingBookItem }
         binding.booksReadingRecyclerView.adapter = adapter
 
         val spaceDecoration = RecyclerDecoration(25)
         binding.booksReadingRecyclerView.addItemDecoration(spaceDecoration)
 
-        adapter.setBooksItemClickListener(object : BooksAdapter.BooksItemClickListener{
-            override fun onClick(v: View, position: Int, item: MyBook) {
-                val action = BooksFragmentDirections.actionBooksFragmentToSelBookFragment(item)
-                findNavController().navigate(action)
-            }
-        })
 
         booksViewModel.apply {
             setCategoryReading()
@@ -54,8 +48,12 @@ class BooksReadingFragment : Fragment() {
             })
         }
 
-
         return binding.root
+    }
+
+    private fun moveReadingBookItem(item: MyBook) {
+        val action = BooksFragmentDirections.actionBooksFragmentToSelBookFragment(item)
+        findNavController().navigate(action)
     }
 
 }

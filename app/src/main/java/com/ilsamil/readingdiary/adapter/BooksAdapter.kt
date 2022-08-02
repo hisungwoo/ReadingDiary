@@ -18,7 +18,7 @@ import kotlin.math.floor
 
 class BooksAdapter() : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
     private var bItem : List<MyBook> = ArrayList()
-    private lateinit var booksItemClickListener : BooksItemClickListener
+    var bookOnClickItem : (book : MyBook) -> Unit = {}
 
     inner class BooksViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val binding = ItemMybooksBinding.bind(itemView)
@@ -34,7 +34,7 @@ class BooksAdapter() : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
 
         // 클릭 이벤트
         holder.binding.itemMybooksCl.setOnClickListener {
-            booksItemClickListener.onClick(it, position, bItem[position])
+            bookOnClickItem(bItem[position])
         }
     }
 
@@ -75,15 +75,4 @@ class BooksAdapter() : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
         }
 
     }
-
-
-    interface BooksItemClickListener {
-        fun onClick(v: View, position: Int, item : MyBook)
-    }
-
-    fun setBooksItemClickListener(booksItemClickListener : BooksItemClickListener) {
-        this.booksItemClickListener = booksItemClickListener
-    }
-
-
 }
