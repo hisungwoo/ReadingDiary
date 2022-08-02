@@ -4,12 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.ilsamil.readingdiary.data.remote.api.BookInterface
 import com.ilsamil.readingdiary.data.remote.model.Books
-import com.ilsamil.readingdiary.repositorty.KakaoBookRepository
+import com.ilsamil.readingdiary.repository.KakaoBookRepository
 import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchViewModel(application : Application) : AndroidViewModel(application) {
     var searchItem = MutableLiveData<List<Books>>()

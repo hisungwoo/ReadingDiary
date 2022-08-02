@@ -1,4 +1,4 @@
-package com.ilsamil.readingdiary.repositorty
+package com.ilsamil.readingdiary.repository
 
 import com.ilsamil.readingdiary.data.remote.api.BookInterface
 import retrofit2.Retrofit

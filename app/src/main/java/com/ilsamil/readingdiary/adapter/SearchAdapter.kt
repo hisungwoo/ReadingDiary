@@ -15,7 +15,7 @@ import com.ilsamil.readingdiary.databinding.ItemSearchBinding
 
 class SearchAdapter() : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     private var sItem : List<Books> = ArrayList()
-    private lateinit var sItemClickListener : SearchOnItemClickListener
+    var onClickItem : (Books) -> Unit = {}
 
     inner class SearchViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val binding = ItemSearchBinding.bind(itemView)
@@ -30,9 +30,7 @@ class SearchAdapter() : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
         holder.binding.books = sItem[position]
 
         // 클릭 이벤트
-        holder.binding.itemSearchListCl.setOnClickListener {
-            sItemClickListener.onClick(it, position, sItem[position])
-        }
+        holder.binding.itemSearchListCl.setOnClickListener { onClickItem(sItem[position]) }
     }
 
     override fun getItemCount(): Int {
@@ -71,11 +69,4 @@ class SearchAdapter() : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
         notifyDataSetChanged()
     }
 
-    interface SearchOnItemClickListener {
-        fun onClick(v: View, position: Int, item : Books)
-    }
-
-    fun setItemClickListener(onItemClickListener : SearchOnItemClickListener) {
-        this.sItemClickListener = onItemClickListener
-    }
 }

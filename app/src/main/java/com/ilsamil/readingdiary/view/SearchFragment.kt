@@ -36,47 +36,43 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
-        binding.searchBackBtn.setOnClickListener { findNavController().popBackStack() }
-        binding.searchRecyclerView.layoutManager = LinearLayoutManager(
-            container?.context,
-            RecyclerView.VERTICAL,
-            false
-        )
-        val adapter = SearchAdapter()
+        binding.apply {
+            searchBackBtn.setOnClickListener { findNavController().popBackStack() }
+            searchRecyclerView.layoutManager = LinearLayoutManager(
+                container?.context,
+                RecyclerView.VERTICAL,
+                false
+            )
+
+            // 키보드 엔터 혹은 검색버튼 클릭 시 searchViewModel 함수 호출
+            searchEt.setOnKeyListener { view, i, keyEvent ->
+                if ((keyEvent.action == KeyEvent.ACTION_DOWN) && (i == KeyEvent.KEYCODE_ENTER)) {
+                    val searchText = searchEt.text.toString()
+                    if (searchText != "") {
+                        val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                        inputMethodManager.hideSoftInputFromWindow(searchEt.windowToken, 0)
+
+                        searchViewModel.getSearchBook(searchText)
+                    }
+                    true
+                } else false
+            }
+
+            searchClearBtn.setOnClickListener {
+                searchEt.setText("")
+                focusKy()
+            }
+        }
+
+        val adapter = SearchAdapter().apply { onClickItem = this@SearchFragment::moveSearchResult }
         binding.searchRecyclerView.adapter = adapter
         searchViewModel.searchItem.observe(this, Observer {
             binding.searchGuideTv.visibility = View.INVISIBLE
             binding.searchRecyclerView.visibility = View.VISIBLE
             adapter.updateItem(it)
         })
-
-        //클릭 이벤트
-        adapter.setItemClickListener(object: SearchAdapter.SearchOnItemClickListener {
-            override fun onClick(v: View, position: Int, item : Books) {
-                val action = SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(item)
-                findNavController().navigate(action)
-            }
-        })
-
-        // 키보드 엔터 혹은 검색버튼 클릭 시 searchViewModel 함수 호출
-        binding.searchEt.setOnKeyListener { view, i, keyEvent ->
-            if ((keyEvent.action == KeyEvent.ACTION_DOWN) && (i == KeyEvent.KEYCODE_ENTER)) {
-                val searchText = binding.searchEt.text.toString()
-                if (searchText != "") {
-                    val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    inputMethodManager.hideSoftInputFromWindow(binding.searchEt.windowToken, 0)
-
-                    searchViewModel.getSearchBook(searchText)
-                }
-                true
-            } else false
-        }
-
-        binding.searchClearBtn.setOnClickListener {
-            binding.searchEt.setText("")
-            focusKy()
-        }
 
         return binding.root
     }
@@ -94,6 +90,12 @@ class SearchFragment : Fragment() {
         imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         binding.searchEt.requestFocus()
         imm.showSoftInput(binding.searchEt, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+    // 클릭 이벤트
+    private fun moveSearchResult(item : Books) {
+        val action = SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(item)
+        findNavController().navigate(action)
     }
 
 }
