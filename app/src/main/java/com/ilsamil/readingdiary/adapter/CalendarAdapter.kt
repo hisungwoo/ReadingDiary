@@ -9,12 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.databinding.ItemCalendarBinding
 import com.ilsamil.readingdiary.data.db.entity.CalendarDay
+import com.ilsamil.readingdiary.data.db.entity.MyBook
 import java.time.LocalDate
 import java.util.*
 
 class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
     private var dayList : List<CalendarDay> = ArrayList<CalendarDay>()
-    private lateinit var itemClickListener : OnItemClickListener
+    var calOnClickItem : (calDay : CalendarDay) -> Unit = {}
 
     inner class CalendarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val binding = ItemCalendarBinding.bind(itemView)
@@ -30,7 +31,7 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>
 
         // 클릭 이벤트
         holder.binding.itemReadIbtn.setOnClickListener {
-            itemClickListener.onClick(it, position, dayList[position])
+            calOnClickItem(dayList[position])
         }
     }
 
@@ -59,14 +60,6 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>
                 imgView.visibility = View.INVISIBLE
             }
         }
-    }
-
-    interface OnItemClickListener {
-        fun onClick(v: View, position: Int, item : CalendarDay)
-    }
-
-    fun setItemClickListener(onItemClickListener : OnItemClickListener) {
-        this.itemClickListener = onItemClickListener
     }
 
     fun updateItem(item : List<CalendarDay>) {

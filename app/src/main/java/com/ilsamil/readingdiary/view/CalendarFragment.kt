@@ -23,6 +23,7 @@ import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.adapter.CalendarAdapter
 import com.ilsamil.readingdiary.databinding.CalendarListBinding
 import com.ilsamil.readingdiary.data.db.entity.CalendarDay
+import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 import com.ilsamil.readingdiary.databinding.DialogSelCalendarBinding
 import com.ilsamil.readingdiary.utils.Util
@@ -55,7 +56,7 @@ class CalendarFragment : Fragment() {
 
         //현재 날짜
         selectedDate = LocalDate.now()
-        val calendarAdapter = CalendarAdapter()
+        val calendarAdapter = CalendarAdapter().apply { calOnClickItem = this@CalendarFragment::moveWriteReadingItem }
 
         binding.apply {
             calCurrentDateTv.text = monthYearFromDate(selectedDate)
@@ -71,26 +72,6 @@ class CalendarFragment : Fragment() {
                 calendarAdapter.updateItem(it)
             })
         }
-
-        //클릭 이벤트
-        calendarAdapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener {
-            override fun onClick(v: View, position: Int, item : CalendarDay) {
-                if (!item.isEmpty && item.isRead) {
-                    // 독서 정보가 있는 경우
-                    GlobalScope.launch(Dispatchers.Main) {
-                        val calInfo = mainViewModel.getCalInfo(item)
-                        val imgUrl = mainViewModel.getImgUrl(calInfo)
-                        setDialog(inflater.context, calInfo, imgUrl, item)
-                    }
-
-                } else {
-                    // 독서 정보가 없는 경우 : 독서날 생성 페이지로 이동
-                    val action = CalendarFragmentDirections.actionCalendarFragmentToWriteReadingFragment(item)
-                    findNavController().navigate(action)
-                }
-            }
-        })
-
 
         binding.apply {
             setVariable(BR.model, ViewModelProvider(this@CalendarFragment).get(CalendarViewModel::class.java))
@@ -111,6 +92,23 @@ class CalendarFragment : Fragment() {
             }
         }
         return binding.root
+    }
+
+    // 달력 클릭
+    private fun moveWriteReadingItem(calDay : CalendarDay) {
+        if (!calDay.isEmpty && calDay.isRead) {
+            // 독서 정보가 있는 경우
+            GlobalScope.launch(Dispatchers.Main) {
+                val calInfo = mainViewModel.getCalInfo(calDay)
+                val imgUrl = mainViewModel.getImgUrl(calInfo)
+                setDialog(context!!, calInfo, imgUrl, calDay)
+            }
+
+        } else {
+            // 독서 정보가 없는 경우 : 독서날 생성 페이지로 이동
+            val action = CalendarFragmentDirections.actionCalendarFragmentToWriteReadingFragment(calDay)
+            findNavController().navigate(action)
+        }
     }
 
 
@@ -186,6 +184,7 @@ class CalendarFragment : Fragment() {
         super.onResume()
         mainViewModel.setCalendar(selectedDate)
     }
+
 }
 
 

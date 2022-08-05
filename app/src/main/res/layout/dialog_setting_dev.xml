@@ -26,7 +26,7 @@
         android:id="@+id/dialog_dev_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/img_all_reading_icon_1"
+        android:src="@drawable/img_all_reading_icon_11"
         android:elevation="3dp"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="@+id/dialog_dev_vw"
