@@ -13,7 +13,7 @@ import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.data.remote.model.Books
 import com.ilsamil.readingdiary.databinding.ItemSearchBinding
 
-class SearchAdapter() : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
+class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     private var sItem : List<Books> = ArrayList()
     var onClickItem : (Books) -> Unit = {}
 

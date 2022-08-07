@@ -16,7 +16,7 @@ import com.ilsamil.readingdiary.databinding.ItemMybooksBinding
 import java.lang.Math.round
 import kotlin.math.floor
 
-class BooksAdapter() : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
+class BooksAdapter : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
     private var bItem : List<MyBook> = ArrayList()
     var bookOnClickItem : (book : MyBook) -> Unit = {}
 
