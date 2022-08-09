@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.R
-import com.ilsamil.readingdiary.data.remote.model.Books
+import com.ilsamil.readingdiary.models.Books
 import com.ilsamil.readingdiary.databinding.ItemSearchBinding
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {

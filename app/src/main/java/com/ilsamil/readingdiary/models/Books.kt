@@ -1,4 +1,4 @@
-package com.ilsamil.readingdiary.data.remote.model
+package com.ilsamil.readingdiary.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

@@ -1,8 +1,7 @@
-package com.ilsamil.readingdiary.data.remote.api
+package com.ilsamil.readingdiary.network
 
 import com.ilsamil.readingdiary.BuildConfig
-import com.ilsamil.readingdiary.data.remote.model.SearchBookDto
-import retrofit2.Call
+import com.ilsamil.readingdiary.models.SearchBookDto
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -17,7 +16,4 @@ interface BookInterface {
         @Query("target") target : String
     ) : SearchBookDto
 
-    companion object {
-        const val BASE_URL = "https://dapi.kakao.com"
-    }
 }

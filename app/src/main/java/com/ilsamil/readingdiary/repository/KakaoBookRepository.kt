@@ -1,21 +1,25 @@
 package com.ilsamil.readingdiary.repository
 
-import com.ilsamil.readingdiary.data.remote.api.BookInterface
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.ilsamil.readingdiary.models.SearchBookDto
+import com.ilsamil.readingdiary.network.RetrofitApi
 
 class KakaoBookRepository {
-    private val bookInterface : BookInterface
-    init {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BookInterface.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
 
-        bookInterface = retrofit.create(BookInterface::class.java)
+    // 싱글톤 패턴
+    companion object {
+        private var instance: KakaoBookRepository? = null
+        fun getInstance(): KakaoBookRepository? {
+            if (instance == null) {
+                instance = KakaoBookRepository()
+            }
+            return instance
+        }
     }
 
-    suspend fun getBookInfo(SearchText : String) =
-        bookInterface.getBookInfo(SearchText, "accuracy", 50, "title")
+    suspend fun getBookInfo(SearchText : String): SearchBookDto {
+        return RetrofitApi.bookInterface.getBookInfo(SearchText, "accuracy", 50, "title")
+    }
+
 
 }
+
