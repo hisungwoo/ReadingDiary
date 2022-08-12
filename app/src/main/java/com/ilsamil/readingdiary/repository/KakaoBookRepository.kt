@@ -16,10 +16,9 @@ class KakaoBookRepository {
         }
     }
 
-    suspend fun getBookInfo(SearchText : String): SearchBookDto {
-        return RetrofitApi.bookInterface.getBookInfo(SearchText, "accuracy", 50, "title")
+    suspend fun getBookInfo(SearchText : String): SearchBookDto? {
+        val response = RetrofitApi.bookInterface.getBookInfo(SearchText, "accuracy", 50, "title")
+        return if (response.isSuccessful) response.body() else null
     }
-
-
 }
 

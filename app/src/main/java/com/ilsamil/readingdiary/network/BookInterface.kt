@@ -2,6 +2,7 @@ package com.ilsamil.readingdiary.network
 
 import com.ilsamil.readingdiary.BuildConfig
 import com.ilsamil.readingdiary.models.SearchBookDto
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -14,6 +15,6 @@ interface BookInterface {
         @Query("sort") sort : String,
         @Query("size") size : Int,
         @Query("target") target : String
-    ) : SearchBookDto
+    ) : Response<SearchBookDto>
 
 }
