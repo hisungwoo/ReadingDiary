@@ -19,10 +19,6 @@ class BooksFragment : Fragment() {
     private val booksViewModel by activityViewModels<BooksViewModel>()
     private lateinit var binding : FragmentBooksBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     private val tabTitleArray = arrayOf(
         "전체",
         "읽고 있는 책",
@@ -46,7 +42,6 @@ class BooksFragment : Fragment() {
         binding.booksAddBtn.setOnClickListener {
             findNavController().navigate(R.id.action_booksFragment_to_searchFragment)
         }
-
 
         return binding.root
     }
