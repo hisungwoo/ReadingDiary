@@ -1,7 +1,7 @@
 package com.ilsamil.readingdiary.network
 
 import com.ilsamil.readingdiary.BuildConfig
-import com.ilsamil.readingdiary.models.SearchBookDto
+import com.ilsamil.readingdiary.data.remote.model.SearchBookDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers

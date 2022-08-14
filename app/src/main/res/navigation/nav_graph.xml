@@ -54,7 +54,7 @@
         tools:layout="@layout/fragment_search_result" >
         <argument
             android:name="books"
-            app:argType="com.ilsamil.readingdiary.models.Books" />
+            app:argType="com.ilsamil.readingdiary.data.remote.model.Books" />
     </fragment>
     <fragment
         android:id="@+id/selBookFragment"

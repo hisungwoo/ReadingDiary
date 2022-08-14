@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.adapter.SearchAdapter
-import com.ilsamil.readingdiary.models.Books
+import com.ilsamil.readingdiary.data.remote.model.Books
 import com.ilsamil.readingdiary.databinding.FragmentSearchBinding
 import com.ilsamil.readingdiary.viewmodel.SearchViewModel
 

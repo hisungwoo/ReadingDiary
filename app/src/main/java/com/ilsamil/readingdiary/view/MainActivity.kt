@@ -13,7 +13,9 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.ilsamil.readingdiary.BuildConfig
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     companion object{

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="books"
-            type="com.ilsamil.readingdiary.models.Books" />
+            type="com.ilsamil.readingdiary.data.remote.model.Books" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,23 +1,14 @@
 package com.ilsamil.readingdiary.repository
 
-import com.ilsamil.readingdiary.models.SearchBookDto
-import com.ilsamil.readingdiary.network.RetrofitApi
+import com.ilsamil.readingdiary.data.remote.model.SearchBookDto
+import com.ilsamil.readingdiary.network.BookInterface
+import javax.inject.Inject
 
-class KakaoBookRepository {
-
-    // 싱글톤 패턴
-    companion object {
-        private var instance: KakaoBookRepository? = null
-        fun getInstance(): KakaoBookRepository? {
-            if (instance == null) {
-                instance = KakaoBookRepository()
-            }
-            return instance
-        }
-    }
-
+class KakaoBookRepository @Inject constructor(
+    private val retrofitInstance : BookInterface
+) {
     suspend fun getBookInfo(SearchText : String): SearchBookDto? {
-        val response = RetrofitApi.bookInterface.getBookInfo(SearchText, "accuracy", 50, "title")
+        val response = retrofitInstance.getBookInfo(SearchText, "accuracy", 50, "title")
         return if (response.isSuccessful) response.body() else null
     }
 }
