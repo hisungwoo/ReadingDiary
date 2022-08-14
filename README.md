@@ -36,6 +36,8 @@
 
 * Jsoup를 이용한 웹 크롤링
 
+* Dagger Hilt를 이용한 의존성 주입
+
 * 앱 출시
  
 * 출시 후에도 공부한 기술 스택 적용 후 지속적인 업데이트
@@ -107,7 +109,7 @@
 
 ```kotlin``` ```ViewModel``` ```Retrofit``` ```MVVM``` ```Coroutine``` ```Room``` ```Recyclerview``` ```LiveData```
 
-```DataBinding``` ```Kakao Api``` ```Glide``` ```TabLayout``` ```Jsoup``` ```Singleton```
+```DataBinding``` ```Hilt``` ```Kakao Api``` ```Glide``` ```TabLayout``` ```Jsoup``` ```Singleton```
 
 
 
