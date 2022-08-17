@@ -16,5 +16,4 @@ interface BookInterface {
         @Query("size") size : Int,
         @Query("target") target : String
     ) : Response<SearchBookDto>
-
 }
