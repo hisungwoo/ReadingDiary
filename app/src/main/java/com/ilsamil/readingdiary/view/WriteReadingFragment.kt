@@ -1,19 +1,12 @@
 package com.ilsamil.readingdiary.view
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -27,10 +20,6 @@ import com.ilsamil.readingdiary.utils.Util
 import com.ilsamil.readingdiary.viewmodel.WriteReadingViewModel
 
 class WriteReadingFragment : Fragment() {
-
-    companion object {
-        private const val TAG = "WriteReadingFragment_1sam1"
-    }
 
     private val addReadingViewModel : WriteReadingViewModel by viewModels()
     private lateinit var binding : FragmentWriteReadingBinding
@@ -132,46 +121,6 @@ class WriteReadingFragment : Fragment() {
             }
         })
 
-//        binding.addReadingUpdatePageBtn.setOnClickListener {
-//            AlertDialog.Builder(inflater.context)
-//                .setView(R.layout.dialog_page_update)
-//                .show()
-//                .also { alertDialog ->
-//                    if (alertDialog == null) return@also
-//                    alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//
-//                    val saveBtn = alertDialog.findViewById<Button>(R.id.dialog_update_save_btn)
-//                    val cancelBtn = alertDialog.findViewById<Button>(R.id.dialog_update_cancel_btn)
-//                    val edPageTv = alertDialog.findViewById<TextView>(R.id.dialog_update_end_tv)
-//                    val beforeTv = alertDialog.findViewById<TextView>(R.id.dialog_update_before_tv)
-//                    val pageEt = alertDialog.findViewById<EditText>(R.id.dialog_update_edit_et)
-//
-//
-//                    beforeTv?.text = "마지막 독서  ${readSt}장"
-//                    edPageTv?.text = "마지막 페이지  ${maxPage}장"
-//
-//
-//                    saveBtn?.setOnClickListener {
-//                        if (pageEt?.text.toString() != "") {
-//                            val isInput = pageEt?.text.toString().toInt()
-//                            if (readSt!!.toInt() >= isInput) {
-//                                Toast.makeText(inflater.context, "이전보다 많은 페이지를 입력해주세요", Toast.LENGTH_SHORT).show()
-//                            } else if(isInput > maxPage!!.toInt()) {
-//                                Toast.makeText(inflater.context, "페이지 총수보다 적게 입력해주세요", Toast.LENGTH_SHORT).show()
-//                            } else {
-//                                binding.addReadingTodayReadTv.text = isInput.toString()
-//                                readEd = isInput
-//                                alertDialog.dismiss()
-//                            }
-//                        }
-//                    }
-//
-//                    cancelBtn?.setOnClickListener {
-//                        alertDialog.dismiss()
-//                    }
-//                }
-//        }
-
         binding.addReadingCancelBtn.setOnClickListener {
             cancelBook()
         }
@@ -251,10 +200,6 @@ class WriteReadingFragment : Fragment() {
     private fun setSelBook() {
         binding.apply {
             addReadingSaveBtn.visibility = View.VISIBLE
-//            addReadingUpdatePageBtn.isEnabled = true
-//            addReadingUpdatePageBtn.setBackgroundColor(getColor(context!!, R.color.update_btn))
-//            addReadingUpdatePageBtn.setTextColor(getColor(context!!, R.color.white))
-//            focusable
             addReadingTodayReadEt.isFocusable = true
             addReadingBookNullIv.visibility = View.INVISIBLE
             addReadingBookNullTv.visibility = View.INVISIBLE
@@ -271,15 +216,9 @@ class WriteReadingFragment : Fragment() {
         maxPage = null
 
         binding.apply {
-//            addReadingUpdatePageBtn.isEnabled = false
-//            addReadingUpdatePageBtn.setBackgroundColor(getColor(context!!, R.color.update_btn_cancel_bak))
-//            addReadingUpdatePageBtn.setTextColor(getColor(context!!, R.color.update_btn_cancel_text))
-
             addReadingBookTitleTv.text = ""
             addReadingCurPageTv.text = "-"
             addReadingLastPageTv.text = "-"
-//            addReadingUpdatePageBtn.text = "오늘 읽은 페이지 입력"
-
             addReadingSaveBtn.visibility = View.INVISIBLE
             addReadingBookNullIv.visibility = View.VISIBLE
             addReadingBookNullTv.visibility = View.VISIBLE

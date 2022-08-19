@@ -28,17 +28,12 @@ import kotlin.math.floor
 class SelBookFragment : Fragment() {
 
     companion object{
-        private const val TAG = "SelBookFragment_1sam1"
         var adsCnt = 0
     }
 
     private val selBookViewModel by activityViewModels<SelBookViewModel>()
     private lateinit var binding : FragmentSelBookBinding
     private val args by navArgs<SelBookFragmentArgs>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -105,7 +100,6 @@ class SelBookFragment : Fragment() {
         binding.selBookBackBtn.setOnClickListener {
             findNavController().popBackStack()
         }
-
 
         return binding.root
     }

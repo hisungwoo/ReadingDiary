@@ -18,10 +18,6 @@ import com.ilsamil.readingdiary.viewmodel.StatsViewModel
 class StatsFragment : Fragment() {
     private val statsViewModel by activityViewModels<StatsViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,10 +48,6 @@ class StatsFragment : Fragment() {
             RecyclerView.HORIZONTAL,
             false
         )
-
-
-
-
 
         return binding.root
     }
