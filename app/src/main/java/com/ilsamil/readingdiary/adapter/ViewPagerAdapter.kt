@@ -1,6 +1,5 @@
 package com.ilsamil.readingdiary.adapter
 
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle

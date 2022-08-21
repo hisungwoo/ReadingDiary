@@ -22,24 +22,21 @@ class BooksReadingFragment : Fragment() {
     private val booksViewModel by activityViewModels<BooksViewModel>()
     private lateinit var binding : FragmentBooksReadingBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_books_reading, container, false)
-        binding.booksReadingRecyclerView.layoutManager = LinearLayoutManager(container?.context,
-            RecyclerView.VERTICAL,
-            false)
-        val adapter = BooksAdapter().apply { bookOnClickItem = this@BooksReadingFragment::moveReadingBookItem }
-        binding.booksReadingRecyclerView.adapter = adapter
+        binding.apply {
+            booksReadingRecyclerView.layoutManager = LinearLayoutManager(container?.context,
+                RecyclerView.VERTICAL,
+                false)
+            val adapter = BooksAdapter().apply { bookOnClickItem = this@BooksReadingFragment::moveReadingBookItem }
+            booksReadingRecyclerView.adapter = adapter
 
-        val spaceDecoration = RecyclerDecoration(25)
-        binding.booksReadingRecyclerView.addItemDecoration(spaceDecoration)
-
+            val spaceDecoration = RecyclerDecoration(25)
+            booksReadingRecyclerView.addItemDecoration(spaceDecoration)
+        }
 
         booksViewModel.apply {
             setCategoryReading()

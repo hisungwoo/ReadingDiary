@@ -44,10 +44,6 @@ class CalendarFragment : Fragment() {
         private const val TAG = "CalendarFragment_1sam1"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

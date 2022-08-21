@@ -25,10 +25,6 @@ class SearchFragment : Fragment() {
     private val searchViewModel by activityViewModels<SearchViewModel>()
     private lateinit var imm : InputMethodManager
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
