@@ -70,10 +70,6 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
     override fun onResume() {
         super.onResume()
         focusKy()
