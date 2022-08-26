@@ -26,12 +26,12 @@ class BooksReadingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val adapter = BooksAdapter().apply { bookOnClickItem = this@BooksReadingFragment::moveReadingBookItem }
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_books_reading, container, false)
         binding.apply {
             booksReadingRecyclerView.layoutManager = LinearLayoutManager(container?.context,
                 RecyclerView.VERTICAL,
                 false)
-            val adapter = BooksAdapter().apply { bookOnClickItem = this@BooksReadingFragment::moveReadingBookItem }
             booksReadingRecyclerView.adapter = adapter
 
             val spaceDecoration = RecyclerDecoration(25)

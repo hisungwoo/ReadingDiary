@@ -25,6 +25,7 @@ import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.databinding.FragmentSearchResultBinding
 import com.ilsamil.readingdiary.utils.Util
 import com.ilsamil.readingdiary.viewmodel.SearchResultViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -121,7 +122,7 @@ class SearchResultFragment : Fragment() {
             } else {
                 val util = Util()
                 val addBook : () -> Unit = {
-                    GlobalScope.launch(Dispatchers.Main) {
+                    CoroutineScope(Dispatchers.Main).launch {
                         val check = srViewModel.checkBook(resultItem.title)
                         if (check == 0) {
                             var authors = ""

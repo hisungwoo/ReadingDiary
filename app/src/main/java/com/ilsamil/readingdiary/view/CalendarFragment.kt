@@ -27,6 +27,7 @@ import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 import com.ilsamil.readingdiary.databinding.DialogSelCalendarBinding
 import com.ilsamil.readingdiary.utils.Util
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -94,11 +95,12 @@ class CalendarFragment : Fragment() {
     private fun moveWriteReadingItem(calDay : CalendarDay) {
         if (!calDay.isEmpty && calDay.isRead) {
             // 독서 정보가 있는 경우
-            GlobalScope.launch(Dispatchers.Main) {
+            CoroutineScope(Dispatchers.Main).launch {
                 val calInfo = mainViewModel.getCalInfo(calDay)
                 val imgUrl = mainViewModel.getImgUrl(calInfo)
                 setDialog(context!!, calInfo, imgUrl, calDay)
             }
+
 
         } else {
             // 독서 정보가 없는 경우 : 독서날 생성 페이지로 이동
