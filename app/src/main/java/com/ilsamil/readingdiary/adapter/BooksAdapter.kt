@@ -46,33 +46,27 @@ class BooksAdapter : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
         bItem = items
         notifyDataSetChanged()
     }
+}
 
-    object BooksBindingAdapter {
-        @BindingAdapter("setProgress")
-        @JvmStatic
-        fun setProgress(progressBar : ProgressBar, myBook : MyBook) {
-            if(myBook.curPage == 0) {
-                progressBar.max = 10000
-                progressBar.progress = 1
-            } else {
-                progressBar.max = myBook.edPage
-                progressBar.progress = myBook.curPage
-            }
-        }
-
-        @SuppressLint("SetTextI18n")
-        @BindingAdapter("setProgressText")
-        @JvmStatic
-        fun setProgressText(tv : TextView, myBook : MyBook) {
-            tv.text = floor((myBook.curPage.toDouble()/myBook.edPage.toDouble())*100).toInt().toString()+ "%"
-        }
-
-        @SuppressLint("SetTextI18n")
-        @BindingAdapter("setReadingText")
-        @JvmStatic
-        fun setReadingText(tv : TextView, myBook : MyBook) {
-            tv.text = "${myBook.curPage}/${myBook.edPage} 페이지"
-        }
-
+@BindingAdapter("setProgress")
+fun setProgress(progressBar : ProgressBar, myBook : MyBook) {
+    if(myBook.curPage == 0) {
+        progressBar.max = 10000
+        progressBar.progress = 1
+    } else {
+        progressBar.max = myBook.edPage
+        progressBar.progress = myBook.curPage
     }
+}
+
+@SuppressLint("SetTextI18n")
+@BindingAdapter("setProgressText")
+fun setProgressText(tv : TextView, myBook : MyBook) {
+    tv.text = floor((myBook.curPage.toDouble()/myBook.edPage.toDouble())*100).toInt().toString()+ "%"
+}
+
+@SuppressLint("SetTextI18n")
+@BindingAdapter("setReadingText")
+fun setReadingText(tv : TextView, myBook : MyBook) {
+    tv.text = "${myBook.curPage}/${myBook.edPage} 페이지"
 }

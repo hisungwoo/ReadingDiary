@@ -37,36 +37,31 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
         return sItem.size
     }
 
-    object SearchBindingAdapter {
-        @BindingAdapter("setAuthors")
-        @JvmStatic
-        fun setAuthors(tv : TextView, books: Books) {
-            var authors = ""
-            for(i in books.authors) authors += "$i "
-            tv.text = authors
-        }
-
-        @BindingAdapter("setDateTime")
-        @JvmStatic
-        fun setDateTime(tv : TextView, books: Books) {
-            tv.text = books.datetime.substring(0,10)
-        }
-
-        @BindingAdapter("setImg")
-        @JvmStatic
-        fun setImg(iv : ImageView, url : String) {
-            Glide.with(iv.context)
-                .load(url)
-                .placeholder(R.drawable.img_loading)
-                .error(R.drawable.img_not)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(iv)
-        }
-    }
-
     fun updateItem(item : List<Books>) {
         sItem = item
         notifyDataSetChanged()
     }
 
+}
+
+@BindingAdapter("setAuthors")
+fun setAuthors(tv : TextView, books: Books) {
+    var authors = ""
+    for(i in books.authors) authors += "$i "
+    tv.text = authors
+}
+
+@BindingAdapter("setDateTime")
+fun setDateTime(tv : TextView, books: Books) {
+    tv.text = books.datetime.substring(0,10)
+}
+
+@BindingAdapter("setImg")
+fun setImg(iv : ImageView, url : String) {
+    Glide.with(iv.context)
+        .load(url)
+        .placeholder(R.drawable.img_loading)
+        .error(R.drawable.img_not)
+        .diskCacheStrategy(DiskCacheStrategy.NONE)
+        .into(iv)
 }
