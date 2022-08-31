@@ -39,32 +39,28 @@ class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>
         return dayList.size
     }
 
-    object DataBindingAdapter {
-        private val today = LocalDate.now().dayOfMonth
-        @BindingAdapter("readCheck")
-        @JvmStatic
-        fun setReadCheck(imgView: ImageView, calDay : CalendarDay) {
-            if (!calDay.isEmpty) {
-                imgView.visibility = View.VISIBLE
-                if(today == calDay.day.toInt()) imgView.setBackgroundResource(R.drawable.calendar_today_background)
-                if (calDay.isRead) {
-                    when(calDay.day.toInt()) {
-                        in 1..10 -> imgView.setImageResource(R.drawable.img_all_reading_icon_22)
-                        in 11..21 -> imgView.setImageResource(R.drawable.img_all_reading_icon_11)
-                        else -> imgView.setImageResource(R.drawable.img_all_reading_icon_33)
-                    }
-                } else {
-                    imgView.setImageResource(R.drawable.img_claendar_not_reading_icon2)
-                }
-            } else {
-                imgView.visibility = View.INVISIBLE
-            }
-        }
-    }
-
     fun updateItem(item : List<CalendarDay>) {
         dayList = item
         notifyDataSetChanged()
     }
+}
 
+@BindingAdapter("readCheck")
+fun setReadCheck(imgView: ImageView, calDay : CalendarDay) {
+    val today = LocalDate.now().dayOfMonth
+    if (!calDay.isEmpty) {
+        imgView.visibility = View.VISIBLE
+        if(today == calDay.day.toInt()) imgView.setBackgroundResource(R.drawable.calendar_today_background)
+        if (calDay.isRead) {
+            when(calDay.day.toInt()) {
+                in 1..10 -> imgView.setImageResource(R.drawable.img_all_reading_icon_22)
+                in 11..21 -> imgView.setImageResource(R.drawable.img_all_reading_icon_11)
+                else -> imgView.setImageResource(R.drawable.img_all_reading_icon_33)
+            }
+        } else {
+            imgView.setImageResource(R.drawable.img_claendar_not_reading_icon2)
+        }
+    } else {
+        imgView.visibility = View.INVISIBLE
+    }
 }
