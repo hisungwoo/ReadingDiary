@@ -27,10 +27,6 @@ import kotlin.math.floor
 
 class SelBookFragment : Fragment() {
 
-    companion object{
-        var adsCnt = 0
-    }
-
     private val selBookViewModel by activityViewModels<SelBookViewModel>()
     private lateinit var binding : FragmentSelBookBinding
     private val args by navArgs<SelBookFragmentArgs>()

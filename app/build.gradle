@@ -9,11 +9,9 @@ plugins {
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
-def ads_meta_data = properties.getProperty("ads_meta_data")
 
 android {
     compileSdk 33
-    buildToolsVersion "33.0.1"
 
     defaultConfig {
         applicationId "com.ilsamil.readingdiary"
@@ -25,8 +23,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "kakaoAuthorization", properties["kakao_authorization"]
-        buildConfigField "String", "adsId", properties["ads_id"]
-        manifestPlaceholders = [adsMetaData : ads_meta_data]
     }
 
     buildTypes {
@@ -87,8 +83,6 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     implementation 'org.jsoup:jsoup:1.13.1'
-
-    implementation 'com.google.android.gms:play-services-ads:21.0.0'
 
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-android-compiler:2.44"

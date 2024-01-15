@@ -38,7 +38,7 @@ class BooksAllFragment : Fragment() {
 
         booksViewModel.apply {
             setCategoryAll()
-            bookAllList.observe(this@BooksAllFragment, Observer {
+            bookAllList.observe(viewLifecycleOwner, Observer {
                 adapter.updateItems(it)
             })
         }

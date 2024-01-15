@@ -65,13 +65,15 @@ class CalendarFragment : Fragment() {
         // 독서 달력 셋팅
         mainViewModel.apply {
             setCalendar(selectedDate)
-            calReadList.observe(this@CalendarFragment, androidx.lifecycle.Observer {
+            calReadList.observe(viewLifecycleOwner) {
                 calendarAdapter.updateItem(it)
-            })
+            }
         }
 
         binding.apply {
-            setVariable(BR.model, ViewModelProvider(this@CalendarFragment).get(CalendarViewModel::class.java))
+            setVariable(BR.model,
+                ViewModelProvider(this@CalendarFragment)[CalendarViewModel::class.java]
+            )
             lifecycleOwner = this@CalendarFragment
             model = mainViewModel
             executePendingBindings()
@@ -98,7 +100,7 @@ class CalendarFragment : Fragment() {
             CoroutineScope(Dispatchers.Main).launch {
                 val calInfo = mainViewModel.getCalInfo(calDay)
                 val imgUrl = mainViewModel.getImgUrl(calInfo)
-                setDialog(context!!, calInfo, imgUrl, calDay)
+                setDialog(requireContext(), calInfo, imgUrl, calDay)
             }
 
 
