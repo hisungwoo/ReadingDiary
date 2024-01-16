@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +24,7 @@ class BooksReadingFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val adapter = BooksAdapter().apply { bookOnClickItem = this@BooksReadingFragment::moveReadingBookItem }
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_books_reading, container, false)
         binding.apply {
@@ -40,9 +39,9 @@ class BooksReadingFragment : Fragment() {
 
         booksViewModel.apply {
             setCategoryReading()
-            bookReadingList.observe(this@BooksReadingFragment, Observer {
+            bookReadingList.observe(viewLifecycleOwner) {
                 adapter.updateItems(it)
-            })
+            }
         }
 
         return binding.root
