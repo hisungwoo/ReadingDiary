@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,7 +27,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
         binding.apply {
@@ -39,8 +38,8 @@ class SearchFragment : Fragment() {
                 false
             )
 
-            // 키보드 엔터 혹은 검색버튼 클릭 시 searchViewModel 함수 호출
-            searchEt.setOnKeyListener { view, i, keyEvent ->
+            // 키보드 엔터 혹은 검색 버튼 클릭 시 searchViewModel 함수 호출
+            searchEt.setOnKeyListener { _, i, keyEvent ->
                 if ((keyEvent.action == KeyEvent.ACTION_DOWN) && (i == KeyEvent.KEYCODE_ENTER)) {
                     val searchText = searchEt.text.toString()
                     if (searchText != "") {
@@ -61,11 +60,11 @@ class SearchFragment : Fragment() {
 
         val adapter = SearchAdapter().apply { onClickItem = this@SearchFragment::moveSearchResult }
         binding.searchRecyclerView.adapter = adapter
-        searchViewModel.searchItem.observe(this, Observer {
+        searchViewModel.searchItem.observe(viewLifecycleOwner) {
             binding.searchGuideTv.visibility = View.INVISIBLE
             binding.searchRecyclerView.visibility = View.VISIBLE
             adapter.updateItem(it)
-        })
+        }
 
         return binding.root
     }

@@ -3,7 +3,6 @@ package com.ilsamil.readingdiary.view
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,8 +20,6 @@ import com.ilsamil.readingdiary.viewmodel.SelBookViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.temporal.ChronoUnit
 import kotlin.math.floor
 
 class SelBookFragment : Fragment() {
@@ -34,7 +31,7 @@ class SelBookFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sel_book, container, false)
         val item = args.mybook
 

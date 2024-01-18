@@ -15,7 +15,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -37,14 +36,10 @@ class SearchResultFragment : Fragment() {
     private val args by navArgs<SearchResultFragmentArgs>()
     private var maxPage = 0
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_result, container, false)
         val resultItem = args.books
 
@@ -142,7 +137,7 @@ class SearchResultFragment : Fragment() {
         }
 
 
-        srViewModel.isExist.observe(this, Observer {
+        srViewModel.isExist.observe(viewLifecycleOwner) {
             when(it) {
                 true -> {
                     var authors = ""
@@ -155,8 +150,7 @@ class SearchResultFragment : Fragment() {
                 }
                 false -> Toast.makeText(inflater.context, "이미 내 서재에 추가되어 있습니다.", Toast.LENGTH_SHORT).show()
             }
-        })
-
+        }
 
         return binding.root
     }
