@@ -1,10 +1,7 @@
 package com.ilsamil.readingdiary.view
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,32 +20,21 @@ import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.adapter.CalendarAdapter
 import com.ilsamil.readingdiary.databinding.CalendarListBinding
 import com.ilsamil.readingdiary.data.db.entity.CalendarDay
-import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
-import com.ilsamil.readingdiary.databinding.DialogSelCalendarBinding
 import com.ilsamil.readingdiary.utils.Util
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.*
 import kotlin.math.floor
 
-class CalendarFragment : Fragment() {
+class CalendarFragment : BaseFragment() {
     private val mainViewModel by activityViewModels<CalendarViewModel>()
-    private lateinit var binding : CalendarListBinding
-    private lateinit var selectedDate : LocalDate
+    private lateinit var binding: CalendarListBinding
+    private lateinit var selectedDate: LocalDate
 
-    companion object {
-        private const val TAG = "CalendarFragment_1sam1"
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
 
         //현재 날짜
@@ -57,8 +43,10 @@ class CalendarFragment : Fragment() {
 
         binding.apply {
             calCurrentDateTv.text = monthYearFromDate(selectedDate)
-            calRecyclerview.layoutManager = GridLayoutManager(context,
-                7)
+            calRecyclerview.layoutManager = GridLayoutManager(
+                context,
+                7
+            )
             calRecyclerview.adapter = calendarAdapter
         }
 
@@ -71,9 +59,7 @@ class CalendarFragment : Fragment() {
         }
 
         binding.apply {
-            setVariable(BR.model,
-                ViewModelProvider(this@CalendarFragment)[CalendarViewModel::class.java]
-            )
+            setVariable(BR.model, ViewModelProvider(this@CalendarFragment)[CalendarViewModel::class.java])
             lifecycleOwner = this@CalendarFragment
             model = mainViewModel
             executePendingBindings()
@@ -94,7 +80,7 @@ class CalendarFragment : Fragment() {
     }
 
     // 달력 클릭
-    private fun moveWriteReadingItem(calDay : CalendarDay) {
+    private fun moveWriteReadingItem(calDay: CalendarDay) {
         if (!calDay.isEmpty && calDay.isRead) {
             // 독서 정보가 있는 경우
             CoroutineScope(Dispatchers.Main).launch {
@@ -112,7 +98,7 @@ class CalendarFragment : Fragment() {
     }
 
 
-    private fun setDialog(context : Context, readingDay: ReadingDay, imgUrl : String, item : CalendarDay) {
+    private fun setDialog(context: Context, readingDay: ReadingDay, imgUrl: String, item: CalendarDay) {
         AlertDialog.Builder(context)
             .setView(R.layout.dialog_sel_calendar)
             .show()
@@ -121,7 +107,8 @@ class CalendarFragment : Fragment() {
 
                 val dateTitleTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_date_tv)
                 val bookNameTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_book_tv)
-                val progressBar = alertDialog.findViewById<ProgressBar>(R.id.dialog_cal_progress_bar)
+                val progressBar =
+                    alertDialog.findViewById<ProgressBar>(R.id.dialog_cal_progress_bar)
                 val progressTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_progress_tv)
                 val pageTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_page_tv)
                 val readingTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_reading_tv)
@@ -135,7 +122,7 @@ class CalendarFragment : Fragment() {
                     .load(imgUrl)
                     .placeholder(R.drawable.img_loading)
                     .error(R.drawable.img_not)
-                    .override(470,530)
+                    .override(470, 530)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(bookImg!!)
 
@@ -144,7 +131,9 @@ class CalendarFragment : Fragment() {
                 bookNameTv?.text = "${readingDay.book}"
                 progressBar?.max = readingDay.maxPage?.toInt()!!
                 progressBar?.progress = readingDay.readEd!!
-                progressTv?.text = floor((readingDay.readEd!!.toDouble()/ readingDay.maxPage!!.toDouble())*100).toInt().toString()+ "%"
+                progressTv?.text =
+                    floor((readingDay.readEd!!.toDouble() / readingDay.maxPage!!.toDouble()) * 100).toInt()
+                        .toString() + "%"
                 pageTv?.text = "${readingDay.readEd} / ${readingDay.maxPage} 페이지"
 
                 val readingPage = readingDay.readEd!!.toInt() - readingDay.readSt!!.toInt()
@@ -153,29 +142,34 @@ class CalendarFragment : Fragment() {
 
                 editBtn?.setOnClickListener {
                     alertDialog.dismiss()
-                    val action = CalendarFragmentDirections.actionCalendarFragmentToWriteReadingFragment(item)
+                    val action =
+                        CalendarFragmentDirections.actionCalendarFragmentToWriteReadingFragment(item)
                     findNavController().navigate(action)
                 }
 
-                removeBtn?.setOnClickListener { view ->
+                removeBtn?.setOnClickListener { _ ->
                     val util = Util()
-                    val removeBook : () -> Unit = {
-                        mainViewModel.removeReadingDay(readingDay.year, readingDay.month, readingDay.day, selectedDate)
+                    val removeBook: () -> Unit = {
+                        mainViewModel.removeReadingDay(
+                            readingDay.year,
+                            readingDay.month,
+                            readingDay.day,
+                            selectedDate
+                        )
                         alertDialog.dismiss()
                     }
-                    util.showDialog(context, removeBook,"정말로 삭제 하시겠습니까?", "삭제")
+                    util.showDialog(context, removeBook, "정말로 삭제 하시겠습니까?", "삭제")
                 }
 
                 cancelBtn?.setOnClickListener {
                     alertDialog.dismiss()
                 }
 
-
             }
     }
 
     // 날짜 타입 설정
-    private fun monthYearFromDate(date : LocalDate) : String {
+    private fun monthYearFromDate(date: LocalDate): String {
         val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월")
         return date.format(formatter)
     }
