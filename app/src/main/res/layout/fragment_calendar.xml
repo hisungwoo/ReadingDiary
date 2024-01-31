@@ -89,7 +89,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="일"
+                android:text="@string/sunday"
                 android:textColor="#878787"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -99,7 +99,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="월"
+                android:text="@string/monday"
                 android:textColor="#878787"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -109,7 +109,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="화"
+                android:text="@string/tuesday"
                 android:textColor="#878787"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -119,7 +119,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="수"
+                android:text="@string/wednesday"
                 android:textColor="#878787"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -129,7 +129,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="목"
+                android:text="@string/thursday"
                 android:textColor="#878787"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -139,7 +139,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="금"
+                android:text="@string/friday"
                 android:textColor="#878787"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -149,7 +149,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="토"
+                android:text="@string/saturday"
                 android:textColor="#878787"
                 android:textSize="15sp"
                 android:textStyle="bold" />

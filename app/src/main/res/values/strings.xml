@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">리딩데이</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="monday">월</string>
+    <string name="tuesday">화</string>
+    <string name="wednesday">수</string>
+    <string name="thursday">목</string>
+    <string name="friday">금</string>
+    <string name="saturday">토</string>
+    <string name="sunday">일</string>
+    <string name="popup_date_title">%1$s년 %2$s월 %3$s일</string>
+    <string name="popup_reading">%d장을 읽었습니다.</string>
 
+    <string name="dialog_remove">정말로 삭제하시겠습니까?</string>
+
+    <string name="btn_remove">삭제</string>
 </resources>

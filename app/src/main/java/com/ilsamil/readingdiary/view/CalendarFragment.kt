@@ -1,5 +1,6 @@
 package com.ilsamil.readingdiary.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -36,8 +37,6 @@ class CalendarFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
-
-        //현재 날짜
         selectedDate = LocalDate.now()
         val calendarAdapter = CalendarAdapter().apply { calOnClickItem = this@CalendarFragment::moveWriteReadingItem }
 
@@ -98,6 +97,7 @@ class CalendarFragment : BaseFragment() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun setDialog(context: Context, readingDay: ReadingDay, imgUrl: String, item: CalendarDay) {
         AlertDialog.Builder(context)
             .setView(R.layout.dialog_sel_calendar)
@@ -105,66 +105,62 @@ class CalendarFragment : BaseFragment() {
             .also { alertDialog ->
                 if (alertDialog == null) return@also
 
-                val dateTitleTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_date_tv)
-                val bookNameTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_book_tv)
-                val progressBar =
-                    alertDialog.findViewById<ProgressBar>(R.id.dialog_cal_progress_bar)
-                val progressTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_progress_tv)
-                val pageTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_page_tv)
-                val readingTv = alertDialog.findViewById<TextView>(R.id.dialog_cal_reading_tv)
+                with(alertDialog) {
+                    val dateTitleTv = findViewById<TextView>(R.id.dialog_cal_date_tv)
+                    val bookNameTv = findViewById<TextView>(R.id.dialog_cal_book_tv)
+                    val progressBar = findViewById<ProgressBar>(R.id.dialog_cal_progress_bar)
+                    val progressTv = findViewById<TextView>(R.id.dialog_cal_progress_tv)
+                    val pageTv = findViewById<TextView>(R.id.dialog_cal_page_tv)
+                    val readingTv = findViewById<TextView>(R.id.dialog_cal_reading_tv)
 
-                val editBtn = alertDialog.findViewById<Button>(R.id.dialog_cal_edit_btn)
-                val removeBtn = alertDialog.findViewById<Button>(R.id.dialog_cal_remove_btn)
-                val bookImg = alertDialog.findViewById<ImageView>(R.id.dialog_cal_img_iv)
-                val cancelBtn = alertDialog.findViewById<ImageButton>(R.id.dialog_cal_cancel_btn)
+                    val editBtn = findViewById<Button>(R.id.dialog_cal_edit_btn)
+                    val removeBtn = findViewById<Button>(R.id.dialog_cal_remove_btn)
+                    val bookImg = findViewById<ImageView>(R.id.dialog_cal_img_iv)
+                    val cancelBtn = findViewById<ImageButton>(R.id.dialog_cal_cancel_btn)
 
-                Glide.with(context)
-                    .load(imgUrl)
-                    .placeholder(R.drawable.img_loading)
-                    .error(R.drawable.img_not)
-                    .override(470, 530)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .into(bookImg!!)
+                    Glide.with(context)
+                        .load(imgUrl)
+                        .placeholder(R.drawable.img_loading)
+                        .error(R.drawable.img_not)
+                        .override(470, 530)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .into(bookImg!!)
 
+                    dateTitleTv?.text = getString(R.string.popup_date_title, readingDay.year, readingDay.month, readingDay.day)
+                    bookNameTv?.text = readingDay.book
+                    progressBar?.max = readingDay.maxPage?.toInt()!!
+                    progressBar?.progress = readingDay.readEd!!
+                    progressTv?.text = floor((readingDay.readEd!!.toDouble() / readingDay.maxPage!!.toDouble()) * 100).toInt().toString() + "%"
+                    pageTv?.text = "${readingDay.readEd} / ${readingDay.maxPage} 페이지"
 
-                dateTitleTv?.text = "${readingDay.year}년 ${readingDay.month}월 ${readingDay.day}일"
-                bookNameTv?.text = "${readingDay.book}"
-                progressBar?.max = readingDay.maxPage?.toInt()!!
-                progressBar?.progress = readingDay.readEd!!
-                progressTv?.text =
-                    floor((readingDay.readEd!!.toDouble() / readingDay.maxPage!!.toDouble()) * 100).toInt()
-                        .toString() + "%"
-                pageTv?.text = "${readingDay.readEd} / ${readingDay.maxPage} 페이지"
+                    val readingPage = readingDay.readEd!!.toInt() - readingDay.readSt!!.toInt()
+                    readingTv?.text = getString(R.string.popup_reading, readingPage)
 
-                val readingPage = readingDay.readEd!!.toInt() - readingDay.readSt!!.toInt()
-                readingTv?.text = "$readingPage 장을 읽었습니다."
+                    editBtn?.setOnClickListener {
+                        alertDialog.dismiss()
+                        val action =
+                            CalendarFragmentDirections.actionCalendarFragmentToWriteReadingFragment(item)
+                        findNavController().navigate(action)
+                    }
 
+                    removeBtn?.setOnClickListener { _ ->
+                        val util = Util()
+                        val removeBook: () -> Unit = {
+                            mainViewModel.removeReadingDay(
+                                readingDay.year,
+                                readingDay.month,
+                                readingDay.day,
+                                selectedDate
+                            )
+                            alertDialog.dismiss()
+                        }
+                        util.showDialog(context, removeBook, getString(R.string.dialog_remove), getString(R.string.btn_remove))
+                    }
 
-                editBtn?.setOnClickListener {
-                    alertDialog.dismiss()
-                    val action =
-                        CalendarFragmentDirections.actionCalendarFragmentToWriteReadingFragment(item)
-                    findNavController().navigate(action)
-                }
-
-                removeBtn?.setOnClickListener { _ ->
-                    val util = Util()
-                    val removeBook: () -> Unit = {
-                        mainViewModel.removeReadingDay(
-                            readingDay.year,
-                            readingDay.month,
-                            readingDay.day,
-                            selectedDate
-                        )
+                    cancelBtn?.setOnClickListener {
                         alertDialog.dismiss()
                     }
-                    util.showDialog(context, removeBook, "정말로 삭제 하시겠습니까?", "삭제")
                 }
-
-                cancelBtn?.setOnClickListener {
-                    alertDialog.dismiss()
-                }
-
             }
     }
 
