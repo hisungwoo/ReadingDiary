@@ -23,6 +23,7 @@ import com.ilsamil.readingdiary.databinding.CalendarListBinding
 import com.ilsamil.readingdiary.data.db.entity.CalendarDay
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 import com.ilsamil.readingdiary.utils.Util
+import com.ilsamil.readingdiary.viewmodel.CalendarDate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -146,12 +147,7 @@ class CalendarFragment : BaseFragment() {
                     removeBtn?.setOnClickListener { _ ->
                         val util = Util()
                         val removeBook: () -> Unit = {
-                            mainViewModel.removeReadingDay(
-                                readingDay.year,
-                                readingDay.month,
-                                readingDay.day,
-                                selectedDate
-                            )
+                            mainViewModel.removeReadingDay(CalendarDate(readingDay.year, readingDay.day, readingDay.day), selectedDate)
                             alertDialog.dismiss()
                         }
                         util.showDialog(context, removeBook, getString(R.string.dialog_remove), getString(R.string.btn_remove))
