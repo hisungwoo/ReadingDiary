@@ -172,21 +172,3 @@ class CalendarFragment : BaseFragment() {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

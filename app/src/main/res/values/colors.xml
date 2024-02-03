@@ -15,10 +15,5 @@
     <color name="update_btn_cancel_text">#9C9C9C</color>
     <color name="progress_bar_color">#ECECEC</color>
 
-
-    <color name="stats_item_color1">#46789E</color>
-    <color name="stats_item_color2">#7FABCD</color>
-    <color name="stats_item_color3">#074F87</color>
-    <color name="stats_item_color4">#2C4559</color>
-
+    <color name="base_background">#F4F3F3</color>
 </resources>

@@ -51,7 +51,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="#F4F3F3"
+            android:background="@color/base_background"
             app:layout_constraintTop_toBottomOf="@+id/search_result_line_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

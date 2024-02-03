@@ -56,7 +56,7 @@
             android:id="@+id/sel_book_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="#F4F3F3"
+            android:background="@color/base_background"
             app:layout_constraintTop_toBottomOf="@+id/sel_book_line"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
