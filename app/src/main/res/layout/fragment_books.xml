@@ -26,7 +26,7 @@
             android:id="@+id/books_add_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#00000000"
+            android:background="@color/transparent"
             android:drawableStart="@drawable/selector_add_book_btn"
             android:drawablePadding="-7dp"
             android:text="책 추가"

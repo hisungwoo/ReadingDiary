@@ -20,17 +20,13 @@ import com.ilsamil.readingdiary.databinding.FragmentSearchBinding
 import com.ilsamil.readingdiary.viewmodel.SearchViewModel
 
 class SearchFragment : Fragment() {
-    private lateinit var binding : FragmentSearchBinding
+    private lateinit var binding: FragmentSearchBinding
     private val searchViewModel by activityViewModels<SearchViewModel>()
-    private lateinit var imm : InputMethodManager
+    private lateinit var imm: InputMethodManager
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
-        binding.apply {
+        with(binding) {
             searchBackBtn.setOnClickListener { findNavController().popBackStack() }
             searchRecyclerView.layoutManager = LinearLayoutManager(
                 container?.context,
@@ -38,11 +34,10 @@ class SearchFragment : Fragment() {
                 false
             )
 
-            // 키보드 엔터 혹은 검색 버튼 클릭 시 searchViewModel 함수 호출
             searchEt.setOnKeyListener { _, i, keyEvent ->
                 if ((keyEvent.action == KeyEvent.ACTION_DOWN) && (i == KeyEvent.KEYCODE_ENTER)) {
                     val searchText = searchEt.text.toString()
-                    if (searchText != "") {
+                    if (searchText.isNotEmpty()) {
                         val inputMethodManager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                         inputMethodManager.hideSoftInputFromWindow(searchEt.windowToken, 0)
 
@@ -61,7 +56,7 @@ class SearchFragment : Fragment() {
         val adapter = SearchAdapter().apply { onClickItem = this@SearchFragment::moveSearchResult }
         binding.searchRecyclerView.adapter = adapter
         searchViewModel.searchItem.observe(viewLifecycleOwner) {
-            binding.searchGuideTv.visibility = View.INVISIBLE
+//            binding.searchGuideTextView.visibility = View.INVISIBLE
             binding.searchRecyclerView.visibility = View.VISIBLE
             adapter.updateItem(it)
         }
@@ -81,7 +76,7 @@ class SearchFragment : Fragment() {
     }
 
     // 클릭 이벤트
-    private fun moveSearchResult(item : Books) {
+    private fun moveSearchResult(item: Books) {
         val action = SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(item)
         findNavController().navigate(action)
     }

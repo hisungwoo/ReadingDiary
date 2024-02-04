@@ -13,4 +13,6 @@
     <string name="dialog_remove">정말로 삭제하시겠습니까?</string>
 
     <string name="btn_remove">삭제</string>
+    <string name="search_description">읽을 책을 검색해서 추가해봐요</string>
+    <string name="search_button_description">찾으시려는 책을 입력해주세요</string>
 </resources>

@@ -10,10 +10,13 @@
     <color name="clear">#00000000</color>
     <color name="category_en">#B1B1B1</color>
 
+    <color name="transparent">#00000000</color>
+
     <color name="update_btn">#EC5A7D</color>
     <color name="update_btn_cancel_bak">#D3D3D3</color>
     <color name="update_btn_cancel_text">#9C9C9C</color>
     <color name="progress_bar_color">#ECECEC</color>
 
     <color name="base_background">#F4F3F3</color>
+    <color name="line_color">#D6D6D6</color>
 </resources>
