@@ -11,11 +11,12 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.adapter.ViewPagerAdapter
+import com.ilsamil.readingdiary.common.BaseFragment
 import com.ilsamil.readingdiary.databinding.FragmentBooksBinding
 import com.ilsamil.readingdiary.viewmodel.BooksViewModel
 
 
-class BooksFragment : Fragment() {
+class BooksFragment : BaseFragment() {
     private val booksViewModel by activityViewModels<BooksViewModel>()
     private lateinit var binding : FragmentBooksBinding
 

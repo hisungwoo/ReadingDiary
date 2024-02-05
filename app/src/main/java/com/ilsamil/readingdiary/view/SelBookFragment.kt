@@ -14,15 +14,16 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.R
+import com.ilsamil.readingdiary.common.BaseFragment
 import com.ilsamil.readingdiary.databinding.FragmentSelBookBinding
-import com.ilsamil.readingdiary.utils.Util
+import com.ilsamil.readingdiary.common.Util
 import com.ilsamil.readingdiary.viewmodel.SelBookViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlin.math.floor
 
-class SelBookFragment : Fragment() {
+class SelBookFragment : BaseFragment() {
 
     private val selBookViewModel by activityViewModels<SelBookViewModel>()
     private lateinit var binding : FragmentSelBookBinding

@@ -15,11 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.adapter.SearchAdapter
+import com.ilsamil.readingdiary.common.BaseFragment
 import com.ilsamil.readingdiary.data.remote.model.Books
 import com.ilsamil.readingdiary.databinding.FragmentSearchBinding
 import com.ilsamil.readingdiary.viewmodel.SearchViewModel
 
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment() {
     private lateinit var binding: FragmentSearchBinding
     private val searchViewModel by activityViewModels<SearchViewModel>()
     private lateinit var imm: InputMethodManager

@@ -9,10 +9,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ilsamil.readingdiary.adapter.StatsAdapter
+import com.ilsamil.readingdiary.common.BaseFragment
 import com.ilsamil.readingdiary.databinding.FragmentStatsBinding
 import com.ilsamil.readingdiary.viewmodel.StatsViewModel
 
-class StatsFragment : Fragment() {
+class StatsFragment : BaseFragment() {
     private val statsViewModel by activityViewModels<StatsViewModel>()
 
     override fun onCreateView(

@@ -1,9 +1,8 @@
-package com.ilsamil.readingdiary.utils
+package com.ilsamil.readingdiary.common
 
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog

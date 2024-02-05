@@ -12,12 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.adapter.BooksAdapter
+import com.ilsamil.readingdiary.common.BaseFragment
 import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.databinding.FragmentBooksReadingBinding
-import com.ilsamil.readingdiary.utils.RecyclerDecoration
+import com.ilsamil.readingdiary.common.RecyclerDecoration
 import com.ilsamil.readingdiary.viewmodel.BooksViewModel
 
-class BooksReadingFragment : Fragment() {
+class BooksReadingFragment : BaseFragment() {
     private val booksViewModel by activityViewModels<BooksViewModel>()
     private lateinit var binding : FragmentBooksReadingBinding
 

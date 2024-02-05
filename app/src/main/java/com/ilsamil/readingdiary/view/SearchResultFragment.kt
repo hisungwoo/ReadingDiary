@@ -20,9 +20,10 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.R
+import com.ilsamil.readingdiary.common.BaseFragment
 import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.databinding.FragmentSearchResultBinding
-import com.ilsamil.readingdiary.utils.Util
+import com.ilsamil.readingdiary.common.Util
 import com.ilsamil.readingdiary.viewmodel.SearchResultViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +31,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.lang.NumberFormatException
 
-class SearchResultFragment : Fragment() {
+class SearchResultFragment : BaseFragment() {
     private lateinit var binding : FragmentSearchResultBinding
     private val srViewModel by activityViewModels<SearchResultViewModel>()
     private val args by navArgs<SearchResultFragmentArgs>()

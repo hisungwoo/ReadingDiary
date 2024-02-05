@@ -14,12 +14,13 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.R
+import com.ilsamil.readingdiary.common.BaseFragment
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 import com.ilsamil.readingdiary.databinding.FragmentWriteReadingBinding
-import com.ilsamil.readingdiary.utils.Util
+import com.ilsamil.readingdiary.common.Util
 import com.ilsamil.readingdiary.viewmodel.WriteReadingViewModel
 
-class WriteReadingFragment : Fragment() {
+class WriteReadingFragment : BaseFragment() {
 
     private val addReadingViewModel : WriteReadingViewModel by viewModels()
     private lateinit var binding : FragmentWriteReadingBinding

@@ -19,10 +19,11 @@ import com.ilsamil.readingdiary.BR
 import com.ilsamil.readingdiary.viewmodel.CalendarViewModel
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.adapter.CalendarAdapter
+import com.ilsamil.readingdiary.common.BaseFragment
 import com.ilsamil.readingdiary.databinding.CalendarListBinding
 import com.ilsamil.readingdiary.data.db.entity.CalendarDay
 import com.ilsamil.readingdiary.data.db.entity.ReadingDay
-import com.ilsamil.readingdiary.utils.Util
+import com.ilsamil.readingdiary.common.Util
 import com.ilsamil.readingdiary.viewmodel.CalendarDate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

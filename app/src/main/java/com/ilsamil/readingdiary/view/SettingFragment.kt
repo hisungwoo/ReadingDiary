@@ -12,9 +12,10 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.ilsamil.readingdiary.R
+import com.ilsamil.readingdiary.common.BaseFragment
 import com.ilsamil.readingdiary.databinding.FragmentSettingBinding
 
-class SettingFragment : Fragment() {
+class SettingFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

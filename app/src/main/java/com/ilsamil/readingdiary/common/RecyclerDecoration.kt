@@ -1,4 +1,4 @@
-package com.ilsamil.readingdiary.utils
+package com.ilsamil.readingdiary.common
 
 import android.graphics.Rect
 import android.view.View
