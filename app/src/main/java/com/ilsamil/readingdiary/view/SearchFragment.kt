@@ -26,14 +26,13 @@ class SearchFragment : BaseFragment() {
     private lateinit var imm: InputMethodManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
+        binding = DataBindingUtil.inflate<FragmentSearchBinding?>(inflater, R.layout.fragment_search, container, false).apply{
+            //            viewModle = uxViewModel,
+            lifecycleOwner = viewLifecycleOwner
+        }
         with(binding) {
             searchBackBtn.setOnClickListener { findNavController().popBackStack() }
-            searchRecyclerView.layoutManager = LinearLayoutManager(
-                container?.context,
-                RecyclerView.VERTICAL,
-                false
-            )
+            searchRecyclerView.layoutManager = LinearLayoutManager(container?.context, RecyclerView.VERTICAL, false)
 
             searchEt.setOnKeyListener { _, i, keyEvent ->
                 if ((keyEvent.action == KeyEvent.ACTION_DOWN) && (i == KeyEvent.KEYCODE_ENTER)) {
@@ -54,12 +53,12 @@ class SearchFragment : BaseFragment() {
             }
         }
 
-        val adapter = SearchAdapter().apply { onClickItem = this@SearchFragment::moveSearchResult }
+        val adapter = SearchAdapter(viewLifecycleOwner)
         binding.searchRecyclerView.adapter = adapter
         searchViewModel.searchItem.observe(viewLifecycleOwner) {
 //            binding.searchGuideTextView.visibility = View.INVISIBLE
             binding.searchRecyclerView.visibility = View.VISIBLE
-            adapter.updateItem(it)
+            adapter.submitList(it)
         }
 
         return binding.root

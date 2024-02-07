@@ -26,10 +26,7 @@ class BooksFragment : BaseFragment() {
         "다 읽은 책"
     )
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_books, container, false)
         binding.booksViewPager.adapter = ViewPagerAdapter(activity?.supportFragmentManager!!, lifecycle)
 

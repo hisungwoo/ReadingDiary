@@ -1,47 +1,64 @@
 package com.ilsamil.readingdiary.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LifecycleOwner
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ilsamil.readingdiary.R
+import com.ilsamil.readingdiary.common.BaseViewHolder
 import com.ilsamil.readingdiary.data.remote.model.Books
 import com.ilsamil.readingdiary.databinding.ItemSearchBinding
 
-class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
-    private var sItem : List<Books> = ArrayList()
+class SearchAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapter<Books, BaseViewHolder<Books>>(SearchViewDiffCallback()) {
     var onClickItem : (Books) -> Unit = {}
 
-    inner class SearchViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val binding = ItemSearchBinding.bind(itemView)
+//    override fun getItemId(position: Int): Long {
+//        return position.toLong()
+//    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Books> {
+        val binding = ItemSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return SearchViewHolder(binding, lifecycleOwner, parent.context)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): SearchViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_search, parent, false)
-        return SearchViewHolder(view)
+    override fun onBindViewHolder(holder: BaseViewHolder<Books>, position: Int) {
+        holder.bind(getItem(position))
+    }
+}
+
+private class SearchViewHolder(private val binding: ItemSearchBinding, lifecycleOwner: LifecycleOwner, private val context: Context) : BaseViewHolder<Books>(binding.root) {
+
+//    init {
+//        binding.lifecycleOwner = lifecycleOwner
+//    }
+
+    override fun bind(item: Books) {
+        binding.books = item
+//        binding.itemSearchListCl.setOnClickListener { onClickItem(sItem[position]) }
+//        binding.itemSearchListCl.setOnClickListener {
+////            viewmodel.action.value = Event(item)
+//        }
+        binding.executePendingBindings()
+    }
+}
+
+private class SearchViewDiffCallback : DiffUtil.ItemCallback<Books>() {
+    override fun areItemsTheSame(oldItem: Books, newItem: Books): Boolean {
+        return false
     }
 
-    override fun onBindViewHolder(holder: SearchAdapter.SearchViewHolder, position: Int) {
-        holder.binding.books = sItem[position]
-
-        // 클릭 이벤트
-        holder.binding.itemSearchListCl.setOnClickListener { onClickItem(sItem[position]) }
+    override fun areContentsTheSame(oldItem: Books, newItem: Books): Boolean {
+        return false
     }
-
-    override fun getItemCount(): Int {
-        return sItem.size
-    }
-
-    fun updateItem(item : List<Books>) {
-        sItem = item
-        notifyDataSetChanged()
-    }
-
 }
 
 @BindingAdapter("setAuthors")
