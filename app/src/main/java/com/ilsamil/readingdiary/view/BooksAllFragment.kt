@@ -30,16 +30,17 @@ class BooksAllFragment : BaseFragment() {
         binding.booksAllRecyclerView.layoutManager = LinearLayoutManager(container?.context,
             RecyclerView.VERTICAL,
             false)
-        val adapter = BooksAdapter().apply { bookOnClickItem = this@BooksAllFragment::moveAllBookItem }
-        binding.booksAllRecyclerView.adapter = adapter
 
+//        val adapter = BooksAdapter().apply { bookOnClickItem = this@BooksAllFragment::moveAllBookItem }
+        val adapter = BooksAdapter(viewLifecycleOwner)
+        binding.booksAllRecyclerView.adapter = adapter
         val spaceDecoration = RecyclerDecoration(25)
         binding.booksAllRecyclerView.addItemDecoration(spaceDecoration)
 
         booksViewModel.apply {
             setCategoryAll()
             bookAllList.observe(viewLifecycleOwner) {
-                adapter.updateItems(it)
+                adapter.submitList(it)
             }
         }
 

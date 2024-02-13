@@ -26,7 +26,8 @@ class BooksReadingFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val adapter = BooksAdapter().apply { bookOnClickItem = this@BooksReadingFragment::moveReadingBookItem }
+//        val adapter = BooksAdapter().apply { bookOnClickItem = this@BooksReadingFragment::moveReadingBookItem }
+        val adapter = BooksAdapter(viewLifecycleOwner)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_books_reading, container, false)
         binding.apply {
             booksReadingRecyclerView.layoutManager = LinearLayoutManager(container?.context,
@@ -41,7 +42,7 @@ class BooksReadingFragment : BaseFragment() {
         booksViewModel.apply {
             setCategoryReading()
             bookReadingList.observe(viewLifecycleOwner) {
-                adapter.updateItems(it)
+                adapter.submitList(it)
             }
         }
 

@@ -31,7 +31,8 @@ class BooksFinishFragment : BaseFragment() {
             RecyclerView.VERTICAL,
             false)
 
-        val adapter = BooksAdapter().apply { bookOnClickItem = this@BooksFinishFragment::moveFinishBookItem }
+//        val adapter = BooksAdapter().apply { bookOnClickItem = this@BooksFinishFragment::moveFinishBookItem }
+        val adapter = BooksAdapter(viewLifecycleOwner)
         binding.booksFinishRecyclerView.adapter = adapter
 
         val spaceDecoration = RecyclerDecoration(25)
@@ -40,7 +41,7 @@ class BooksFinishFragment : BaseFragment() {
         booksViewModel.apply {
             setCategoryFinish()
             bookFinishList.observe(viewLifecycleOwner) {
-                adapter.updateItems(it)
+                adapter.submitList(it)
             }
         }
 

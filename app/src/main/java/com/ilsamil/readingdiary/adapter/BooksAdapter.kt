@@ -1,50 +1,52 @@
 package com.ilsamil.readingdiary.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.ilsamil.readingdiary.R
+import androidx.lifecycle.LifecycleOwner
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import com.ilsamil.readingdiary.common.BaseViewHolder
 import com.ilsamil.readingdiary.data.db.entity.MyBook
 import com.ilsamil.readingdiary.databinding.ItemMybooksBinding
-import java.lang.Math.round
 import kotlin.math.floor
 
-class BooksAdapter : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
-    private var bItem : List<MyBook> = ArrayList()
+class BooksAdapter(private val lifecycleOwner: LifecycleOwner) : ListAdapter<MyBook, BaseViewHolder<MyBook>>(BooksViewDiffCallback()) {
     var bookOnClickItem : (book : MyBook) -> Unit = {}
 
-    inner class BooksViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val binding = ItemMybooksBinding.bind(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<MyBook> {
+        val binding = ItemMybooksBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return BooksViewHolder(binding, lifecycleOwner)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BooksViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_mybooks, parent, false)
-        return BooksViewHolder(view)
+    override fun onBindViewHolder(holder: BaseViewHolder<MyBook>, position: Int) {
+        holder.bind(getItem(position))
+
+//        // 클릭 이벤트
+//        holder.binding.itemMybooksCl.setOnClickListener {
+//            bookOnClickItem(bItem[position])
+//        }
+    }
+}
+
+private class BooksViewHolder(private val binding: ItemMybooksBinding, lifecycleOwner: LifecycleOwner) : BaseViewHolder<MyBook>(binding.root) {
+    override fun bind(item: MyBook) {
+        binding.myBook = item
+        binding.executePendingBindings()
     }
 
-    override fun onBindViewHolder(holder: BooksViewHolder, position: Int) {
-        holder.binding.myBook = bItem[position]
+}
 
-        // 클릭 이벤트
-        holder.binding.itemMybooksCl.setOnClickListener {
-            bookOnClickItem(bItem[position])
-        }
+private class BooksViewDiffCallback : DiffUtil.ItemCallback<MyBook>() {
+    override fun areItemsTheSame(oldItem: MyBook, newItem: MyBook): Boolean {
+        return false
     }
 
-    override fun getItemCount(): Int {
-        return bItem.size
-    }
-
-    fun updateItems(items : List<MyBook>) {
-        bItem = items
-        notifyDataSetChanged()
+    override fun areContentsTheSame(oldItem: MyBook, newItem: MyBook): Boolean {
+        return false
     }
 }
 
