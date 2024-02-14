@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import com.ilsamil.readingdiary.R
 import com.ilsamil.readingdiary.common.BaseFragment
 import com.ilsamil.readingdiary.databinding.FragmentSettingBinding

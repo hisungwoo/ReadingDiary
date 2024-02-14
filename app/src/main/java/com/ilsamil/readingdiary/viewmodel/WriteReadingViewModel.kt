@@ -10,8 +10,6 @@ import com.ilsamil.readingdiary.data.db.entity.ReadingDay
 import kotlinx.coroutines.launch
 
 class WriteReadingViewModel(application : Application) : AndroidViewModel(application) {
-    val isEdit = MutableLiveData<Boolean>()
-
     val editReadingDay = MutableLiveData<ReadingDay>()
     val editImg = MutableLiveData<String>()
     val selBooks = MutableLiveData<List<MyBook>>()
@@ -35,23 +33,21 @@ class WriteReadingViewModel(application : Application) : AndroidViewModel(applic
             val books = db!!.myBookDao().selectMyBook()
             val items = ArrayList<MyBook>()
 
-            if(books != null) {
-                for (i in books.indices) {
-                    val curDay : ReadingDay? = db!!.readingDao().selectMaxRead(books[i].name)
-                    if(curDay == null) {
-                        val item = books[i]
-                        item.curPage = 0
-                        items.add(item)
+            for (i in books.indices) {
+                val curDay : ReadingDay? = db.readingDao().selectMaxRead(books[i].name)
+                if(curDay == null) {
+                    val item = books[i]
+                    item.curPage = 0
+                    items.add(item)
 
-                    } else if (curDay.readEd != books[i].edPage) {
-                        val item = books[i]
-                        item.curPage = curDay.readEd!!
-                        books[i].lastDate = "${curDay.year}.${curDay.month}.${curDay.day}"
-                        items.add(item)
-                    }
+                } else if (curDay.readEd != books[i].edPage) {
+                    val item = books[i]
+                    item.curPage = curDay.readEd!!
+                    books[i].lastDate = "${curDay.year}.${curDay.month}.${curDay.day}"
+                    items.add(item)
                 }
-                selBooks.value = items
             }
+            selBooks.value = items
         }
     }
 
